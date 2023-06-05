@@ -1,0 +1,72 @@
+This file will hold all of my brainstorming notes that are not appropriate to keep as comments in the code, as well as layout ideas and such. 
+
+Overall Data Flow: (copypasted from Learndot)
+
+1)  Fetch initial data and build application state
+2)    Build initial interface from application state
+3)    Set up all event listeners for interface
+    3.5)    Event listeners might transform interaction into API requests (THIS IS NEW)
+4)  User interaction triggers event listeners, which in turn update data in multiple places:
+    4.1)    Pass update requests to API (THIS IS NEW)
+    4.2)    API returns success or failure for update
+    4.3)    On success, update state to reflect change
+    4.4)    On failure, render useful error message to user
+5)    React Re-renders components based on updated state
+
+Application Requirements:
+Your task is to build out a Craigslist-Lite, complete with users, posts, and messages.
+
+    Routes via React Router (This is a minimum; you could have more than just these routes. These routes may be named as you wish.):
+        /posts
+        /profile (with messages)
+        /login and /register (this could alternatively be displayed in the profile instead of living in its own route)
+
+    Unauthenticated Users should be able to:
+        See a list of all posts
+        Sign up for an account with username and password
+        Sign in with correct username/password combination
+
+    Unauthenticated Users should not be able to:
+        Create a new post
+        Delete any post
+        Send a message to the author of any post
+
+    Authenticated Users should be able to:
+        Create a new post
+        Delete a post for which they are the author
+        Send a message to the author of any post for which they are not the author
+        See all messages for any post for which they are the author
+        See all messages they've received in a special view
+
+    Authenticated Users should not be able to:
+        Delete posts for which they are not the author
+        Send a message to themselves
+
+    All users should be able to:
+        Filter posts with a simple text matcher (no fetch call needed here)
+
+    Opportunity for EXTRA CREDIT of up to 5% added to your overall score. Authenticated Users would be delighted to be able to:
+        Edit a post for which they are the author
+
+
+Overall Development Path:
+1. Begin with getting the posts to show 
+2. Set up the home page
+    - make skeletal structure (header, nav, main, form, buttons, etc)
+    - Form has: username input, password input, password confirmation input
+     - Set min property on password and username length, make them required on the form inputs
+        - Provide feedback on the form if user provides non-valid usernames or passwords, OR 
+        if user provides incorrect credentials 
+        - If user enters info correctly, send an AJAX request to the backend, and upon successful user creation, you'll get a token 
+        - useState to store the token and also store it in localStorage for auto-login 
+        - that token will be sent with all future requests
+    - Once registered, user should see a form to be able to log in and a button to log out 
+** The presence of the token on State (of useState) will determine how the front end 
+treats the user as logged in/ out, and it will thus determine what parts of the 
+site are rendered 
+- Potential useful helper functions: 
+
+    logIn - which sets the token on state (and optionally in localStorage)
+    logOut - which clears the token from the state (and from localStorage if we stored it there also)
+    isLoggedIn - which lets you know if there's a current user logged in
+    makeHeaders - which creates a headers object with our without the bearer token depending on what is on state
