@@ -1,13 +1,57 @@
-import React, { useState, useEffect } from "react";
-import {
-  registerUser,
-  fetchPosts
-} from "./api/index.js"
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+// import {
+//   registerUser,
+//   fetchPosts
+// } from "./api/index.js"
 import "./App.css";
+import LogIn from "./Login";
+import Navbar  from "./Navbar";
+import Profile from "./Profile";
+import Posts from "./Posts";
 
 
+//Will need to include <Routes> and <Route path=""> for each component that are 
+//rendered conditionally.
 const App = () => {
-  const [registeredUsers, setRegisteredUsers] = useState([]);
+  return( 
+  <>
+    <BrowserRouter>
+      <div className="App wrapper">
+      <Navbar />
+        <Routes>
+          <Route path="/src/App.js" element={<LogIn />}>
+          </Route>
+          <Route path="/src/Profile.js" element={<Profile />}>
+          </Route>
+          <Route path="/src/Posts.js" element={<Posts />}>
+          </Route>
+          <Route path="/src/Login.js" element={<LogIn />}>
+          </Route>
+        </Routes>
+    </div>
+    </BrowserRouter>
+  </>
+)
+}
+  
+
+
+
+export default App;
+
+/*need to display: 
+location:
+author
+  - username
+title 
+description
+price
+*/
+
+/*Potential component to show all posts 
+
+const [registeredUsers, setRegisteredUsers] = useState([]);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -23,9 +67,7 @@ const App = () => {
 
   return (
   <>
-    <div className="App">
-      <h1>Dear World, hello!</h1>
-    </div>
+  
     <div className="form">
       <form
       onSubmit={async (event) => {
@@ -50,24 +92,10 @@ const App = () => {
         <button>clickme</button>
       </form>
     </div>
+ 
 
   </>
   );
 }
-
-
-
-export default App;
-
-/*need to display: 
-location:
-author
-  - username
-title 
-description
-price
-
-
-
 
 */
