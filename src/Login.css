@@ -5,6 +5,7 @@
     flex-direction: column;
     background-color:lavender;
     flex-grow:1;
+    
 }
 
 h1 {
@@ -37,6 +38,7 @@ input {
     font-size:0.75em;
     box-shadow: 3px 1px 1px rgb(80, 75, 75);
     border-radius:8px;
+    text-align: center;
 }
 
 button {

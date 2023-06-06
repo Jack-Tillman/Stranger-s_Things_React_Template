@@ -30,10 +30,10 @@ export const registerUser = async () => {
     try {
       const response = await fetch(`${BASE_URL}/posts`)
   
-      const posts = await response.json();
-      console.log(posts);
-      console.log(posts.data.posts);
-      return posts;
+      const returned = await response.json();
+      console.log(returned);
+      console.log(returned.data.posts);
+      return returned;
     } catch (err) {
       console.error(err);
     }

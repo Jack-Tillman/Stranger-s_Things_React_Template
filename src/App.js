@@ -9,18 +9,21 @@ import LogIn from "./Login";
 import Navbar  from "./Navbar";
 import Profile from "./Profile";
 import Posts from "./Posts";
+import Home from "./Home";
 
 
 //Will need to include <Routes> and <Route path=""> for each component that are 
 //rendered conditionally.
 const App = () => {
+
+
   return( 
   <>
     <BrowserRouter>
       <div className="App wrapper">
       <Navbar />
         <Routes>
-          <Route path="/src/App.js" element={<LogIn />}>
+          <Route path="/src/App.js" element={<Home />}>
           </Route>
           <Route path="/src/Profile.js" element={<Profile />}>
           </Route>
@@ -29,6 +32,7 @@ const App = () => {
           <Route path="/src/Login.js" element={<LogIn />}>
           </Route>
         </Routes>
+        
     </div>
     </BrowserRouter>
   </>
