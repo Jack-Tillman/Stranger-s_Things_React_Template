@@ -14,6 +14,8 @@ import "./Login.css";
     - input for password
     - button to log in
     - sentence of "Don't have an account? Sign Up" with a link to signup page 
+
+    JUNE 6 UPDATE: Consider making username, password into a single state with username and password as properties for a single state object like in register
 */
 
 const LogIn = () => {

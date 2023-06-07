@@ -47,8 +47,10 @@ const Posts = () => {
                     <div className="title">{post.title}</div>
                     <div className="description">{post.description}</div>
                     <div className="price">{post.price}</div>
-                    <div className="seller">{post.seller}</div>
+                    <div className="author">{post.author.username}</div>
                     <div className="location">{post.location}</div>
+                    <div className="willDeliver">{post.willDeliver}
+                      {post.willDeliver}{console.log(post.willDeliver)}</div>
                     <button className="message-btn">SEND MESSAGE</button>
                 </div>)
               )

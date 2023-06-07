@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 // import {
 //   registerUser,
 //   fetchPosts
@@ -10,6 +10,7 @@ import Navbar  from "./Navbar";
 import Profile from "./Profile";
 import Posts from "./Posts";
 import Home from "./Home";
+import Register from "./Register";
 
 
 //Will need to include <Routes> and <Route path=""> for each component that are 
@@ -22,17 +23,21 @@ const App = () => {
     <BrowserRouter>
       <div className="App wrapper">
       <Navbar />
-        <Routes>
-          <Route path="/src/App.js" element={<Home />}>
+          <Route path="/src/App.js">
+            <Home />
           </Route>
-          <Route path="/src/Profile.js" element={<Profile />}>
+          <Route path="/src/Profile.js">
+            <Profile />
           </Route>
-          <Route path="/src/Posts.js" element={<Posts />}>
+          <Route path="/src/Posts.js">
+            <Posts />
           </Route>
-          <Route path="/src/Login.js" element={<LogIn />}>
+          <Route path="/src/Login.js">
+            <LogIn />
           </Route>
-        </Routes>
-        
+          <Route path="/src/Register.js">
+            <Register />
+          </Route>
     </div>
     </BrowserRouter>
   </>

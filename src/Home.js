@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import { fetchPosts, registerUser } from "./api";
+// import React, {useState, useEffect} from "react";
+// import { fetchPosts, registerUser } from "./api";
 
 const Home = () => {
 //     const [registeredUsers, setRegisteredUsers] = useState([]);

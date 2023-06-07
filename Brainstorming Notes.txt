@@ -70,3 +70,28 @@ site are rendered
     logOut - which clears the token from the state (and from localStorage if we stored it there also)
     isLoggedIn - which lets you know if there's a current user logged in
     makeHeaders - which creates a headers object with our without the bearer token depending on what is on state
+
+Progress Report (June 6, 6:30 PM)
+Completed: 
+- Rough draft of App.js, Posts, and Login
+- Rough draft of CSS for App, Posts, Login
+- Fetch requests for Posts.js work!
+
+Immediate To Do: 
+- Add a few more parts of post to show, such as date created and more 
+- Refine Login (JS and CSS, focus on JS for now)
+- Sit down and figure out rough guideline on props I will need and where to pass them 
+
+Longterm To do:
+- on focus and while active, have the 'Search Posts' placeholder text 'exit' 
+the search field and go slightly above it
+
+Progress Report (June 7, 6:30 PM wow consistent)
+Completed:
+- Really decent Register component - I might need to add required attributes to the inputs, but not sure 
+
+Immediate To Do:
+-Still gotta sit down and figure out rough guideline on props
+- Refine Login to maybe use only one state for username and password
+    - Perhaps make new prop to track if user is logged in or not (isLoggedIn, setIsLoggedIn)
+- Add a few more parts of post to show, such as date created and more 
