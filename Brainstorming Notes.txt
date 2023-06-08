@@ -92,6 +92,24 @@ Completed:
 
 Immediate To Do:
 -Still gotta sit down and figure out rough guideline on props
+- Refine Register css, add min property to username and PW length, make required 
 - Refine Login to maybe use only one state for username and password
     - Perhaps make new prop to track if user is logged in or not (isLoggedIn, setIsLoggedIn)
 - Add a few more parts of post to show, such as date created and more 
+
+Rough Draft of Props needed:
+FOR ALL:
+isLoggedIn, setIsLoggedIn
+username, setUsername
+
+FOR POSTS:
+searchResults, setSearchResults 
+
+Progress Report Jun 8:
+- Completed: 
+Registration CSS looks much better! 
+- Regex check for username to have only letters and numbers! 
+- Made the button look much cleaner 
+To Do
+- Make the Login CSS similar to Register 
+- Fetch requests for authentification!

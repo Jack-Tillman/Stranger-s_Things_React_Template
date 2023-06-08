@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './Register.css'
 /*
 Register utilizes useState to track both user input and errors with user input.
 Validation of user inputs occurs upon submission, either when user presses enter within input fields or clicks Register button
@@ -47,7 +47,22 @@ const Register = () => {
             password: "",
             confirmPassword: "",
         }
+
+        const userCheck = /^[a-zA-Z0-9]+$/;
+        const userResult = userCheck.test(formInput.username);
+        console.log(userResult);
+        //contains only letters, numbers, and both, but no special chars like . or _
+        
         //if invalid username & password, pass a copy of inputError object and display error message for both username & password to setFormError
+        
+        if (!userResult) { 
+            setFormError({
+                ...inputError,
+                username: "Username may contain only letters and numbers."
+            });
+            return
+        }
+        
         if (!formInput.username && !formInput.password) {
             setFormError({
                 ...inputError,
@@ -60,7 +75,7 @@ const Register = () => {
         if (!formInput.username) {
             setFormError({
                 ...inputError,
-                email:"Please enter a valid username",
+                username:"Please enter a valid username",
             });
             return
         }
@@ -87,17 +102,18 @@ const Register = () => {
     return (
     <>
         <main className="register-main">
-            <section className="register-section">
-                <h1>Register</h1>
-                <form 
-                className="register-form"
-                onSubmit={validateFormInput}>
 
-                    <label htmlFor="username">Username: 
+            <div className="register-container">       
+            <h3 className="h3-register">Register</h3>
+                <form className="register-form" onSubmit={validateFormInput}>
+                    <label className="username-label" htmlFor="username">Username
                         <input
+                         className="register-input"
                          type="text" 
                          placeholder="Enter a valid username" 
                          name="username" 
+                         minLength="8"
+                         maxLength="20"
                          value={formInput.username} 
                          onChange={(e) => {
                             //when user enters username, pass the name + value of event as arguments to handleUserInput function
@@ -110,37 +126,45 @@ const Register = () => {
                     {formError.username && <span className='err'>{formError.username}</span>}
                     </label>
 
-                    <label htmlFor="password">
+                    <label htmlFor="password">Password
                         <input 
+                        className="register-input"
                         type="password" 
                         placeholder="Enter a valid password" 
                         name="password"
+                        minLength="8"
+                        maxLength="20"
                         value={formInput.password}
                         onChange={(e) => { 
                              //when user enters password, pass the name + value of event as arguments to handleUserInput function
                             handleUserInput(e.target.name, e.target.value);
                         }} 
+                        
                         />
                         {/*Error with password input will render span with error message */}
                         {formError.password && <span className='err'>{formError.password}</span>}
                     </label>
 
-                    <label htmlFor="confirm-password">
+                    <label htmlFor="confirm-password">Confirm Password
                         <input 
+                        className="register-input"
                         type="password" 
                         placeholder="Confirm your password" 
                         name="confirmPassword" 
+                        minLength="8"
+                        maxLength="20"
                         value={formInput.confirmPassword} 
                         onChange={(e) => {
                              //when user enters password confirmation, pass the name + value of event as arguments to handleUserInput function
                             handleUserInput(e.target.name, e.target.value);
                         }}
                         />
-                        {formError.confirmPassword && <span className='err'>{formError.confirmPassword}</span>}
+                        {/* <span className="error-message"></span> */}
+                        {formError.confirmPassword && <span className='err'>{formError.confirmPassword}{console.log("error with password confirmation")}</span>}
                     </label>
-                    <button type="submit">Register</button>
+                    <button className="register-btn" type="submit">Register</button>
                 </form>
-            </section>
+            </div>
         </main>
     </>
     )

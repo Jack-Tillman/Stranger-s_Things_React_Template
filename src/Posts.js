@@ -27,7 +27,7 @@ const Posts = () => {
         <>
         <div className="posts-wrapper">
             <section className="post-section">
-                <h1>Posts</h1>
+                <h1 className="h1-posts">Posts</h1>
                 <div className="search-posts-wrapper">
                     <input className="search-posts" type="text" placeholder="Search Posts" />
                 </div>
