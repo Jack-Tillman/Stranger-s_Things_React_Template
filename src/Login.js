@@ -37,24 +37,24 @@ const LogIn = () => {
     return (
     <>
         <main className="login-main">
-            <section className="login-section">
+            <div className="login-container">
                 <h1>Log In</h1>
                 <form onSubmit={handleSubmit} className="login-form">
 
-                    <label htmlFor="username">    
-                    <input type="text" placeholder="Username*" name='username' value={username} onChange={handleChange} />
+                    <label htmlFor="username">Username:    
+                    <input className="login-input" type="text" placeholder="Username*" name='username' value={username} onChange={handleChange} />
                     </label>
 
-                    <label htmlFor="password">
-                    <input type="text" placeholder="Password*" name="password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
+                    <label htmlFor="password">Password:
+                    <input className="login-input" type="text" placeholder="Password*" name="password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
                     </label>
 
                     <button type="submit">Log In</button>
                     <label htmlFor="signup">
-                        <aside>Don't have an account? What's wrong with you?</aside>
+                        <aside className="signup-link">Don't have an account? What's wrong with you?</aside>
                     </label>
                 </form>
-            </section>
+            </div>
         </main>
     </>
     )

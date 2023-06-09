@@ -47,13 +47,12 @@ const Register = () => {
             password: "",
             confirmPassword: "",
         }
-
+        //Username must contain only letters and numbers
         const userCheck = /^[a-zA-Z0-9]+$/;
         const userResult = userCheck.test(formInput.username);
         console.log(userResult);
         //contains only letters, numbers, and both, but no special chars like . or _
         
-        //if invalid username & password, pass a copy of inputError object and display error message for both username & password to setFormError
         
         if (!userResult) { 
             setFormError({
@@ -63,6 +62,7 @@ const Register = () => {
             return
         }
         
+        //if invalid username & password, pass a copy of inputError object and display error message for both username & password to setFormError
         if (!formInput.username && !formInput.password) {
             setFormError({
                 ...inputError,
