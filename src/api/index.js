@@ -1,7 +1,10 @@
+
+
 export const COHORT_NAME = '2303-FTB-ET-WEB-AM';
 export const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
-export const registerUser = async () => {
+
+export const registerUser = async ({username, password}) => {
     try {
       const response = await fetch(
         `${BASE_URL}/users/register`, {
@@ -11,16 +14,17 @@ export const registerUser = async () => {
         },
         body: JSON.stringify({
           user: {
-            username: 'superman27',
-            password: 'krypt0n0rbust'
+            username: `${username}`,
+            password: `${password}`
           }
         })
       });
+      console.log(username, password)
       const result = await response.json();
 // You can log ▲▲▲ the result
 // here ▼▼▼ to view the json object before returning it
       console.log(result)
-      return result
+      return result.data.token
     } catch (err) {
       console.error(err);
     }
@@ -38,3 +42,4 @@ export const registerUser = async () => {
       console.error(err);
     }
   }
+

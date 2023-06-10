@@ -49,8 +49,7 @@ const Posts = () => {
                     <div className="price">{post.price}</div>
                     <div className="author">{post.author.username}</div>
                     <div className="location">{post.location}</div>
-                    <div className="willDeliver">{post.willDeliver}
-                      {post.willDeliver}{console.log(post.willDeliver)}</div>
+                    <div className="willDeliver">{post.willDeliver}</div>
                     <button className="message-btn">SEND MESSAGE</button>
                 </div>)
               )

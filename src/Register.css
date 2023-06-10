@@ -76,6 +76,25 @@ label {
     width:30em;
     margin:0 auto;
 }
+
+.welcome-notification {
+  display:flex;
+  flex:1;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+  display: inline;
+  background-color: #ffffff;
+  border: 10px solid #33c63a;
+  text-align: center;
+  padding: 0.5rem 0.75rem;
+  color: #33c63a;
+  font-weight: 900;
+  font-size:5rem;
+  margin:1rem auto 0rem auto;
+  font-family:"Poppins","Darumadrop One","Bebas Neue",serif;
+}
+
 /* :required {
     
 } */

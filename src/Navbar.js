@@ -1,7 +1,7 @@
 import React from "react"
 import {Link} from "react-router-dom"
 
-const Navbar = () => {
+const Navbar = ({isLoggedIn, userAccount, localStorage}) => {
     return (
       <header className="header">
       <nav className="navbar-container">
@@ -23,12 +23,15 @@ const Navbar = () => {
           <Link to="/src/Profile.js">
             <li className="navbar profile">PROFILE</li>
           </Link>
-          <Link to="/src/Login.js">
+          {/* If not logged in, render links to login and register, else render null */}
+          {isLoggedIn ? null : <Link to="/src/Login.js">
             <li className="navbar login">LOGIN</li>
           </Link>
-          <Link to="/src/Register.js">
+        }
+          {isLoggedIn ? null : <Link to="/src/Register.js">
             <li className="navbar register">REGISTER</li>
           </Link>
+          }
           </span>
         </ul>
       </nav>

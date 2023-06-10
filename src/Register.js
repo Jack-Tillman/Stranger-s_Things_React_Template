@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Register.css'
+import { registerUser } from './api';
 /*
 Register utilizes useState to track both user input and errors with user input.
 Validation of user inputs occurs upon submission, either when user presses enter within input fields or clicks Register button
@@ -15,7 +16,24 @@ TO-DO:
 *Make the CSS good for this, keeping in mind required pseudoclass for the inputs 
 */
 
-const Register = () => {
+// const ActualRegister = () => {
+//    useEffect(() => {
+//     Promise.all([])
+//    })
+// }
+
+// const Testy = () => {
+//     return (
+//         <>
+//             <div>YAAAAAA BOOYYYYY</div>
+//         </>
+//     )
+// }
+
+const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount, localStorage, setLocalStorage}) => {
+    //track whether registration was successful or not
+    const [registerSuccess, setRegisterSuccess] = useState(false);
+    
     //tracks user input and places username, password, and confirmPassword values in an object 
     const [formInput, setFormInput] = useState({
         username: '',
@@ -95,9 +113,34 @@ const Register = () => {
             });
             return
         }
+        //if the user's input passes all the validation checks, then initiate a fetch request for the authentification token
+
+        /*Current issue: The submission does not go through the first time. It will always fail and say that the user is already taken; however, if submitted again, 
+        it will go through and return the authToken. Ideas: refine the condition for this async fetch request   */
+        if ((userResult) && (formInput.username) && (formInput.password) && (formInput.confirmPassword === formInput.password)) {
+            async function fetchToken() {
+                try {
+                    //get authorization token
+                    const authToken = await registerUser(userAccount);
+                    //add isAuthenticated and _id to hold authToken 
+                    await setUserAccount({username: formInput.username, password: formInput.password, isAuthenticated: true, _id: authToken })
+                    await (userAccount.isAuthenticated) ? setIsLoggedIn(true) : setIsLoggedIn(false);
+                } catch (error) {
+                    throw error;
+                }   
+            }
+            fetchToken();
+        }
         //pass whatever inputError exists to setFormError to update state and display the error messages on the screen 
         setFormError(inputError);
     };
+
+    /*
+    Current issues:
+    id does not get updated in userAccount immediately - might not be an issue though
+    still need to make sure that the userAccount is passed to other components 
+    password and password confirmation error message shows up even if user corrects the problem 
+    */
 
     return (
     <>
@@ -115,11 +158,13 @@ const Register = () => {
                          minLength="8"
                          maxLength="20"
                          value={formInput.username} 
+                         required
                          onChange={(e) => {
                             //when user enters username, pass the name + value of event as arguments to handleUserInput function
                             console.log(e.target.name)
                             console.log(e.target.value)
                             handleUserInput(e.target.name, e.target.value);
+                            
                          }}
                         />
                         {/*Span with error message will render ONLY if there is an error with the username*/}
@@ -134,6 +179,7 @@ const Register = () => {
                         name="password"
                         minLength="8"
                         maxLength="20"
+                        required
                         value={formInput.password}
                         onChange={(e) => { 
                              //when user enters password, pass the name + value of event as arguments to handleUserInput function
@@ -153,18 +199,24 @@ const Register = () => {
                         name="confirmPassword" 
                         minLength="8"
                         maxLength="20"
+                        required
                         value={formInput.confirmPassword} 
                         onChange={(e) => {
                              //when user enters password confirmation, pass the name + value of event as arguments to handleUserInput function
                             handleUserInput(e.target.name, e.target.value);
                         }}
                         />
-                        {/* <span className="error-message"></span> */}
                         {formError.confirmPassword && <span className='err'>{formError.confirmPassword}{console.log("error with password confirmation")}</span>}
+
                     </label>
                     <button className="register-btn" type="submit">Register</button>
                 </form>
             </div>
+                    {registerSuccess && <span className="welcome-notification">
+                        Registration successful!
+                        {console.log("welcome notif popped up")}
+                        {/* <Testy /> */}
+                        </span>}
         </main>
     </>
     )
