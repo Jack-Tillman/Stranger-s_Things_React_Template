@@ -1,11 +1,12 @@
 import React from "react"
 import {Link} from "react-router-dom"
 
-const Navbar = ({isLoggedIn, userAccount, localStorage}) => {
+const Navbar = ({isLoggedIn, setIsLoggedIn, userAccount}) => {
     return (
       <header className="header">
       <nav className="navbar-container">
         <ul className="navbar-list">
+
           <span className="navbar-left">
             {/* <Route path="./App.js"> */}
             <Link to="/src/App.js">
@@ -13,6 +14,7 @@ const Navbar = ({isLoggedIn, userAccount, localStorage}) => {
             </Link>
             {/* </Route> */}
           </span>
+
           <span className="navbar-right">
           <Link to="/src/App.js">
             <li className="navbar home">HOME</li>
@@ -32,7 +34,16 @@ const Navbar = ({isLoggedIn, userAccount, localStorage}) => {
             <li className="navbar register">REGISTER</li>
           </Link>
           }
+          {isLoggedIn ? 
+          <Link to="/">
+            <li className="navbar logout" onClick={()=> {
+              localStorage.clear();
+              setIsLoggedIn(false);
+            }}>LOG OUT</li>
+          </Link> 
+          : null} 
           </span>
+
         </ul>
       </nav>
     </header>

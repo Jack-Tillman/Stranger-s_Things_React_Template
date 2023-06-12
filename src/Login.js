@@ -19,7 +19,7 @@ import { login } from './api';
     JUNE 6 UPDATE: Consider making username, password into a single state with username and password as properties for a single state object like in register
 */
 
-const LogIn = () => {
+const LogIn = ({isLoggedIn, setIsLoggedIn, setUserAccount, userAccount}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -42,6 +42,7 @@ const LogIn = () => {
             const authToken = await login(username, password);
             await localStorage.setItem("id", authToken);
             console.log("Logintoken done attempt")
+            await setIsLoggedIn(true);
 
         } catch (error) {
             console.error(error)

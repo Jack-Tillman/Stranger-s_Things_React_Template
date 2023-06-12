@@ -16,19 +16,6 @@ TO-DO:
 *Make the CSS good for this, keeping in mind required pseudoclass for the inputs 
 */
 
-// const ActualRegister = () => {
-//    useEffect(() => {
-//     Promise.all([])
-//    })
-// }
-
-// const Testy = () => {
-//     return (
-//         <>
-//             <div>YAAAAAA BOOYYYYY</div>
-//         </>
-//     )
-// }
 
 const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount}) => {
     //track whether registration was successful or not
@@ -136,7 +123,8 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount}) => {
                     await setUserAccount({username: formInput.username, password: formInput.password, isAuthenticated: true, _id: authToken })
                     //put authToken in localStorage
                     await populateStorage(authToken);
-                    await (userAccount.isAuthenticated) ? setIsLoggedIn(true) : setIsLoggedIn(false);
+                    await setIsLoggedIn(true);
+                    await setRegisterSuccess(true)
                 } catch (error) {
                     throw error;
                 }   

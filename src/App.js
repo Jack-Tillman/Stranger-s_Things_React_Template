@@ -25,8 +25,6 @@ const App = () => {
     isAuthenticated: false,
     _id: ''
   });
-  //localStorage will hold user's account info between sessions until cleared
-  const [localStorage, setLocalStorage] = useState([]);
 
   return( 
   <>
@@ -34,40 +32,49 @@ const App = () => {
       <div className="App wrapper">
       <Navbar 
       isLoggedIn={isLoggedIn}
+      setIsLoggedIn={setIsLoggedIn}
       userAccount={userAccount}
-      localStorage={localStorage}
       />
+
           <Route path="/src/App.js">
             <Home 
             isLoggedIn={isLoggedIn}
             userAccount={userAccount}
-            localStorage={localStorage}
             />
           </Route>
+          
           <Route path="/src/Profile.js">
             <Profile
             isLoggedIn={isLoggedIn}
             userAccount={userAccount}
-            localStorage={localStorage}
             />
           </Route>
+
           <Route path="/src/Posts.js">
             <Posts
             isLoggedIn={isLoggedIn}
             userAccount={userAccount}
-            localStorage={localStorage}
             />
           </Route>
+          {/* once the user signs in, redirect them to Posts. if they aren't signed in, they will be directed to login page  */}
           <Route path="/src/Login.js">
-            <LogIn 
+            {
+              (isLoggedIn)
+              ?
+              (<Posts
+                isLoggedIn={isLoggedIn}
+                userAccount={userAccount}
+              />) 
+              :  
+            (<LogIn 
             isLoggedIn={isLoggedIn}
             setIsLoggedIn={setIsLoggedIn}
             userAccount={userAccount}
             setUserAccount={setUserAccount}
-            localStorage={localStorage}
-            setLocalStorage={setLocalStorage}
-            />
+            />)
+          }
           </Route>
+
           <Route path="/src/Register.js">
             {/* if user is logged in, render Posts, else render Register **PROBABLY DON'T LEAVE THIS AS THE FINAL SOLUTION, LIKELY NOT BEST PRACTICE */}
             {
@@ -76,7 +83,6 @@ const App = () => {
             (<Posts
               isLoggedIn={isLoggedIn}
               userAccount={userAccount}
-              localStorage={localStorage}
               />) 
             : 
             (<Register 
@@ -84,8 +90,6 @@ const App = () => {
             setIsLoggedIn={setIsLoggedIn}
             userAccount={userAccount}
             setUserAccount={setUserAccount}
-            localStorage={localStorage}
-            setLocalStorage={setLocalStorage}
             />)
             }
             
