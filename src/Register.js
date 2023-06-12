@@ -30,7 +30,7 @@ TO-DO:
 //     )
 // }
 
-const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount, localStorage, setLocalStorage}) => {
+const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount}) => {
     //track whether registration was successful or not
     const [registerSuccess, setRegisterSuccess] = useState(false);
     
@@ -56,6 +56,14 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount, local
        })
     };
 
+    function populateStorage(authToken) {
+        localStorage.setItem("username", formInput.username);
+        localStorage.setItem("id", authToken);
+    }
+    //used by both validateFormInput, and to conditionally render prompts for sign in 
+    const userCheck = /^[a-zA-Z0-9]+$/;
+    const userResult = userCheck.test(formInput.username);
+
     const validateFormInput = (e) => {
         //prevent page reload
         e.preventDefault();
@@ -66,8 +74,8 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount, local
             confirmPassword: "",
         }
         //Username must contain only letters and numbers
-        const userCheck = /^[a-zA-Z0-9]+$/;
-        const userResult = userCheck.test(formInput.username);
+        // const userCheck = /^[a-zA-Z0-9]+$/;
+        // const userResult = userCheck.test(formInput.username);
         console.log(userResult);
         //contains only letters, numbers, and both, but no special chars like . or _
         
@@ -118,12 +126,16 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount, local
         /*Current issue: The submission does not go through the first time. It will always fail and say that the user is already taken; however, if submitted again, 
         it will go through and return the authToken. Ideas: refine the condition for this async fetch request   */
         if ((userResult) && (formInput.username) && (formInput.password) && (formInput.confirmPassword === formInput.password)) {
+            // setUserAccount(formInput.username, formInput.password);
+            console.log(formInput.username, formInput.password);
             async function fetchToken() {
                 try {
                     //get authorization token
-                    const authToken = await registerUser(userAccount);
+                    const authToken = await registerUser(formInput.username, formInput.password);
                     //add isAuthenticated and _id to hold authToken 
                     await setUserAccount({username: formInput.username, password: formInput.password, isAuthenticated: true, _id: authToken })
+                    //put authToken in localStorage
+                    await populateStorage(authToken);
                     await (userAccount.isAuthenticated) ? setIsLoggedIn(true) : setIsLoggedIn(false);
                 } catch (error) {
                     throw error;
@@ -138,8 +150,9 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount, local
     /*
     Current issues:
     id does not get updated in userAccount immediately - might not be an issue though
-    still need to make sure that the userAccount is passed to other components 
+    still need to make sure that the userAccount is passed to other components => IT DOES! 
     password and password confirmation error message shows up even if user corrects the problem 
+    ** perhaps incorporate the userAccount stuff in Login.js rather than username, password 
     */
 
     return (
@@ -150,6 +163,9 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount, local
             <h3 className="h3-register">Register</h3>
                 <form className="register-form" onSubmit={validateFormInput}>
                     <label className="username-label" htmlFor="username">Username
+                    {/* line below ensures the prompt disappears once user enters 8 characters */}
+                    {(formInput.username.length < 8)  && <span className="register-setup">Usernames must be 8 - 20 characters in length, using only use letters and numbers.</span>}
+                    {(!userResult) && <span className="register-setup">Username cannot have special characters</span>}
                         <input
                          className="register-input"
                          type="text" 
@@ -158,7 +174,6 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount, local
                          minLength="8"
                          maxLength="20"
                          value={formInput.username} 
-                         required
                          onChange={(e) => {
                             //when user enters username, pass the name + value of event as arguments to handleUserInput function
                             console.log(e.target.name)
@@ -172,6 +187,8 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount, local
                     </label>
 
                     <label htmlFor="password">Password
+                    
+                    {(formInput.password.length < 8) && <span className="register-setup">Passwords must be between 8 - 20 characters in length.</span>}
                         <input 
                         className="register-input"
                         type="password" 
@@ -179,7 +196,6 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount, local
                         name="password"
                         minLength="8"
                         maxLength="20"
-                        required
                         value={formInput.password}
                         onChange={(e) => { 
                              //when user enters password, pass the name + value of event as arguments to handleUserInput function
@@ -192,6 +208,7 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount, local
                     </label>
 
                     <label htmlFor="confirm-password">Confirm Password
+                    {(formInput.confirmPassword.length < 8) && <span className="register-setup">Password and Confirm Password must match</span>}
                         <input 
                         className="register-input"
                         type="password" 
@@ -199,7 +216,6 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount, local
                         name="confirmPassword" 
                         minLength="8"
                         maxLength="20"
-                        required
                         value={formInput.confirmPassword} 
                         onChange={(e) => {
                              //when user enters password confirmation, pass the name + value of event as arguments to handleUserInput function

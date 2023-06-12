@@ -9,6 +9,7 @@ const Posts = () => {
     console.log('posts: ', posts);
 
   useEffect(() => {
+    
     const fetchPosts = async () => {
       try {
         const response = await fetch(`${BASE_URL}/posts`)

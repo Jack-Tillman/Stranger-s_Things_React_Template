@@ -62,12 +62,21 @@
     background-color: #0556F3;
 }
 
+.register-setup {
+    font-family:"Bebas Neue", "Poppins","Darumadrop One",serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: rgb(50, 170, 60);
+}
+
 .err {
     font-family:"Bebas Neue", "Poppins","Darumadrop One",serif;
-    font-size: 1em;
+    font-size: 1.6rem;
     font-weight: 500;
     color: red;
 }
+
+
 
 label {
     font-family:"Poppins","Darumadrop One","Bebas Neue",serif;

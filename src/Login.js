@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "./Login.css";
+import { login } from './api';
 // import {
 //     registerUser,
 //     fetchPosts
@@ -25,13 +26,26 @@ const LogIn = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log(username);
-        console.log(password)
+        console.log(password);
+        loginToken(username, password)
         setUsername('')
         setPassword('')
     }   
 
     const handleChange = (event) => {
         setUsername(event.target.value);
+    }
+
+    async function loginToken(username, password) {
+        try {
+            console.log("loginToken attempt")
+            const authToken = await login(username, password);
+            await localStorage.setItem("id", authToken);
+            console.log("Logintoken done attempt")
+
+        } catch (error) {
+            console.error(error)
+        } 
     }
 
     return (
@@ -42,11 +56,11 @@ const LogIn = () => {
                 <form onSubmit={handleSubmit} className="login-form">
 
                     <label htmlFor="username">Username:    
-                    <input className="login-input" type="text" placeholder="Username*" name='username' value={username} onChange={handleChange} />
+                    <input className="login-input" required type="text" placeholder="Username*" name='username' value={username} onChange={handleChange} />
                     </label>
 
                     <label htmlFor="password">Password:
-                    <input className="login-input" type="text" placeholder="Password*" name="password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
+                    <input className="login-input" required type="password" placeholder="Password*" name="password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
                     </label>
 
                     <button type="submit">Log In</button>
