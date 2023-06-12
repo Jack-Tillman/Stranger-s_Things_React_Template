@@ -11,6 +11,7 @@ import Profile from "./Profile";
 import Posts from "./Posts";
 import Home from "./Home";
 import Register from "./Register";
+import AddNewPost from "./AddNewPost";
 
 
 //Will need to include <Routes> and <Route path=""> for each component that are 
@@ -93,6 +94,13 @@ const App = () => {
             />)
             }
             
+          </Route>
+
+          <Route path="/src/AddNewPost.jsx">
+            <AddNewPost
+            isLoggedIn={isLoggedIn}
+            userAccount={userAccount}
+            />
           </Route>
     </div>
     </BrowserRouter>

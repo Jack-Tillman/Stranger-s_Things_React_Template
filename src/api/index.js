@@ -4,6 +4,23 @@ export const COHORT_NAME = '2303-FTB-ET-WEB-AM';
 export const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
 
+
+function makeHeaders(authToken){
+  if (authToken) {
+    const loggedInHeader = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    }
+    return loggedInHeader;
+  } else {
+    const guestHeader = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer`
+    } 
+    return guestHeader;
+  }
+}
+
 export const registerUser = async (username, password) => {
   //check for proper username and password values 
   // console.log(username, password)
@@ -62,9 +79,32 @@ export const registerUser = async (username, password) => {
       });
       const result = await response.json();
       console.log(result);
+      return result.data.token;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+//used as arguments for below
+  // {authToken, newPost.title, newPost.description, newPost.price, newPost.willDeliver}
+  export const makePost = async (authToken) => {
+
+    try {
+      const response = await fetch(`${BASE_URL}/posts`, {
+        method: "POST",
+        headers: makeHeaders(authToken),
+        body: JSON.stringify({
+          post: {
+            title: "My favorite stuffed animal",
+            description: "This is a pooh doll from 1973. It has been carefully taken care of since I first got it.",
+            price: "$480.00",
+            willDeliver: true
+          }
+        })
+      });
+      const result = await response.json();
+      console.log(result);
       return result
     } catch (err) {
       console.error(err);
     }
   }
-

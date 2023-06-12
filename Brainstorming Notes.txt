@@ -125,19 +125,24 @@ To-Do
 * Fix issue where user registration fails on first attempt due to "username already taken" but works second time
 
 Progress Report June 12: 
-Completed: 
+Completed (during class): 
 * Fixed the issues with Register! Now the user can sign up, and the authToken is assigned to their userAccount. Additionally, 
 the authToken is then stored in localStorage. 
 * Touched up Register form prompts, so now there will be a prompt indicating the specifications that must be met 
 for each input until the min - length is set. Can also incorporate the other checks as well later. 
 
-Short Term To-Do: 
-* Determine if more than authToken and username needs to be in localStorage. 
-* makeHeaders helper function that creates a header object both with, and without, the Bearer token based on if there is an authToken in storage 
-* Make posts - create a form to make new listings 
+Completed (after class):
+* Created new component, AddNewPost, which will render when user clicks on Add new post link within Posts 
+* Set up majority of the logic required for AddNewPost, alongside CSS for it as well. 
+* Created (but did not test!) the makeHeaders helper function alongside the makePosts function 
+* Refined the new post form, now all the inputs properly reflected in formInput and formInputError 
+* Log out button clears storage
+
+Short Term To-Do:
+* Test both makeHeaders and makePosts functions - make sure to customize makePosts to be specific to the inputs 
+* 
 
 Long term To-Do:
-* Set up Log out button to clear local storage 
-* Improve the error messages for Registration page (make sure specific responses that are fully helpful, i.e. mention min and max length and no special characters )
-* In Register.js, refine the CSS for form input so that the prompts are useful without being too big.
-* In Register.js maybe render the prompts as red upon page load, and then when conditions are met, they turn green
+* Improve the error messages for Registration page, Login, AddnewPost (make sure specific responses that are fully helpful, i.e. mention min and max length and no special characters )
+* In Register.js, Login.js, and AddNewPost, refine the CSS for form input so that the prompts are useful without being too big.
+* In Register.js, Login.js, and maybe AddNewPost maybe render the prompts as red upon page load, and then when conditions are met, they turn green

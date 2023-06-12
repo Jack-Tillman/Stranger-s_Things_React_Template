@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link} from "react-router-dom"
 import "./Login.css";
 import { login } from './api';
 // import {
@@ -22,7 +23,7 @@ import { login } from './api';
 const LogIn = ({isLoggedIn, setIsLoggedIn, setUserAccount, userAccount}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
+    //ISSUE: even if incorrect login info, will still log in - try catch block is one approach, maybe just copy register stuff here
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log(username);
@@ -37,16 +38,19 @@ const LogIn = ({isLoggedIn, setIsLoggedIn, setUserAccount, userAccount}) => {
     }
 
     async function loginToken(username, password) {
-        try {
-            console.log("loginToken attempt")
-            const authToken = await login(username, password);
-            await localStorage.setItem("id", authToken);
-            console.log("Logintoken done attempt")
-            await setIsLoggedIn(true);
-
-        } catch (error) {
-            console.error(error)
-        } 
+      try {
+        console.log("loginToken attempt");
+        const authToken = await login(username, password);
+        localStorage.setItem("id", authToken);
+        console.log("Logintoken done attempt");
+        // if successful login, pass true as argument for setIsLoggedIn
+        // This conditional ultimately determines whether a Log In attempt results in a redirect to another page (upon success) or not.
+        if (authToken) {
+          await setIsLoggedIn(true);
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     return (
@@ -66,7 +70,9 @@ const LogIn = ({isLoggedIn, setIsLoggedIn, setUserAccount, userAccount}) => {
 
                     <button type="submit">Log In</button>
                     <label htmlFor="signup">
+                        <Link to="/src/Register.js">
                         <aside className="signup-link">Don't have an account? What's wrong with you?</aside>
+                        </Link>
                     </label>
                 </form>
             </div>

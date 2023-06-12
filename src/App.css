@@ -1,4 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Darumadrop+One&family=IBM+Plex+Sans&family=Poppins&display=swap');
+
+/* Hide number input arrows for mozilla firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* Hide number input arrows for Safari, Chrome, Opera, Microsoft Edge*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 * { 
     margin:0;
     padding:0;

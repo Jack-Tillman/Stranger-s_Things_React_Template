@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 import "./Posts.css";
 
 const COHORT_NAME = '2303-FTB-ET-WEB-AM';
@@ -32,17 +33,14 @@ const Posts = () => {
                 <div className="search-posts-wrapper">
                     <input className="search-posts" type="text" placeholder="Search Posts" />
                 </div>
-                <span className="add-post">(ADD POST)</span>
+                <Link to="/src/AddNewPost.jsx">
+                <span className="add-post">
+                  (ADD POST)
+                  </span>
+                </Link>
             </section>
             <div className="all-posts">
           {
-            /*
-            Title
-            Description post.description
-            Price: post.price
-            Seller: post.username
-            Location: post.location
-            */
             posts.map(post => (
                 <div className="full-post" key={post._id}>
                     <div className="title">{post.title}</div>
