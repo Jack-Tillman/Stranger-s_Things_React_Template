@@ -5,21 +5,7 @@ export const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAM
 
 
 
-function makeHeaders(authToken){
-  if (authToken) {
-    const loggedInHeader = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${authToken}`
-    }
-    return loggedInHeader;
-  } else {
-    const guestHeader = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer`
-    } 
-    return guestHeader;
-  }
-}
+
 
 export const registerUser = async (username, password) => {
   //check for proper username and password values 
@@ -84,20 +70,38 @@ export const registerUser = async (username, password) => {
       console.error(err);
     }
   }
-//used as arguments for below
-  // {authToken, newPost.title, newPost.description, newPost.price, newPost.willDeliver}
-  export const makePost = async (authToken) => {
 
+//helper function for makePosts
+function makeHeaders(authToken){
+  if (authToken) {
+    const loggedInHeader = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    }
+    return loggedInHeader;
+  } else {
+    return {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer`
+    };
+  }
+}
+  
+  //used as arguments for below
+  // {authToken, newPost.title, newPost.description, newPost.price, newPost.willDeliver}
+  export const makePost = async (formInputObject) => {
+    // const madeHeader = makeHeaders(authToken);
+    console.log(formInputObject);
     try {
       const response = await fetch(`${BASE_URL}/posts`, {
         method: "POST",
-        headers: makeHeaders(authToken),
+        headers: makeHeaders(formInputObject.authToken),
         body: JSON.stringify({
           post: {
-            title: "My favorite stuffed animal",
-            description: "This is a pooh doll from 1973. It has been carefully taken care of since I first got it.",
-            price: "$480.00",
-            willDeliver: true
+            title: `${formInputObject.title}`,
+            description: `${formInputObject.description}`,
+            price: `${formInputObject.price}`,
+            willDeliver: `${formInputObject.willDeliver}`
           }
         })
       });

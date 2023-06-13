@@ -146,3 +146,18 @@ Long term To-Do:
 * Improve the error messages for Registration page, Login, AddnewPost (make sure specific responses that are fully helpful, i.e. mention min and max length and no special characters )
 * In Register.js, Login.js, and AddNewPost, refine the CSS for form input so that the prompts are useful without being too big.
 * In Register.js, Login.js, and maybe AddNewPost maybe render the prompts as red upon page load, and then when conditions are met, they turn green
+
+June 13 Pre-co working:
+completed:
+* can now make new posts! 
+* new post submission form clears after submission 
+
+todo:
+* conditionally render 'ADD NEW POST' based on whether isLoggedIn is true or whatever
+* set up user feedback for when the post is created or failed to create 
+* ideally, have the new post rise to the very top - might not be feasible without sorting the posts by chronological order
+
+Long term To-Do:
+* Improve the error messages for Registration page, Login, AddnewPost (make sure specific responses that are fully helpful, i.e. mention min and max length and no special characters )
+* In Register.js, Login.js, and AddNewPost, refine the CSS for form input so that the prompts are useful without being too big.
+* In Register.js, Login.js, and maybe AddNewPost maybe render the prompts as red upon page load, and then when conditions are met, they turn green

@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import './AddNewPost.css'
-import { makePost } from './api';
+import { makePost, makeHeaders } from './api';
 
 const AddNewPost = ({isLoggedIn, userAccount}) => {
-    const [willDeliver, setWillDeliver] = useState(false)
-    console.log(willDeliver)
+    const [willDeliver, setWillDeliver] = useState(false);
+
     const [formInput, setFormInput] = useState({
         title: '',
         description: '',
@@ -41,13 +41,12 @@ const AddNewPost = ({isLoggedIn, userAccount}) => {
             //not sure exactly why, but setting inverse of willDeliver ensures that willDeliver matches what user wants from screen selection
             willingToDeliver: `${!willDeliver}`
         })
-        console.log(willDeliver)
     };
 
     //only numbers 0-9 allowed
     const priceCheck = /^[0-9]+$/;
     const priceResult = priceCheck.test(formInput.price);
-
+    //this is the function that ultimately submits the post creation template 
     const validateFormInput = (e) => {
         e.preventDefault();
 
@@ -89,6 +88,37 @@ const AddNewPost = ({isLoggedIn, userAccount}) => {
             });
             return;
         }
+        //if the user enters all input fields properly, store the input values within an object
+        // that will be passed to the makePost API request
+        if ((formInput.location) && (formInput.price) && (priceResult) && (formInput.description) && (formInput.title)) {
+            console.log(formInput.title, formInput.description, formInput.location, formInput.price, priceResult);
+            const formInputObject = {
+                title: formInput.title,
+                description: formInput.description,
+                price: formInput.price,
+                location: formInput.location,
+                willDeliver: `${willDeliver}`,
+                authToken: userAccount._id
+            }
+            console.log(formInputObject);
+            try{
+                //line below is when API call is actually made
+                const newPostResult = makePost(formInputObject);
+                console.log(newPostResult);
+                //reset form inputs
+                setFormInput({ title: '',
+                description: '',
+                price: 0,
+                location: '',
+                willingToDeliver: `${willDeliver}`})
+            } catch (error) {
+                console.error(error);
+            } finally {
+                console.log("New post submission attempted")
+            }
+            
+        }
+
         setFormError(inputError);
         console.log(formInput)
         // if (!formInput.willDeliver) {
@@ -106,6 +136,7 @@ const AddNewPost = ({isLoggedIn, userAccount}) => {
                 <form className="newpost-form" onSubmit={validateFormInput}>
                     <label className="title-label" htmlFor='title'>Title*
                         <input 
+                        required
                         className="newpost-input"
                         type="text"
                         placeholder="Title"
@@ -123,6 +154,7 @@ const AddNewPost = ({isLoggedIn, userAccount}) => {
 
                     <label className="description-label" htmlFor='description'>Description*
                         <input 
+                        required
                         className="newpost-input"
                         type="text"
                         placeholder="Description"
@@ -140,6 +172,7 @@ const AddNewPost = ({isLoggedIn, userAccount}) => {
 
                     <label className="price-label" htmlFor='price'>Price*
                         <input 
+                        required
                         className="newpost-input"
                         type="number"
                         placeholder="Price"
@@ -160,6 +193,7 @@ const AddNewPost = ({isLoggedIn, userAccount}) => {
                     
                     <label className="location-label" htmlFor='location'>Location*
                         <input 
+                        required
                         className="newpost-input"
                         type="text"
                         placeholder="Location"

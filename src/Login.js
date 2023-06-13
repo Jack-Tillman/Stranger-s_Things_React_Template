@@ -47,6 +47,7 @@ const LogIn = ({isLoggedIn, setIsLoggedIn, setUserAccount, userAccount}) => {
         // This conditional ultimately determines whether a Log In attempt results in a redirect to another page (upon success) or not.
         if (authToken) {
           await setIsLoggedIn(true);
+          await setUserAccount({username, password, isAuthenticated: true, _id: authToken });
         }
       } catch (error) {
         console.error(error);
