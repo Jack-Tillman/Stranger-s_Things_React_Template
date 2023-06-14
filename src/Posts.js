@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link} from "react-router-dom";  
 import "./Posts.css";
 
 const COHORT_NAME = '2303-FTB-ET-WEB-AM';
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
-const Posts = () => {
+const Posts = ({showPost, setShowPost}) => {
     const [posts, setPosts] = useState([]);
     console.log('posts: ', posts);
 
@@ -41,6 +41,8 @@ const Posts = () => {
             </section>
             <div className="all-posts">
           {
+            // (getItem.localStorage(post._id)) ? <
+
             posts.map(post => (
                 <div className="full-post" key={post._id}>
                     <div className="title">{post.title}</div>
@@ -49,7 +51,15 @@ const Posts = () => {
                     <div className="author">{post.author.username}</div>
                     <div className="location">{post.location}</div>
                     <div className="willDeliver">{post.willDeliver}</div>
-                    <button className="message-btn">SEND MESSAGE</button>
+                    <Link to="/src/ViewPost.jsx">
+                    <button className="message-btn" onClick={()=> {
+                      const postId = post._id;
+                      localStorage.setItem("postid", postId);
+                      setShowPost(postId);
+                      console.log(showPost)
+                    }}>VIEW POST</button>
+                  </Link>
+                  
                 </div>)
               )
           }

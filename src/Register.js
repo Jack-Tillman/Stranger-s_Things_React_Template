@@ -115,6 +115,7 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount}) => {
         if ((userResult) && (formInput.username) && (formInput.password) && (formInput.confirmPassword === formInput.password)) {
             // setUserAccount(formInput.username, formInput.password);
             console.log(formInput.username, formInput.password);
+            //**CHANGE later to incorporate useEffect  */
             async function fetchToken() {
                 try {
                     //get authorization token

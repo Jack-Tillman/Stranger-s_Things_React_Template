@@ -1,0 +1,25 @@
+.posts-wrapper {
+    display:flex;
+    flex-direction: column;
+    margin:0 auto;
+}
+
+
+.single-post-container {
+    display:flex;
+    flex-direction: column;   
+}
+
+div > .single-body {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    border:1px solid black;
+    margin:1em auto 0;
+    width:65vw;
+    height:15em;
+    padding:0.5em;
+    box-shadow: 10px 5px 5px rgb(226, 195, 195);
+    text-align: left;
+}

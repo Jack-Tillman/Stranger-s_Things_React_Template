@@ -12,6 +12,7 @@ import Posts from "./Posts";
 import Home from "./Home";
 import Register from "./Register";
 import AddNewPost from "./AddNewPost";
+import ViewPost from "./ViewPost";
 
 
 //Will need to include <Routes> and <Route path=""> for each component that are 
@@ -26,11 +27,12 @@ const App = () => {
     isAuthenticated: false,
     _id: ''
   });
+  const [showPost, setShowPost] = useState('');
 
   return( 
   <>
     <BrowserRouter>
-      <div className="App wrapper">
+      <div className="App-wrapper">
       <Navbar 
       isLoggedIn={isLoggedIn}
       setIsLoggedIn={setIsLoggedIn}
@@ -53,6 +55,8 @@ const App = () => {
 
           <Route path="/src/Posts.js">
             <Posts
+            showPost={showPost}
+            setShowPost={setShowPost}
             isLoggedIn={isLoggedIn}
             userAccount={userAccount}
             />
@@ -65,9 +69,13 @@ const App = () => {
               (<Posts
                 isLoggedIn={isLoggedIn}
                 userAccount={userAccount}
+                showPost={showPost}
+              setShowPost={setShowPost}
               />) 
               :  
             (<LogIn 
+            showPost={showPost}
+            setShowPost={setShowPost}
             isLoggedIn={isLoggedIn}
             setIsLoggedIn={setIsLoggedIn}
             userAccount={userAccount}
@@ -101,6 +109,15 @@ const App = () => {
             isLoggedIn={isLoggedIn}
             userAccount={userAccount}
             />
+          </Route>
+
+          <Route path="/src/ViewPost.jsx">
+          <ViewPost
+            showPost={showPost}
+            setShowPost={setShowPost}
+            isLoggedIn={isLoggedIn}
+            userAccount={userAccount}
+            /> 
           </Route>
     </div>
     </BrowserRouter>

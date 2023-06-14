@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './AddNewPost.css'
-import { makePost, makeHeaders } from './api';
+import { makePost} from './api';
 
 const AddNewPost = ({isLoggedIn, userAccount}) => {
     const [willDeliver, setWillDeliver] = useState(false);

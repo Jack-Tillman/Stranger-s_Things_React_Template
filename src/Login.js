@@ -20,7 +20,7 @@ import { login } from './api';
     JUNE 6 UPDATE: Consider making username, password into a single state with username and password as properties for a single state object like in register
 */
 
-const LogIn = ({isLoggedIn, setIsLoggedIn, setUserAccount, userAccount}) => {
+const LogIn = ({isLoggedIn, setIsLoggedIn, setUserAccount, userAccount, showPost, setShowPost}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     //ISSUE: even if incorrect login info, will still log in - try catch block is one approach, maybe just copy register stuff here
