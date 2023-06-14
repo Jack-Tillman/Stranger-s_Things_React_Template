@@ -43,9 +43,9 @@ export const registerUser = async (username, password) => {
       });
   
       const result = await response.json();
-      console.log(result);
-      console.log(result.data.posts);
-      console.log(authToken)
+      // console.log(result);
+      // console.log(result.data.posts);
+      // console.log(authToken)
       return result;
     } catch (err) {
       console.error(err);
@@ -90,13 +90,13 @@ export const registerUser = async (username, password) => {
 
 //helper function for makePosts
 function makeHeaders(authToken){
-  console.log(authToken);
+  // console.log(authToken);
   if (authToken) {
     const loggedInHeader = {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${authToken}`
     }
-    console.log(loggedInHeader)
+    // console.log(loggedInHeader)
     return loggedInHeader;
   } else {
     return {
@@ -123,6 +123,23 @@ function makeHeaders(authToken){
             willDeliver: `${formInputObject.willDeliver}`
           }
         })
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  export const deletePost = async (postId, authToken) => {
+    try {
+      const response = await fetch(`${BASE_URL}/posts/${postId}`, {
+        method: "DELETE",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        }
       });
       const result = await response.json();
       console.log(result);

@@ -13,6 +13,7 @@ const AddNewPost = ({isLoggedIn, userAccount}) => {
         willingToDeliver: `${willDeliver}`
     });
 
+    // eslint-disable-next-line no-unused-vars
     const [formError, setFormError] = useState({
         title: '',
         description: '',

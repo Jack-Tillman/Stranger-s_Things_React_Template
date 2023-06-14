@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { fetchPosts } from "./api";
+import { fetchPosts, deletePost } from "./api";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import "./Posts.css"
 import "./ViewPost.css"
@@ -8,13 +8,15 @@ import "./ViewPost.css"
 export const COHORT_NAME = '2303-FTB-ET-WEB-AM';
 export const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
+// eslint-disable-next-line no-unused-vars
 const newguy123id = "64871d300911550014fb4a1b";
 //current error: returned data is null, so i am not getting the actual post i need
 const ViewPost = ({ isLoggedIn, userAccount, posts, setPosts, showPost, setShowPost }) => {
   const currentPostId = localStorage.getItem("postid");
   const [showSinglePost, setShowSinglePost] = useState([]);
-  console.log(currentPostId);
-  
+  console.log(`currentPostId: ${currentPostId}`);
+  console.log(`currentAccountId: ${userAccount._id}`);
+  const authToken = userAccount._id;
   useEffect(() => {
     //potential cleanup function, not used atm as it causes lag
     // let cleanup = true;
@@ -23,8 +25,6 @@ const ViewPost = ({ isLoggedIn, userAccount, posts, setPosts, showPost, setShowP
     //fetch posts, then filter the posts based on currentPostId
     fetchPosts(authToken)
       .then((post) => {
-        // console.log(post);
-        // console.log(post.data.posts);
         let singlePost = post.data.posts.filter((post) => {
           return post._id === currentPostId;
         });
@@ -41,6 +41,8 @@ const ViewPost = ({ isLoggedIn, userAccount, posts, setPosts, showPost, setShowP
     // }
     //adding additional dependencies the linter suggests causes infinite rendering
   }, [currentPostId, userAccount._id]);
+
+
 
 
   return (
@@ -68,6 +70,14 @@ const ViewPost = ({ isLoggedIn, userAccount, posts, setPosts, showPost, setShowP
               <div className="author">{post.author.username}</div>
               <div className="location">{post.location}</div>
               <div className="willDeliver">{post.willDeliver}</div>
+              {/* if messages, show them, else show no messages */}
+              {
+                (post.messages.length > 0) ?
+                <div className="viewMessages">{post.messages}</div>
+                :
+                <div className="viewMessages">No messages</div>
+              }
+              <div className="viewMessages">{post.messages}</div>
               <div className="viewpost-btn-container">
               <Link to="/src/Posts.js">
                 <button
@@ -91,6 +101,15 @@ const ViewPost = ({ isLoggedIn, userAccount, posts, setPosts, showPost, setShowP
               }}>
               Message</button>
               </Link>
+
+              <button 
+              className="delete-btn"
+              onClick={() => {
+                const singlePostId = showSinglePost[0]._id;
+                deletePost(singlePostId, authToken);
+
+              }}>delete
+              </button>
               </div>
             </div>
           ))}

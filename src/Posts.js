@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect } from "react";
 import {Link} from "react-router-dom";  
 import "./Posts.css";
 import { fetchPosts } from "./api";
@@ -48,8 +48,8 @@ const Posts = ({posts, setPosts, userAccount, setUserAccount, showPost, setShowP
                       const postAuthor = post.author._id;
                       localStorage.setItem("postid", postId);
                       setShowPost(postId);
-                      console.log(posts)
-                      console.log(postAuthor)
+                      // console.log(posts)
+                      console.log(`Post author is: ${postAuthor}`)
                     }}>VIEW POST</button>
                   </Link>
                   
