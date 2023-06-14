@@ -110,6 +110,13 @@ const ViewPost = ({ isLoggedIn, userAccount, posts, setPosts, showPost, setShowP
 
               }}>delete
               </button>
+              <Link to="/src/EditPost">
+              <button 
+              className="edit-btn"
+              onClick={()=> {
+                console.log("Time to edit!");
+              }}>Edit</button>
+              </Link>
               </div>
             </div>
           ))}

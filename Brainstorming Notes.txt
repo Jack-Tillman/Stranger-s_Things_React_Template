@@ -230,3 +230,25 @@ After fetchPost is done, the returned value of all the posts is passed thru setP
 [formInput]
 [formError] both of these are almost same as the register ones, just minor format differences
 formInput is used to create a formInputObject which is passed to makePost() 
+
+**June 14 Progress Report
+Completed:
+*Delete posts and edit posts are both functional! YES
+*created EditPost component, didn't need component for deleting posts (slid it into ViewPost component)
+* I think i got messages correct? Need to make messages in order to verify, though 
+
+To-Do:
+* Prevent users who aren't signed in from being able to edit and delete posts (they can't anyways, but they shouldn't be given the chance)
+* Add in the success/failure feedback for creating posts, deleting posts, and editing posts
+* Upon creating, editing, deleting posts, figure out what the redirect if any should be 
+***Sit down, as if you aren't already, and figure out: 
+    what states am I using for posts, editpost, AddNewPost, and post deletion (userId, postId, etc.), and
+    how can I trim and refine everything so that it's easier to understand 
+* conditionally render 'ADD NEW POST' based on whether isLoggedIn is true or whatever
+
+
+Long term To-Do:
+* ideally, have the new post rise to the very top - might not be feasible without sorting the posts by chronological order
+* Improve the error messages for Registration page, Login, AddnewPost (make sure specific responses that are fully helpful, i.e. mention min and max length and no special characters )
+* In Register.js, Login.js, and AddNewPost, refine the CSS for form input so that the prompts are useful without being too big.
+* In Register.js, Login.js, and maybe AddNewPost maybe render the prompts as red upon page load, and then when conditions are met, they turn green

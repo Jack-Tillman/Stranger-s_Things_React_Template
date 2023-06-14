@@ -13,6 +13,7 @@ import Home from "./Home";
 import Register from "./Register";
 import AddNewPost from "./AddNewPost";
 import ViewPost from "./ViewPost";
+import EditPost from "./EditPost";
 
 
 //Will need to include <Routes> and <Route path=""> for each component that are 
@@ -128,6 +129,17 @@ const App = () => {
             isLoggedIn={isLoggedIn}
             userAccount={userAccount}
             /> 
+          </Route>
+
+          <Route path="/src/EditPost">
+            <EditPost
+            posts={posts}
+            setPosts={setPosts}
+             showPost={showPost}
+             setShowPost={setShowPost}
+             isLoggedIn={isLoggedIn}
+             userAccount={userAccount}
+             />
           </Route>
     </div>
     </BrowserRouter>

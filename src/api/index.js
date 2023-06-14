@@ -1,10 +1,6 @@
 
-
 export const COHORT_NAME = '2303-FTB-ET-WEB-AM';
 export const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
-
-
-
 
 
 export const registerUser = async (username, password) => {
@@ -120,7 +116,8 @@ function makeHeaders(authToken){
             title: `${formInputObject.title}`,
             description: `${formInputObject.description}`,
             price: `${formInputObject.price}`,
-            willDeliver: `${formInputObject.willDeliver}`
+            willDeliver: `${formInputObject.willDeliver}`,
+            location: `${formInputObject.location}`
           }
         })
       });
@@ -140,6 +137,37 @@ function makeHeaders(authToken){
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${authToken}`
         }
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  //updatedFormInputObject needs updated form input data, as well as authToken AND postId of the current post that is being edited 
+  export const updatePost = async (updatedFormInputObject) => {
+    console.log(updatedFormInputObject);
+    try {
+      // You will need to insert a variable into the fetch template literal 
+      // in order to make the POST_ID dynamic. 
+      // 5e8d1bd48829fb0017d2233b is just for demonstration.
+      const response = await fetch(`${BASE_URL}/posts/${updatedFormInputObject._id}`, {
+        method: "PATCH",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${updatedFormInputObject.authToken}`
+        },
+        body: JSON.stringify({
+          post: {
+            title: `${updatedFormInputObject.title}`,
+            description: `${updatedFormInputObject.description}`,
+            price: `${updatedFormInputObject.price}`,
+            willDeliver: `${updatedFormInputObject.willDeliver}`,
+            authToken: `${updatedFormInputObject.authToken}`,
+            _id: `${updatedFormInputObject._id}`
+          }
+        })
       });
       const result = await response.json();
       console.log(result);

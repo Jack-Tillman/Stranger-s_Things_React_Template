@@ -1,16 +1,20 @@
-import React, {useState} from 'react';
-import './AddNewPost.css'
-import { makePost} from './api';
+import React, {useState} from "react";
+import { updatePost } from "./api";
 
-const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
+//THIS WORKS YES! BUT, please do refine this and make it easier to read and less redundant 
+const EditPost = ({userAccount, posts, setPosts, showPost, setShowPost}) => {
+    
     const [willDeliver, setWillDeliver] = useState(false);
-
-    const [formInput, setFormInput] = useState({
+    const [thisPostId] = posts.filter(post => post._id === showPost);
+  console.log(thisPostId._id)
+    const [updatedFormInput, setUpdatedFormInput] = useState({
         title: '',
         description: '',
         price: 0,
         location: '',
-        willingToDeliver: `${willDeliver}`
+        willingToDeliver: `${willDeliver}`,
+        authToken: `${userAccount._id}`,
+        _id: `${thisPostId._id}`
     });
 
     // eslint-disable-next-line no-unused-vars
@@ -19,7 +23,9 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
         description: '',
         price: 0,
         location: '',
-        willingToDeliver: `${willDeliver}`
+        willingToDeliver: `${willDeliver}`,
+        authToken: `${userAccount._id}`,
+        _id: `${thisPostId._id}`
     });
 
     // const handleClick = (e) => {
@@ -28,17 +34,17 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
     // }
 
     const handleUserInput = (name, value) => {
-       setFormInput({
-        //spread operator to make a copy of formInput object
-        ...formInput,
+       setUpdatedFormInput({
+        //spread operator to make a copy of updatedFormInput object
+        ...updatedFormInput,
         //[username] / [password]: (user's input for username / password)
         [name]: value,
        })
     };
 
     const handleUserInputCheckbox = ({willDeliver}) => {
-        setFormInput({
-            ...formInput,
+        setUpdatedFormInput({
+            ...updatedFormInput,
             //not sure exactly why, but setting inverse of willDeliver ensures that willDeliver matches what user wants from screen selection
             willingToDeliver: `${!willDeliver}`
         })
@@ -46,9 +52,9 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
 
     //only numbers 0-9 allowed
     const priceCheck = /^[0-9]+$/;
-    const priceResult = priceCheck.test(formInput.price);
+    const priceResult = priceCheck.test(updatedFormInput.price);
     //this is the function that ultimately submits the post creation template 
-    const validateFormInput = (e) => {
+    const validateUpdatedFormInput = (e) => {
         e.preventDefault();
 
         let inputError = {
@@ -58,7 +64,7 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
             location: ''
         }
 
-        if (!formInput.title) {
+        if (!updatedFormInput.title) {
             setFormError({
                 ...inputError,
                 title: "Please enter a valid title."
@@ -66,7 +72,7 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
             return;
         }
 
-        if (!formInput.description) {
+        if (!updatedFormInput.description) {
             setFormError({
                 ...inputError,
                 description: "Please enter a valid description."
@@ -74,7 +80,7 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
             return;
         }
 
-        if (!formInput.price || (!priceResult)) {
+        if (!updatedFormInput.price || (!priceResult)) {
             setFormError({
                 ...inputError,
                 price: "Please enter a price in USD, numbers only."
@@ -82,7 +88,7 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
             return;
         }
 
-        if (!formInput.location) {
+        if (!updatedFormInput.location) {
             setFormError({
                 ...inputError,
                 location: "Please enter a valid location."
@@ -91,29 +97,34 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
         }
         //if the user enters all input fields properly, store the input values within an object
         // that will be passed to the makePost API request
-        if ((formInput.location) && (formInput.price) && (priceResult) && (formInput.description) && (formInput.title)) {
-            console.log(formInput.title, formInput.description, formInput.location, formInput.price, priceResult);
-            console.log(formInput)
-            const formInputObject = {
-                title: formInput.title,
-                description: formInput.description,
-                price: formInput.price,
-                location: formInput.location,
+        if ((updatedFormInput.location) && (updatedFormInput.price) && (priceResult) && (updatedFormInput.description) && (updatedFormInput.title)) {
+            const updatedFormInputObject = {
+                title: updatedFormInput.title,
+                description: updatedFormInput.description,
+                price: updatedFormInput.price,
+                location: updatedFormInput.location,
                 willDeliver: `${willDeliver}`,
-                authToken: userAccount._id
+                authToken: `${userAccount._id}`,
+                _id: `${thisPostId._id}`
             }
-            console.log(formInputObject);
+            console.log(updatedFormInputObject);
             try{
                 //line below is when API call is actually made
-                const newPostResult = makePost(formInputObject);
-                console.log(newPostResult);
+                async function editPost() {
+                    await updatePost(updatedFormInputObject);
+
+                }
+                editPost()
                 //reset form inputs
-                setFormInput({ 
+                setUpdatedFormInput({ 
                 title: '',
                 description: '',
                 price: 0,
                 location: '',
-                willingToDeliver: `${willDeliver}`})
+                willingToDeliver: `${willDeliver}`,
+                authToken: `${userAccount._id}`,
+                _id: `${thisPostId._id}`
+            })
             } catch (error) {
                 console.error(error);
             } finally {
@@ -124,8 +135,8 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
         }
 
         setFormError(inputError);
-        console.log(formInput)
-        // if (!formInput.willDeliver) {
+        console.log(updatedFormInput)
+        // if (!updatedFormInput.willDeliver) {
         //     setFormError({
         //         ...inputError,
         //     })
@@ -137,7 +148,7 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
         <main className="newpost-main">
             <div className="newpost-container">
                 <h3 className="h3-newpost">Add New Post</h3>
-                <form className="newpost-form" onSubmit={validateFormInput}>
+                <form className="newpost-form" onSubmit={validateUpdatedFormInput}>
                     <label className="title-label" htmlFor='title'>Title*
                         <input 
                         required
@@ -147,7 +158,7 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
                         name="title"
                         minLength="1"
                         maxLength="50"
-                        value={formInput.title}
+                        value={updatedFormInput.title}
                         onChange={(e) => {
                             console.log(e.target.name)
                             console.log(e.target.value)
@@ -165,7 +176,7 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
                         name="description"
                         minLength="1"
                         maxLength="250"
-                        value={formInput.description}
+                        value={updatedFormInput.description}
                         onChange={(e) => {
                             console.log(e.target.name)
                             console.log(e.target.value)
@@ -186,7 +197,7 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
                         max="999999"
                         minLength="1"
                         maxLength="10"
-                        value={formInput.price}
+                        value={updatedFormInput.price}
                         onChange={(e) => {
                             console.log(e.target.name)
                             console.log(e.target.value)
@@ -203,7 +214,7 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
                         name="location"
                         minLength="1"
                         maxLength="100"
-                        value={formInput.location}
+                        value={updatedFormInput.location}
                         onChange={(e) => {
                             console.log(e.target.name)
                             console.log(e.target.value)
@@ -219,7 +230,7 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
                         type="checkbox"
                         id="willDeliverCheckbox"
                         name="willDeliver"
-                        value={formInput.willDeliver}
+                        value={updatedFormInput.willDeliver}
                         onChange={(e) => {
                             //wilLDeliver state set to inverse 
                             setWillDeliver(!willDeliver);
@@ -238,4 +249,4 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
     )
 }
 
-export default AddNewPost;
+export default EditPost;
