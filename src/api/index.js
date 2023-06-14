@@ -35,18 +35,35 @@ export const registerUser = async (username, password) => {
   }
 };
 
-  export const fetchPosts = async () => {
+  export const fetchPosts = async (authToken) => {
     try {
-      const response = await fetch(`${BASE_URL}/posts`)
+      const response = await fetch(`${BASE_URL}/posts`, {
+        method: "GET",
+        headers: makeHeaders(authToken)
+      });
   
       const returned = await response.json();
       console.log(returned);
       console.log(returned.data.posts);
+      console.log(authToken)
       return returned;
     } catch (err) {
       console.error(err);
     }
   }
+
+  // export const fetchPosts = async () => {
+  //   try {
+  //     const response = await fetch(`${BASE_URL}/posts`)
+  
+  //     const returned = await response.json();
+  //     console.log(returned);
+  //     console.log(returned.data.posts);
+  //     return returned;
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // }
 
   export const login = async (username, password) => {
 
@@ -73,11 +90,13 @@ export const registerUser = async (username, password) => {
 
 //helper function for makePosts
 function makeHeaders(authToken){
+  console.log(authToken);
   if (authToken) {
     const loggedInHeader = {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${authToken}`
     }
+    console.log(loggedInHeader)
     return loggedInHeader;
   } else {
     return {

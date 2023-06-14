@@ -5,13 +5,14 @@ import "./Posts.css";
 const COHORT_NAME = '2303-FTB-ET-WEB-AM';
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
-const Posts = ({showPost, setShowPost}) => {
-    const [posts, setPosts] = useState([]);
+const Posts = ({posts, setPosts, userAccount, setUserAccount, showPost, setShowPost}) => {
+    const authToken = userAccount._id;
+    console.log(authToken)
     console.log('posts: ', posts);
 
   useEffect(() => {
     
-    const fetchPosts = async () => {
+    const fetchPosts = async (authToken) => {
       try {
         const response = await fetch(`${BASE_URL}/posts`)
         const returned = await response.json();
@@ -22,7 +23,7 @@ const Posts = ({showPost, setShowPost}) => {
         console.error(err);
       }
     }
-    fetchPosts();
+    fetchPosts(authToken);
   }, [])
 
     return(
@@ -41,8 +42,6 @@ const Posts = ({showPost, setShowPost}) => {
             </section>
             <div className="all-posts">
           {
-            // (getItem.localStorage(post._id)) ? <
-
             posts.map(post => (
                 <div className="full-post" key={post._id}>
                     <div className="title">{post.title}</div>
@@ -52,11 +51,13 @@ const Posts = ({showPost, setShowPost}) => {
                     <div className="location">{post.location}</div>
                     <div className="willDeliver">{post.willDeliver}</div>
                     <Link to="/src/ViewPost.jsx">
-                    <button className="message-btn" onClick={()=> {
+                    <button className="viewpost-btn" onClick={()=> {
                       const postId = post._id;
+                      const postAuthor = post.author._id;
                       localStorage.setItem("postid", postId);
                       setShowPost(postId);
-                      console.log(showPost)
+                      console.log(posts)
+                      console.log(postAuthor)
                     }}>VIEW POST</button>
                   </Link>
                   

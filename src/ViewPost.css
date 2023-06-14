@@ -1,3 +1,5 @@
+/*TO-DO: Make the font size for everything larger, refine overall look */
+
 .posts-wrapper {
     display:flex;
     flex-direction: column;
@@ -22,4 +24,14 @@ div > .single-body {
     padding:0.5em;
     box-shadow: 10px 5px 5px rgb(226, 195, 195);
     text-align: left;
+}
+
+.message-btn {
+    cursor:pointer;
+}
+
+.viewpost-btn-container {
+    display:flex;
+    gap:2em;
+    justify-content: center;
 }

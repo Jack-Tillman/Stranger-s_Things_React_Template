@@ -3,6 +3,7 @@
 /* Hide number input arrows for mozilla firefox */
 input[type="number"] {
     -moz-appearance: textfield;
+    appearance: textfield;
 }
 
 /* Hide number input arrows for Safari, Chrome, Opera, Microsoft Edge*/

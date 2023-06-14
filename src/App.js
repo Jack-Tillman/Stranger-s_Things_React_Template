@@ -27,6 +27,7 @@ const App = () => {
     isAuthenticated: false,
     _id: ''
   });
+  const [posts, setPosts] = useState([]);
   const [showPost, setShowPost] = useState('');
 
   return( 
@@ -55,10 +56,13 @@ const App = () => {
 
           <Route path="/src/Posts.js">
             <Posts
+            posts={posts}
+            setPosts={setPosts}
             showPost={showPost}
             setShowPost={setShowPost}
             isLoggedIn={isLoggedIn}
             userAccount={userAccount}
+            setUserAccount={setUserAccount}
             />
           </Route>
           {/* once the user signs in, redirect them to Posts. if they aren't signed in, they will be directed to login page  */}
@@ -67,10 +71,12 @@ const App = () => {
               (isLoggedIn)
               ?
               (<Posts
+                posts={posts}
+                setPosts={setPosts}
                 isLoggedIn={isLoggedIn}
                 userAccount={userAccount}
                 showPost={showPost}
-              setShowPost={setShowPost}
+                setShowPost={setShowPost}
               />) 
               :  
             (<LogIn 
@@ -90,6 +96,8 @@ const App = () => {
             (isLoggedIn) 
             ? 
             (<Posts
+              posts={posts}
+              setPosts={setPosts}
               isLoggedIn={isLoggedIn}
               userAccount={userAccount}
               />) 
@@ -106,6 +114,8 @@ const App = () => {
 
           <Route path="/src/AddNewPost.jsx">
             <AddNewPost
+            posts={posts}
+            setPosts={setPosts}
             isLoggedIn={isLoggedIn}
             userAccount={userAccount}
             />

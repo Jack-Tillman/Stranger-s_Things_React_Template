@@ -166,3 +166,54 @@ Long term To-Do:
 * In Register.js, Login.js, and AddNewPost, refine the CSS for form input so that the prompts are useful without being too big.
 * In Register.js, Login.js, and maybe AddNewPost maybe render the prompts as red upon page load, and then when conditions are met, they turn green
 
+June 14 - Components, props, and state time. 
+Components so far: 
+
+Renderer: Index.js
+
+What gets rendered: App.js
+
+Home.js
+Navbar.js
+Login.js
+Register.js
+Profile.js
+Posts.js
+AddNewPost.jsx
+ViewPost.jsx
+
+States that exist, default values, file they're declared within,localStorage, and what they do
+
+*DECLARED IN App.js
+---
+ const [isLoggedIn, setIsLoggedIn] = useState(false); - App.js. - This tracks whether the user is logged in or not. This prop is used to conditionally render the login/register links in nav bar or log out button.
+
+ const [userAccount, setUserAccount] = useState({
+    username: '', 
+    password: '',
+    isAuthenticated: false,
+    _id: ''
+  }); 
+  ^ App.js - This prop stores the userAccount info when they register an account, or when they log in. This is used to determine whether user can make a new post, edit a post, or send a message within a single post view.
+
+  const [showPost, setShowPost] = useState(''); - App.js; this is mainly used by the Posts and ViewPost components to determine whether to show the single post view or not.  
+
+*DECLARED IN Login.js
+---
+const [username, setUsername] + [password,setPassword] - track user input for username and password, passed as arguments to setUserAccount upon successful log in 
+
+*DECLARED IN Register.js 
+---
+[registerSuccess, setRegisterSuccess] - tracks whether the user successfully registered. If true, display welcome notification, otherwise render nothing 
+
+[formInput, setFormInput] - tracks user's registration information they enter in input. Is used to ultimately create the account and get auth token 
+[formError, setFormError] - tracks any errors user makes while inputting info, used to render more helpful notifications (password must be 8 characters long!)
+
+localStorage sets username and id if successful registration. Id can be used to maintain login between sessions, but will have to figure this out: https://stackoverflow.com/questions/72222728/why-is-localstorage-getting-cleared-whenever-i-refresh-the-page
+
+*DECLARED IN Posts.js 
+---
+none
+USED:
+After fetchPost is done, the returned value of all the posts is passed thru setPosts
+

@@ -8,50 +8,40 @@ import "./ViewPost.css"
 export const COHORT_NAME = '2303-FTB-ET-WEB-AM';
 export const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
+const newguy123id = "64871d300911550014fb4a1b";
 //current error: returned data is null, so i am not getting the actual post i need
-const ViewPost = ({ posts, setPosts, showPost, setShowPost }) => {
-  
-  const currentPostId = localStorage.getItem("postid")
+const ViewPost = ({ isLoggedIn, userAccount, posts, setPosts, showPost, setShowPost }) => {
+  const currentPostId = localStorage.getItem("postid");
   const [showSinglePost, setShowSinglePost] = useState([]);
-  console.log(currentPostId)
-
+  console.log(currentPostId);
+  console.log(posts)
+  
   useEffect(() => {
+    //potential cleanup function, not used atm as it causes lag
     let cleanup = true;
+    const authToken = userAccount._id;
+    console.log(authToken);
     //fetch posts, then filter the posts based on currentPostId
-    fetchPosts().then(posts => {
-        // let postid
-        // let singlePost = posts.filter((._id))
-        console.log(posts);
-        console.log(posts.data.posts)
-        let singlePost = posts.data.posts.filter((post) => {
+    fetchPosts(authToken)
+      .then((post) => {
+        console.log(post);
+        console.log(post.data.posts);
+        let singlePost = post.data.posts.filter((post) => {
           return post._id === currentPostId;
-        })
+        });
         setShowSinglePost(singlePost);
-        console.log(singlePost)
+        console.log(showSinglePost);
         return singlePost;
       })
-    .catch((error) => {
-      console.error(error);
-    })
-    
+      .catch((error) => {
+        console.error(error);
+      });
+
     // return () => {
     //   cleanup = false;
     // }
-    },[])
+  }, []);
 
-  //   const fetchPosts = async () => {
-  //     try {
-  //       const response = await fetch(`${BASE_URL}/posts/${currentPostId}`);
-  //       const returned = await response.json();
-  //       const usableReturned = returned.data.posts;
-  //       console.log("returned: ", usableReturned);
-  //       await setPosts(usableReturned);
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   };
-  //   fetchPosts();
-  // }, [setPosts, currentPostId ]);
 
   return (
     <>
@@ -70,35 +60,38 @@ const ViewPost = ({ posts, setPosts, showPost, setShowPost }) => {
           </Link>
         </section>
         <div className="single-post-container">
-        {
-            // (getItem.localStorage(post._id)) ? <
+          {showSinglePost.map((post) => (
+            <div className="single-body" key={post._id}>
+              <div className="title">{post.title}</div>
+              <div className="description">{post.description}</div>
+              <div className="price">{post.price}</div>
+              <div className="author">{post.author.username}</div>
+              <div className="location">{post.location}</div>
+              <div className="willDeliver">{post.willDeliver}</div>
+              <div className="viewpost-btn-container">
+              <Link to="/src/Posts.js">
+                <button
+                  onClick={() => {
+                    localStorage.removeItem("postid");
+                    setShowPost('false');
+                  }}
+                >
+                  Go back
+                </button>
+              </Link>
 
-            showSinglePost.map(post => (
-                <div className="single-body" key={post._id}>
-                    <div className="title">{post.title}</div>
-                    <div className="description">{post.description}</div>
-                    <div className="price">{post.price}</div>
-                    <div className="author">{post.author.username}</div>
-                    <div className="location">{post.location}</div>
-                    <div className="willDeliver">{post.willDeliver}</div>
-                    <Link to="/src/Posts.js">
-            <button
+              <Link to="/">
+              <button
+              className="message-btn"
               onClick={() => {
-                localStorage.removeItem("postid");
-                setShowPost(false);
-              }}
-            >Go back</button>
-          </Link>
-                  
-                </div>)
-              )
-          }
-
-
-
-
-
-         
+                  localStorage.removeItem("postid");
+                  setShowPost('false');
+              }}>
+              Message</button>
+              </Link>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </>

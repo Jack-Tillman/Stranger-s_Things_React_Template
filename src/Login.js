@@ -41,13 +41,15 @@ const LogIn = ({isLoggedIn, setIsLoggedIn, setUserAccount, userAccount, showPost
       try {
         console.log("loginToken attempt");
         const authToken = await login(username, password);
-        localStorage.setItem("id", authToken);
         console.log("Logintoken done attempt");
         // if successful login, pass true as argument for setIsLoggedIn
         // This conditional ultimately determines whether a Log In attempt results in a redirect to another page (upon success) or not.
         if (authToken) {
           await setIsLoggedIn(true);
           await setUserAccount({username, password, isAuthenticated: true, _id: authToken });
+          await localStorage.setItem("id", authToken)
+        } else {
+            alert("That user does not exist, or the user information was not correctly entered.")
         }
       } catch (error) {
         console.error(error);
