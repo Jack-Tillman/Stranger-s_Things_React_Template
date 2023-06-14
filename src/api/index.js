@@ -42,11 +42,11 @@ export const registerUser = async (username, password) => {
         headers: makeHeaders(authToken)
       });
   
-      const returned = await response.json();
-      console.log(returned);
-      console.log(returned.data.posts);
+      const result = await response.json();
+      console.log(result);
+      console.log(result.data.posts);
       console.log(authToken)
-      return returned;
+      return result;
     } catch (err) {
       console.error(err);
     }

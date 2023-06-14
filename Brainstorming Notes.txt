@@ -214,6 +214,19 @@ localStorage sets username and id if successful registration. Id can be used to 
 *DECLARED IN Posts.js 
 ---
 none
+
 USED:
+---
 After fetchPost is done, the returned value of all the posts is passed thru setPosts
 
+*DECLARED IN ViewPost.jsx
+---
+[showSinglePost, setShowSinglePost] - When a user clicks on the view button of a post in /Posts.js,
+ fetchPosts is run to get the data for that post and stores it in showSinglePost 
+ showSinglePost is mapped to render the post itself 
+
+*DECLARED IN AddNewPost.jsx
+---
+[formInput]
+[formError] both of these are almost same as the register ones, just minor format differences
+formInput is used to create a formInputObject which is passed to makePost() 

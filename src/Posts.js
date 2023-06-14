@@ -1,30 +1,22 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";  
 import "./Posts.css";
+import { fetchPosts } from "./api";
 
-const COHORT_NAME = '2303-FTB-ET-WEB-AM';
-const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
+// const COHORT_NAME = '2303-FTB-ET-WEB-AM';
+// const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
 const Posts = ({posts, setPosts, userAccount, setUserAccount, showPost, setShowPost}) => {
-    const authToken = userAccount._id;
-    console.log(authToken)
-    console.log('posts: ', posts);
-
+  
   useEffect(() => {
-    
-    const fetchPosts = async (authToken) => {
-      try {
-        const response = await fetch(`${BASE_URL}/posts`)
-        const returned = await response.json();
-        const usableReturned = returned.data.posts;
-        console.log('returned: ', usableReturned);
-        setPosts(usableReturned);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    fetchPosts(authToken);
-  }, [])
+    const authToken = userAccount._id;
+    fetchPosts(authToken)
+      .then((posts) => {setPosts(posts.data.posts)})
+      .catch((error) => {
+        console.error(error)
+      });}
+      ,[userAccount._id, setPosts])
+
 
     return(
         <>
@@ -72,3 +64,19 @@ const Posts = ({posts, setPosts, userAccount, setUserAccount, showPost, setShowP
 }
 
 export default Posts;
+
+
+  //old fetch that works 
+  //   const fetchPosts = async (authToken) => {
+  //     try {
+  //       const response = await fetch(`${BASE_URL}/posts`)
+  //       const returned = await response.json();
+  //       const usableReturned = returned.data.posts;
+  //       console.log('returned: ', usableReturned);
+  //       setPosts(usableReturned);
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   }
+  //   fetchPosts(authToken);
+  // })

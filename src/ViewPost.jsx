@@ -14,23 +14,22 @@ const ViewPost = ({ isLoggedIn, userAccount, posts, setPosts, showPost, setShowP
   const currentPostId = localStorage.getItem("postid");
   const [showSinglePost, setShowSinglePost] = useState([]);
   console.log(currentPostId);
-  console.log(posts)
   
   useEffect(() => {
     //potential cleanup function, not used atm as it causes lag
-    let cleanup = true;
+    // let cleanup = true;
     const authToken = userAccount._id;
-    console.log(authToken);
+    // console.log(authToken);
     //fetch posts, then filter the posts based on currentPostId
     fetchPosts(authToken)
       .then((post) => {
-        console.log(post);
-        console.log(post.data.posts);
+        // console.log(post);
+        // console.log(post.data.posts);
         let singlePost = post.data.posts.filter((post) => {
           return post._id === currentPostId;
         });
         setShowSinglePost(singlePost);
-        console.log(showSinglePost);
+        console.log(singlePost);
         return singlePost;
       })
       .catch((error) => {
@@ -40,7 +39,8 @@ const ViewPost = ({ isLoggedIn, userAccount, posts, setPosts, showPost, setShowP
     // return () => {
     //   cleanup = false;
     // }
-  }, []);
+    //adding additional dependencies the linter suggests causes infinite rendering
+  }, [currentPostId, userAccount._id]);
 
 
   return (
@@ -74,6 +74,7 @@ const ViewPost = ({ isLoggedIn, userAccount, posts, setPosts, showPost, setShowP
                   onClick={() => {
                     localStorage.removeItem("postid");
                     setShowPost('false');
+                    setShowSinglePost('');
                   }}
                 >
                   Go back
@@ -86,6 +87,7 @@ const ViewPost = ({ isLoggedIn, userAccount, posts, setPosts, showPost, setShowP
               onClick={() => {
                   localStorage.removeItem("postid");
                   setShowPost('false');
+                  setShowSinglePost('');
               }}>
               Message</button>
               </Link>
