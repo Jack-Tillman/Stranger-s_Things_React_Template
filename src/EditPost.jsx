@@ -2,11 +2,12 @@ import React, {useState} from "react";
 import { updatePost } from "./api";
 
 //THIS WORKS YES! BUT, please do refine this and make it easier to read and less redundant 
-const EditPost = ({userAccount, posts, setPosts, showPost, setShowPost}) => {
+const EditPost = ({userAccount, posts, setPosts, showPost, setShowPost, isLoggedIn, messages, setMessages}) => {
     
     const [willDeliver, setWillDeliver] = useState(false);
-    const [thisPostId] = posts.filter(post => post._id === showPost);
-  console.log(thisPostId._id)
+    //filter all posts to display only one post whose post._id matches the same post stored in showPost (which is the post the user clicks on when seeing all posts)
+    const [thisPostId] = posts.filter(post => post._id === showPost.postId);
+    console.log(thisPostId._id)
     const [updatedFormInput, setUpdatedFormInput] = useState({
         title: '',
         description: '',
@@ -97,7 +98,7 @@ const EditPost = ({userAccount, posts, setPosts, showPost, setShowPost}) => {
         }
         //if the user enters all input fields properly, store the input values within an object
         // that will be passed to the makePost API request
-        if ((updatedFormInput.location) && (updatedFormInput.price) && (priceResult) && (updatedFormInput.description) && (updatedFormInput.title)) {
+        if ((updatedFormInput.location) && (updatedFormInput.price) && (priceResult) && (updatedFormInput.description) && (updatedFormInput.title) && (isLoggedIn)) {
             const updatedFormInputObject = {
                 title: updatedFormInput.title,
                 description: updatedFormInput.description,

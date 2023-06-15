@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { fetchPosts, deletePost } from "./api";
+import { fetchPosts, deletePost, postMessage } from "./api";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import "./Posts.css"
 import "./ViewPost.css"
@@ -8,42 +8,83 @@ import "./ViewPost.css"
 export const COHORT_NAME = '2303-FTB-ET-WEB-AM';
 export const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
-// eslint-disable-next-line no-unused-vars
-const newguy123id = "64871d300911550014fb4a1b";
-//current error: returned data is null, so i am not getting the actual post i need
-const ViewPost = ({ isLoggedIn, userAccount, posts, setPosts, showPost, setShowPost }) => {
-  const currentPostId = localStorage.getItem("postid");
-  const [showSinglePost, setShowSinglePost] = useState([]);
-  console.log(`currentPostId: ${currentPostId}`);
-  console.log(`currentAccountId: ${userAccount._id}`);
+//MAKE SURE to show messages regarding this post underneath the post later 
+
+const ViewPost = ({
+  isLoggedIn,
+  userAccount,
+  posts,
+  setPosts,
+  showPost,
+  setShowPost,
+  messages,
+  setMessages,
+}) => {
+
+  const currentPostId = showPost.postId;
+  const currentAuthor = showPost.postAuthor;
   const authToken = userAccount._id;
+  const [isCurrentAuthor, setIsCurrentAuthor] = useState(false);
+  //conditionally render message form if user clicks button
+  const [showMessageForm, setShowMessageForm] = useState(false);
+
+  // const [messageInput, setMessageInput] = useState({
+  //   message: "",
+  //   currentPostId: `${currentPostId}`,
+  //   authToken: `${authToken}`
+  // })
+
+  //holds value of message, postId, userAccount auth token
+  const [createMessage, setCreateMessage] = useState({
+    message: "",
+  });
+
+  const [showSinglePost, setShowSinglePost] = useState([]);
+  // console.log(`currentPostId: ${currentPostId}`);
+  // console.log(`currentAccountId: ${userAccount._id}`);
+
   useEffect(() => {
     //potential cleanup function, not used atm as it causes lag
-    // let cleanup = true;
-    const authToken = userAccount._id;
-    // console.log(authToken);
+    let cleanup = true;
     //fetch posts, then filter the posts based on currentPostId
-    fetchPosts(authToken)
+    fetchPosts(userAccount._id)
       .then((post) => {
         let singlePost = post.data.posts.filter((post) => {
           return post._id === currentPostId;
         });
         setShowSinglePost(singlePost);
+        setIsCurrentAuthor(post.isAuthor)
         console.log(singlePost);
+        console.log(isCurrentAuthor)
         return singlePost;
       })
       .catch((error) => {
         console.error(error);
       });
 
-    // return () => {
-    //   cleanup = false;
-    // }
+    return () => {
+      cleanup = false;
+    };
     //adding additional dependencies the linter suggests causes infinite rendering
   }, [currentPostId, userAccount._id]);
 
+  const handleMessageInput = (name, value) => {
+    setCreateMessage({
+      [name]: value,
+      currentPostId: `${currentPostId}`,
+      authToken: `${authToken}`,
+    });
+  };
 
-
+  const validateMessage = (e) => {
+    e.preventDefault();
+    if (createMessage.message) {
+      postMessage(createMessage);
+    }
+    setCreateMessage({
+      message: "",
+    });
+  };
 
   return (
     <>
@@ -61,66 +102,111 @@ const ViewPost = ({ isLoggedIn, userAccount, posts, setPosts, showPost, setShowP
             <span className="add-post">(ADD POST)</span>
           </Link>
         </section>
-        <div className="single-post-container">
-          {showSinglePost.map((post) => (
-            <div className="single-body" key={post._id}>
+        {showSinglePost.map((post) => (
+          <div className="single-post-container" key={post._id}>
+            <div className="single-body">
               <div className="title">{post.title}</div>
               <div className="description">{post.description}</div>
               <div className="price">{post.price}</div>
               <div className="author">{post.author.username}</div>
               <div className="location">{post.location}</div>
               <div className="willDeliver">{post.willDeliver}</div>
-              {/* if messages, show them, else show no messages */}
-              {
-                (post.messages.length > 0) ?
-                <div className="viewMessages">{post.messages}</div>
-                :
-                <div className="viewMessages">No messages</div>
-              }
-              <div className="viewMessages">{post.messages}</div>
               <div className="viewpost-btn-container">
-              <Link to="/src/Posts.js">
+                <Link to="/src/Posts.js">
+                  <button
+                    onClick={() => {
+                      localStorage.removeItem("postid");
+                      setShowPost("false");
+                      setShowSinglePost("");
+                    }}
+                  >
+                    Go back
+                  </button>
+                </Link>
+                    {/* i dont remember what this does... */}
+                {
+                  (!currentAuthor) ?
                 <button
+                  className="message-btn"
                   onClick={() => {
-                    localStorage.removeItem("postid");
-                    setShowPost('false');
-                    setShowSinglePost('');
+                    console.log(currentAuthor)
+                    console.log(userAccount._id)
+                    setShowMessageForm(true);
                   }}
                 >
-                  Go back
+                  Message
                 </button>
-              </Link>
-
-              <Link to="/">
-              <button
-              className="message-btn"
-              onClick={() => {
-                  localStorage.removeItem("postid");
-                  setShowPost('false');
-                  setShowSinglePost('');
-              }}>
-              Message</button>
-              </Link>
-
-              <button 
-              className="delete-btn"
-              onClick={() => {
-                const singlePostId = showSinglePost[0]._id;
-                deletePost(singlePostId, authToken);
-
-              }}>delete
-              </button>
-              <Link to="/src/EditPost">
-              <button 
-              className="edit-btn"
-              onClick={()=> {
-                console.log("Time to edit!");
-              }}>Edit</button>
-              </Link>
+                : null}
+                {
+                (showMessageForm && (!currentAuthor)) ? (
+                  <form className="message-form" onSubmit={validateMessage}>
+                    <input
+                      className="message-input"
+                      type="text"
+                      placeholder="What do you want to say?"
+                      name="message"
+                      minLength="1"
+                      value={createMessage.message}
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                        handleMessageInput(e.target.name, e.target.value);
+                      }}
+                    />
+                    <button
+                      className="send-message-btn"
+                      onSubmit={validateMessage}
+                    >
+                      send message
+                    </button>
+                  </form>
+                ) : null}
+                {
+                  //if user wrote post, display delete button, else nothing
+                (currentAuthor) ?
+                <button
+                  className="delete-btn"
+                  onClick={() => {
+                    const singlePostId = showSinglePost[0]._id;
+                    deletePost(singlePostId, authToken);
+                  }}
+                >
+                  delete
+                </button> : null}
+                { 
+                (currentAuthor) ?
+                  <Link to="/src/EditPost">
+                  <button
+                    className="edit-btn"
+                    onClick={() => {
+                      console.log("Time to edit!");
+                    }}
+                    >
+                    Edit
+                  </button>
+                </Link>
+                : null
+                  }
               </div>
+              {//if no messages, display nothin'
+              (post.messages.length > 0 )
+              ? (<div className="post-message-container">
+                <div className="message-display">
+                  <h1 className="message-display-h1">Messages about this post:</h1>
+                  {post.messages.map((message, index) => {
+                    return( 
+                    <div className="message-wrapper" key={index}>
+                        <div className="message-display-div fromUser-id">{message.fromUser._id}</div>
+                        <div className="message-display-div fromUser-username">{message.fromUser.username}</div>
+                        <div className="message-display-div message-content">{message.content}</div>
+                    </div>)
+                        
+                  })}
+                </div>
+              </div>
+              ) : null}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </>
   );

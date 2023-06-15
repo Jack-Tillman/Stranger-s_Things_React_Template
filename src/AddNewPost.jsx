@@ -91,7 +91,7 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
         }
         //if the user enters all input fields properly, store the input values within an object
         // that will be passed to the makePost API request
-        if ((formInput.location) && (formInput.price) && (priceResult) && (formInput.description) && (formInput.title)) {
+        if ((formInput.location) && (formInput.price) && (priceResult) && (formInput.description) && (formInput.title) && (isLoggedIn)) {
             console.log(formInput.title, formInput.description, formInput.location, formInput.price, priceResult);
             console.log(formInput)
             const formInputObject = {

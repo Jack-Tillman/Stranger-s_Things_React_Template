@@ -149,9 +149,6 @@ function makeHeaders(authToken){
   export const updatePost = async (updatedFormInputObject) => {
     console.log(updatedFormInputObject);
     try {
-      // You will need to insert a variable into the fetch template literal 
-      // in order to make the POST_ID dynamic. 
-      // 5e8d1bd48829fb0017d2233b is just for demonstration.
       const response = await fetch(`${BASE_URL}/posts/${updatedFormInputObject._id}`, {
         method: "PATCH",
         headers: {
@@ -166,6 +163,30 @@ function makeHeaders(authToken){
             willDeliver: `${updatedFormInputObject.willDeliver}`,
             authToken: `${updatedFormInputObject.authToken}`,
             _id: `${updatedFormInputObject._id}`
+          }
+        })
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  export const postMessage = async (createMessage) => {
+    const {message, currentPostId, authToken } = createMessage;
+    console.log(message, currentPostId, authToken);
+    try {
+      const response = await fetch(`${BASE_URL}/posts/${currentPostId}/messages`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        },
+        body: JSON.stringify({
+          message: {
+            content: `${message}`
           }
         })
       });

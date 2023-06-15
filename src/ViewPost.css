@@ -4,29 +4,32 @@
     display:flex;
     flex-direction: column;
     margin:0 auto;
+    border:1px solid rgb(28, 181, 20);
 }
 
 
 .single-post-container {
     display:flex;
-    flex-direction: column;   
+    flex-direction: column;
+    border:1px solid rgb(126, 66, 66);   
+    padding: 1em;
 }
 
 div > .single-body {
     display:flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
     border:1px solid black;
     margin:1em auto 0;
     width:65vw;
-    height:15em;
+    height:20em;
     padding:0.5em;
     box-shadow: 10px 5px 5px rgb(226, 195, 195);
     text-align: left;
 }
 
-.message-btn {
+.delete-btn,
+.edit-btn,
+.send-message-btn {
     cursor:pointer;
 }
 
@@ -34,4 +37,18 @@ div > .single-body {
     display:flex;
     gap:2em;
     justify-content: center;
+    padding:1em;
+}
+
+.post-message-container {
+    display:flex;
+    flex-direction:column;
+    border:1px solid rgb(228, 39, 178);
+}
+
+.message-wrapper {
+    display:flex;
+    flex-direction:column;
+    border:1px solid black;
+    margin:1em auto;
 }

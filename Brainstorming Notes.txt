@@ -197,6 +197,7 @@ States that exist, default values, file they're declared within,localStorage, an
   ^ App.js - This prop stores the userAccount info when they register an account, or when they log in. This is used to determine whether user can make a new post, edit a post, or send a message within a single post view.
 
   const [showPost, setShowPost] = useState(''); - App.js; this is mainly used by the Posts and ViewPost components to determine whether to show the single post view or not.  
+  const [posts, showPosts] = useState([]) - used by Posts, ViewPosts, AddNewPost, and EditPost to keep all available posts 
 
 *DECLARED IN Login.js
 ---
@@ -231,6 +232,8 @@ After fetchPost is done, the returned value of all the posts is passed thru setP
 [formError] both of these are almost same as the register ones, just minor format differences
 formInput is used to create a formInputObject which is passed to makePost() 
 
+
+
 **June 14 Progress Report
 Completed:
 *Delete posts and edit posts are both functional! YES
@@ -252,3 +255,81 @@ Long term To-Do:
 * Improve the error messages for Registration page, Login, AddnewPost (make sure specific responses that are fully helpful, i.e. mention min and max length and no special characters )
 * In Register.js, Login.js, and AddNewPost, refine the CSS for form input so that the prompts are useful without being too big.
 * In Register.js, Login.js, and maybe AddNewPost maybe render the prompts as red upon page load, and then when conditions are met, they turn green
+
+Rubric To-Do:
+*Set up Profile component 
+- Load user object on page load i.e., make the fetch request for data/me to get 
+the messages and post theyve made, and render that within Profile 
+
+*Remove prompts for unauthenticated users to 
+- create post
+- delete post 
+- send messages 
+
+*Authenticated users can: 
+- Create post
+- Delete post ONLY if they are the author 
+- Send a message to author of a post ONLY if they are not the author 
+- See messages for any post for which they're the author 
+- See all messages in a 'special view' 
+
+* SEARCH FILTER functionality for all users!
+
+
+Profile Component:
+props: userAccount, isLoggedIn, messages, setMessages, 
+* upon loading, the success modal for login should display 
+
+Welcome ${username}
+
+*Messages to me: 
+all messages to user 
+
+Message format: 
+From: author 
+Message text 
+Link to click on the post that the user send the message from 
+
+*Messages from me: 
+all messages from user 
+
+
+Thursday 
+* Set up Profile component 
+* get api/users/me to get user object for profile to see messages  
+* Set up Messages form 
+* Test if messages actually works by creating messages (Posts.js has place to render messages)
+* Search form (reference art collector and Learndot)
+
+Friday
+* Refinement of code structure 
+* Prevent users who aren't signed in from being able to edit and delete posts (they can't anyways, but they shouldn't be given the chance)
+* Add in the success/failure feedback for creating posts, deleting posts, and editing posts
+    - Upon login, redirect to Home and display the success pop up on Home 
+    - Upon post creation, redirect to Posts and display success message on both AddNewPost and Posts, likely incorporate exact vs un-exact pathing 
+    - Upon post deletion, just do above lol 
+    - Upon post editing, do not redirect to another page but instead render the form underneath the post,
+     update the state of the post you're in to be the edited post, display successful edit popup 
+
+***Sit down, as if you aren't already, and figure out: 
+    what states am I using for posts, editpost, AddNewPost, and post deletion (userId, postId, etc.), and
+    how can I trim and refine everything so that it's easier to understand 
+* conditionally render 'ADD NEW POST' based on whether isLoggedIn is true or whatever
+* ideally, have the new post rise to the very top - might not be feasible without sorting the posts by chronological order
+* Improve the error messages for Registration page, Login, AddnewPost (make sure specific responses that are fully helpful, i.e. mention min and max length and no special characters )
+* In Register.js, Login.js, and AddNewPost, refine the CSS for form input so that the prompts are useful without being too big.
+* In Register.js, Login.js, and maybe AddNewPost maybe render the prompts as red upon page load, and then when conditions are met, they turn green
+
+Saturday
+* CSS, responsive design, further refinement of code structure 
+
+
+*useParams notes 
+import it from react-router-dom, alongside Route and such 
+
+":url" means that any 'child' of the url is the element 
+
+the parameter syntax is a colon, and whatever follows is the name of that parameter 
+do const {favoritePostId } = useParams() in App.js, and the 'parent' element that 
+
+useContext might be better for this project if i wish to implement it 

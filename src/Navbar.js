@@ -1,7 +1,7 @@
 import React from "react"
 import {Link} from "react-router-dom"
 
-const Navbar = ({isLoggedIn, setIsLoggedIn, userAccount}) => {
+const Navbar = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount}) => {
     return (
       <header className="header">
       <nav className="navbar-container">
@@ -39,6 +39,12 @@ const Navbar = ({isLoggedIn, setIsLoggedIn, userAccount}) => {
             <li className="navbar logout" onClick={()=> {
               localStorage.clear();
               setIsLoggedIn(false);
+              setUserAccount({
+                username: "",
+                password: "",
+                isAuthenticated: false,
+                _id: "",
+              })
             }}>LOG OUT</li>
           </Link> 
           : null} 

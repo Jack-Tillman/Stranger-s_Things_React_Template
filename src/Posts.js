@@ -6,7 +6,7 @@ import { fetchPosts } from "./api";
 // const COHORT_NAME = '2303-FTB-ET-WEB-AM';
 // const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
-const Posts = ({posts, setPosts, userAccount, setUserAccount, showPost, setShowPost}) => {
+const Posts = ({isLoggedIn, posts, setPosts, userAccount, setUserAccount, showPost, setShowPost, messages, setMessages}) => {
   
   useEffect(() => {
     const authToken = userAccount._id;
@@ -42,17 +42,27 @@ const Posts = ({posts, setPosts, userAccount, setUserAccount, showPost, setShowP
                     <div className="author">{post.author.username}</div>
                     <div className="location">{post.location}</div>
                     <div className="willDeliver">{post.willDeliver}</div>
+                    { //if user is logged in, button links to single post view, else 
+                    // the button links to Login page
+                      (isLoggedIn) ? 
                     <Link to="/src/ViewPost.jsx">
                     <button className="viewpost-btn" onClick={()=> {
                       const postId = post._id;
-                      const postAuthor = post.author._id;
+                      const postAuthor = post.isAuthor;
+                      setShowPost({postId, postAuthor});
                       localStorage.setItem("postid", postId);
-                      setShowPost(postId);
-                      // console.log(posts)
-                      console.log(`Post author is: ${postAuthor}`)
                     }}>VIEW POST</button>
                   </Link>
-                  
+                  : 
+                  <Link to="/src/Login.js">
+                  <button className="viewpost-btn" onClick={()=> {
+                    const postId = post._id;
+                    const postAuthor = post.isAuthor;
+                    setShowPost({postId, postAuthor});
+                    localStorage.setItem("postid", postId);
+                  }}>VIEW POST</button>
+                </Link>
+                    }
                 </div>)
               )
           }
@@ -64,19 +74,3 @@ const Posts = ({posts, setPosts, userAccount, setUserAccount, showPost, setShowP
 }
 
 export default Posts;
-
-
-  //old fetch that works 
-  //   const fetchPosts = async (authToken) => {
-  //     try {
-  //       const response = await fetch(`${BASE_URL}/posts`)
-  //       const returned = await response.json();
-  //       const usableReturned = returned.data.posts;
-  //       console.log('returned: ', usableReturned);
-  //       setPosts(usableReturned);
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   }
-  //   fetchPosts(authToken);
-  // })
