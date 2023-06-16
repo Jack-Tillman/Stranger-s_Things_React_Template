@@ -148,7 +148,7 @@ const EditPost = ({userAccount, posts, setPosts, showPost, setShowPost, isLogged
         <>
         <main className="newpost-main">
             <div className="newpost-container">
-                <h3 className="h3-newpost">Add New Post</h3>
+                <h3 className="h3-newpost">Edit Post</h3>
                 <form className="newpost-form" onSubmit={validateUpdatedFormInput}>
                     <label className="title-label" htmlFor='title'>Title*
                         <input 

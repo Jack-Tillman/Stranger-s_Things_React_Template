@@ -48,19 +48,6 @@ export const registerUser = async (username, password) => {
     }
   }
 
-  // export const fetchPosts = async () => {
-  //   try {
-  //     const response = await fetch(`${BASE_URL}/posts`)
-  
-  //     const returned = await response.json();
-  //     console.log(returned);
-  //     console.log(returned.data.posts);
-  //     return returned;
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }
-
   export const login = async (username, password) => {
 
     try {
@@ -189,6 +176,21 @@ function makeHeaders(authToken){
             content: `${message}`
           }
         })
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  //returns user's data, such as messages and posts they've made 
+ export const myData = async (authToken) => {
+
+    try {
+      const response = await fetch(`${BASE_URL}/users/me`, {
+        headers: makeHeaders(authToken)
       });
       const result = await response.json();
       console.log(result);

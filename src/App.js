@@ -53,6 +53,8 @@ const App = () => {
             userAccount={userAccount} 
             messages={messages}
             setMessages={setMessages}
+            posts={posts}
+            setPosts={setPosts}
             />
           </Route>
 

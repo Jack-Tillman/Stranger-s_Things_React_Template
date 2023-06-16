@@ -333,3 +333,9 @@ the parameter syntax is a colon, and whatever follows is the name of that parame
 do const {favoritePostId } = useParams() in App.js, and the 'parent' element that 
 
 useContext might be better for this project if i wish to implement it 
+
+June 15 Proggy Report:
+Completed so far: 
+* Made message form
+* Conditional rendering for Message, edit, delete buttons as well as what view post does when logged in vs not
+* ViewPost renders messages if they exist

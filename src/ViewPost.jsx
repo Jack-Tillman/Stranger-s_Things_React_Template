@@ -28,12 +28,6 @@ const ViewPost = ({
   //conditionally render message form if user clicks button
   const [showMessageForm, setShowMessageForm] = useState(false);
 
-  // const [messageInput, setMessageInput] = useState({
-  //   message: "",
-  //   currentPostId: `${currentPostId}`,
-  //   authToken: `${authToken}`
-  // })
-
   //holds value of message, postId, userAccount auth token
   const [createMessage, setCreateMessage] = useState({
     message: "",
@@ -123,7 +117,6 @@ const ViewPost = ({
                     Go back
                   </button>
                 </Link>
-                    {/* i dont remember what this does... */}
                 {
                   (!currentAuthor) ?
                 <button

@@ -14,7 +14,8 @@ const Posts = ({isLoggedIn, posts, setPosts, userAccount, setUserAccount, showPo
       .then((posts) => {setPosts(posts.data.posts)})
       .catch((error) => {
         console.error(error)
-      });}
+      });
+    }
       ,[userAccount._id, setPosts])
 
 
