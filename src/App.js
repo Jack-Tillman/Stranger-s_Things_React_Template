@@ -30,37 +30,34 @@ const App = () => {
   const [posts, setPosts] = useState([]);
   //this will hold the specific postID when user clicks on 'view post' button
   const [showPost, setShowPost] = useState({});
-  //hold all messages sent to userAccount 
+  //hold all messages sent to userAccount
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [usersPosts, setUsersPosts] = useState([]);
   const [showSinglePost, setShowSinglePost] = useState([]);
 
   return (
-    <>
-      <BrowserRouter>
-        <div className="App-wrapper">
-          <Navbar
-            isLoading = {isLoading}
-            setIsLoading = {setIsLoading}
+    <BrowserRouter>
+      <div className="App-wrapper">
+        <Navbar
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+          userAccount={userAccount}
+          setUserAccount={setUserAccount}
+        />
+
+        <Route path="/src/App.js">
+          <Home isLoggedIn={isLoggedIn} userAccount={userAccount} />
+        </Route>
+
+        <Route path="/src/Profile.js">
+          <Profile
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
             isLoggedIn={isLoggedIn}
-            setIsLoggedIn={setIsLoggedIn}
             userAccount={userAccount}
-            setUserAccount={setUserAccount}
-          />
-
-          <Route path="/src/App.js">
-            <Home
-             isLoggedIn={isLoggedIn}
-            userAccount={userAccount} />
-          </Route>
-
-          <Route path="/src/Profile.js">
-            <Profile 
-            isLoading = {isLoading}
-            setIsLoading = {setIsLoading}
-            isLoggedIn={isLoggedIn} 
-            userAccount={userAccount} 
             messages={messages}
             setMessages={setMessages}
             posts={posts}
@@ -71,104 +68,106 @@ const App = () => {
             setUsersPosts={setUsersPosts}
             showSinglePost={showSinglePost}
             setShowSinglePost={setShowSinglePost}
-            />
-          </Route>
+          />
+        </Route>
 
-          <Route path="/src/Posts.js">
-            <Posts
-              isLoading = {isLoading}
-              setIsLoading = {setIsLoading}
-              posts={posts}
-              setPosts={setPosts}
+        <Route path="/src/Posts.js">
+          <Posts
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            posts={posts}
+            setPosts={setPosts}
+            showPost={showPost}
+            setShowPost={setShowPost}
+            isLoggedIn={isLoggedIn}
+            userAccount={userAccount}
+            setUserAccount={setUserAccount}
+            messages={messages}
+            setMessages={setMessages}
+            usersPosts={usersPosts}
+            setUsersPosts={setUsersPosts}
+            showSinglePost={showSinglePost}
+            setShowSinglePost={setShowSinglePost}
+          />
+        </Route>
+        {/* once the user signs in, redirect them to Posts. if they aren't signed in, they will be directed to login page  */}
+        <Route path="/src/Login.js">
+          {isLoggedIn ? (
+            <Redirect to="/src/Home.js" />
+          ) : (
+            <LogIn
               showPost={showPost}
               setShowPost={setShowPost}
               isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
               userAccount={userAccount}
               setUserAccount={setUserAccount}
-              messages={messages}
-              setMessages={setMessages}
-              usersPosts={usersPosts}
+            />
+          )}
+        </Route>
+
+        <Route path="/src/Register.js">
+          {/* if user is logged in, render Posts, else render Register **PROBABLY DON'T LEAVE THIS AS THE FINAL SOLUTION, LIKELY NOT BEST PRACTICE */}
+          {isLoggedIn ? (
+            <Redirect to="/src/Home.js" />
+          ) : (
+            <Register
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
+              userAccount={userAccount}
+              setUserAccount={setUserAccount}
+            />
+          )}
+        </Route>
+
+        <Route path="/src/AddNewPost.jsx">
+          <AddNewPost
+            posts={posts}
+            setPosts={setPosts}
+            isLoggedIn={isLoggedIn}
+            userAccount={userAccount}
+            usersPosts={usersPosts}
+            setUsersPosts={setUsersPosts}
+          />
+        </Route>
+
+        <Route path="/src/ViewPost.jsx">
+          <ViewPost
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            showPost={showPost}
+            setShowPost={setShowPost}
+            isLoggedIn={isLoggedIn}
+            userAccount={userAccount}
+            messages={messages}
+            setMessages={setMessages}
+            usersPosts={usersPosts}
             setUsersPosts={setUsersPosts}
             showSinglePost={showSinglePost}
             setShowSinglePost={setShowSinglePost}
-            />
-          </Route>
-          {/* once the user signs in, redirect them to Posts. if they aren't signed in, they will be directed to login page  */}
-          <Route path="/src/Login.js">
-            {isLoggedIn ? <Redirect to="/src/Home.js" /> : (
-              <LogIn
-                showPost={showPost}
-                setShowPost={setShowPost}
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-                userAccount={userAccount}
-                setUserAccount={setUserAccount}
-              />
-            )}
-          </Route>
+          />
+        </Route>
 
-          <Route path="/src/Register.js">
-            {/* if user is logged in, render Posts, else render Register **PROBABLY DON'T LEAVE THIS AS THE FINAL SOLUTION, LIKELY NOT BEST PRACTICE */}
-            {isLoggedIn ? <Redirect to="/src/Home.js" /> :  (
-              <Register
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-                userAccount={userAccount}
-                setUserAccount={setUserAccount}
-              />
-            )}
-          </Route>
-
-          <Route path="/src/AddNewPost.jsx">
-            <AddNewPost
-              posts={posts}
-              setPosts={setPosts}
-              isLoggedIn={isLoggedIn}
-              userAccount={userAccount}
-              usersPosts={usersPosts}
+        <Route path="/src/EditPost">
+          <EditPost
+            posts={posts}
+            setPosts={setPosts}
+            showPost={showPost}
+            setShowPost={setShowPost}
+            isLoggedIn={isLoggedIn}
+            userAccount={userAccount}
+            messages={messages}
+            setMessages={setMessages}
+            usersPosts={usersPosts}
             setUsersPosts={setUsersPosts}
-            />
-          </Route>
-
-          <Route path="/src/ViewPost.jsx">
-            <ViewPost
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-              showPost={showPost}
-              setShowPost={setShowPost}
-              isLoggedIn={isLoggedIn}
-              userAccount={userAccount}
-              messages={messages}
-              setMessages={setMessages}
-              usersPosts={usersPosts}
-            setUsersPosts={setUsersPosts}
-            showSinglePost={showSinglePost}
-            setShowSinglePost={setShowSinglePost}
-            />
-          </Route>
-
-          <Route path="/src/EditPost">
-            <EditPost
-              posts={posts}
-              setPosts={setPosts}
-              showPost={showPost}
-              setShowPost={setShowPost}
-              isLoggedIn={isLoggedIn}
-              userAccount={userAccount}
-              messages={messages}
-              setMessages={setMessages}
-              usersPosts={usersPosts}
-            setUsersPosts={setUsersPosts}
-            />
-          </Route>
-        </div>
-      </BrowserRouter>
-    </>
+          />
+        </Route>
+      </div>
+    </BrowserRouter>
   );
 };
 
 export default App;
-
 
 // {/* <Route path="/src/Login.js">
 // {isLoggedIn ? (

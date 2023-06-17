@@ -1,18 +1,18 @@
 import React, {useState, useEffect} from "react";
 import { myData } from "./api";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import ViewPost from "./ViewPost";
-import Posts from "./Posts";
+import "./Posts.css"
 
 const Profile = ({showSinglePost, setShowSinglePost, usersPosts, setUsersPosts, isLoading, setIsLoading, isLoggedIn, userAccount, posts, setPosts, messages, setMessages, setShowPost, showPost}) => {
 const [usersMessages, setUsersMessages] = useState({});
-setIsLoading(true);
+//this is not ideal, but i have spent too much time trying to figure ways around it. OH WELL!
+
 
 
 //fetch request for user data only executes if user logged in
     useEffect(()=> {
         const fetchData = async () => {
             try {
+                setIsLoading(true);
                 const authToken = userAccount._id;
                 const data = await myData(authToken);
                 setUsersMessages(data.data.messages);
@@ -26,7 +26,7 @@ setIsLoading(true);
         if (isLoggedIn) {
             fetchData();
         } 
-    }, []);
+    }, [userAccount._id, isLoggedIn, setIsLoading, setUsersPosts]);
 
     console.log(usersMessages);
     console.log(usersPosts);
@@ -66,11 +66,11 @@ setIsLoading(true);
                             {_id, content, fromUser: {username}, post}
                         ) => {
                         return (
-                          <div className="profile-post-container" key={_id}>
-                            <div className="profile-post-fromUser">
+                          <div className="profile-message-container" key={_id}>
+                            <div className="profile-message-fromUser">
                               From: {username}
                             </div>
-                            <div className="profile-post-content">
+                            <div className="profile-message-content">
                               {content}
                             </div>
                               {/* <button
@@ -86,18 +86,63 @@ setIsLoading(true);
                               >
                                 VIEW POST
                               </button> */}
-                            <div className="profile-post-postId">
+                            <div className="profile-message-postId">
                               {post._id}
                             </div>
                           </div>
                         );}) : 
                           <div>no messages</div>
                         }
+
+                        {/* users posts */}
+
+                        <h3 className="profile-posts-h3">Posts I have made:</h3>
+                        { usersPosts ? usersPosts.map(
+                        (
+                            {_id, title, description, price, location, willDeliver }
+                        ) => {
+                        return (
+                          <div className="all-posts profile-post-all-posts" key={_id} >
+                            <div className="full-post profile-post-full-post" >
+                            <div className="title profile-post-title">
+                              {title}
+                            </div>
+                            <div className="description profile-post-description">
+                              {description}
+                            </div>
+                            <div className="price profile-post-price">
+                              {price}
+                            </div>
+                            <div className="location profile-post-location">
+                              {location}
+                            </div>
+                            <div className="willDeliver profile-post-willDeliver">
+                              {willDeliver}
+                            </div>
+                            </div>
+                          </div>
+                        );}) : 
+                          <div>You've made no posts.</div>
+                        }
             </section>
         </main>
         </>
         )
-    }
+      }
     }
     
-export default Profile;
+    export default Profile;
+    
+    // {/* <button
+    //   className="viewpost-btn"
+    //   onClick={() => {
+    //       // <Posts />
+    //       const postId = post._id;
+    //       const postAuthor = post.isAuthor;
+    //       console.log(postId, postAuthor)
+    //       setShowPost({ postId, postAuthor });
+    //       localStorage.setItem("postid", postId);
+    //   }}
+    // >
+    //   VIEW POST
+    // </button> */}

@@ -39,7 +39,6 @@ const ViewPost = ({
 
   useEffect(() => {
     //potential cleanup function, not used atm as it causes lag
-    let cleanup = true;
     //fetch posts, then filter the posts based on currentPostId
     fetchPosts(userAccount._id)
       .then((post) => {
@@ -56,11 +55,8 @@ const ViewPost = ({
         console.error(error);
       });
 
-    return () => {
-      cleanup = false;
-    };
     //adding additional dependencies the linter suggests causes infinite rendering
-  }, [currentPostId, userAccount._id]);
+  }, [currentPostId, isCurrentAuthor, userAccount._id ]);
 
   const handleMessageInput = (name, value) => {
     setCreateMessage({
@@ -83,7 +79,7 @@ const ViewPost = ({
   return (
     <>
       <div className="posts-wrapper">
-        <section className="post-section">
+        {/* <section className="post-section">
           <h1 className="h1-posts">Posts</h1>
           <div className="search-posts-wrapper">
             <input
@@ -95,7 +91,7 @@ const ViewPost = ({
           <Link to="/src/AddNewPost.jsx">
             <span className="add-post">(ADD POST)</span>
           </Link>
-        </section>
+        </section> */}
         {showSinglePost.map((post) => (
           <div className="single-post-container" key={post._id}>
             <div className="single-body">

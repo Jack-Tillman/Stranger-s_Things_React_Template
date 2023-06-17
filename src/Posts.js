@@ -1,4 +1,4 @@
-import React, {useEffect } from "react";
+import React, {useEffect, useState } from "react";
 import {Link} from "react-router-dom";  
 import "./Posts.css";
 import { fetchPosts } from "./api";
@@ -7,7 +7,8 @@ import { fetchPosts } from "./api";
 // const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
 const Posts = ({showSinglePost, setShowSinglePost, isLoading, setIsLoading, isLoggedIn, posts, setPosts, usersPosts, setUsersPosts, userAccount, setUserAccount, showPost, setShowPost, messages, setMessages}) => {
-
+  const [searchTerm, setSearchTerm] = useState('');
+  //fetch all posts 
   useEffect(() => {
     const startFetchPosts = async () => {
       try {
@@ -23,19 +24,57 @@ const Posts = ({showSinglePost, setShowSinglePost, isLoading, setIsLoading, isLo
       }
   },[setIsLoading, isLoading, userAccount._id, setPosts, posts])
   
-  // fetchPosts(authToken)
-  //   .then((posts) => {setPosts(posts.data.posts)})
-  //   .catch((error) => {
-  //     console.error(error)
-  //   });
+
+  function postMatches(post, text) {
+    if (post._id.includes(text)) {
+      return true;
+    }
+    if (post.title.toUpperCase().includes(text) || post.title.toLowerCase().includes(text) || post.title.includes(text)) {
+      return true;
+    }
+    if (post.description.toUpperCase().includes(text) || post.description.toLowerCase().includes(text) || post.description.includes(text)){
+      return true;
+    }
+    if (post.location.toUpperCase().includes(text) || post.location.toLowerCase().includes(text) || post.location.includes(text)){
+      return true;
+    }
+    if (post.author.username.toUpperCase().includes(text) || post.author.username.toLowerCase().includes(text) || post.author.username.includes(text)){
+      return true;
+    }
+  }
+  const filteredPosts = posts.filter(post => postMatches(post, searchTerm));
+  const postsToDisplay = searchTerm.length ? filteredPosts : posts;
+
   if (!isLoading) {
+
     return(
         <>
         <div className="posts-wrapper">
             <section className="post-section">
                 <h1 className="h1-posts">Posts</h1>
                 <div className="search-posts-wrapper">
-                    <input className="search-posts" type="text" placeholder="Search Posts" />
+                  <form
+                  id="search"
+                  onSubmit={async (event) => {
+                    event.preventDefault();
+                    console.log(filteredPosts)
+                    //code to filter stuff i guess
+                  }}>
+
+
+                    <input 
+                    className="search-posts" 
+                    type="text" 
+                    placeholder="Search Posts"
+                    value={searchTerm}
+                    onChange={(e)=> {
+                      setSearchTerm(e.target.value)
+                      console.log(searchTerm)
+                    
+                    }}
+
+                    /> 
+                  </form>
                 </div>
                 <Link to="/src/AddNewPost.jsx">
                 <span className="add-post">
@@ -45,7 +84,7 @@ const Posts = ({showSinglePost, setShowSinglePost, isLoading, setIsLoading, isLo
             </section>
             <div className="all-posts">
           {
-            posts.map(post => (
+            postsToDisplay.map(post => (
                 <div className="full-post" key={post._id}>
                     <div className="title">{post.title}</div>
                     <div className="description">{post.description}</div>
