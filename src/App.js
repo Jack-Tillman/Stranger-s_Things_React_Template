@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Redirect } from "react-router-dom";
 // import {
 //   registerUser,
 //   fetchPosts
@@ -32,11 +32,17 @@ const App = () => {
   const [showPost, setShowPost] = useState({});
   //hold all messages sent to userAccount 
   const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [usersPosts, setUsersPosts] = useState([]);
+  const [showSinglePost, setShowSinglePost] = useState([]);
+
   return (
     <>
       <BrowserRouter>
         <div className="App-wrapper">
           <Navbar
+            isLoading = {isLoading}
+            setIsLoading = {setIsLoading}
             isLoggedIn={isLoggedIn}
             setIsLoggedIn={setIsLoggedIn}
             userAccount={userAccount}
@@ -44,22 +50,34 @@ const App = () => {
           />
 
           <Route path="/src/App.js">
-            <Home isLoggedIn={isLoggedIn} userAccount={userAccount} />
+            <Home
+             isLoggedIn={isLoggedIn}
+            userAccount={userAccount} />
           </Route>
 
           <Route path="/src/Profile.js">
             <Profile 
+            isLoading = {isLoading}
+            setIsLoading = {setIsLoading}
             isLoggedIn={isLoggedIn} 
             userAccount={userAccount} 
             messages={messages}
             setMessages={setMessages}
             posts={posts}
             setPosts={setPosts}
+            showPost={showPost}
+            setShowPost={setShowPost}
+            usersPosts={usersPosts}
+            setUsersPosts={setUsersPosts}
+            showSinglePost={showSinglePost}
+            setShowSinglePost={setShowSinglePost}
             />
           </Route>
 
           <Route path="/src/Posts.js">
             <Posts
+              isLoading = {isLoading}
+              setIsLoading = {setIsLoading}
               posts={posts}
               setPosts={setPosts}
               showPost={showPost}
@@ -69,20 +87,15 @@ const App = () => {
               setUserAccount={setUserAccount}
               messages={messages}
               setMessages={setMessages}
+              usersPosts={usersPosts}
+            setUsersPosts={setUsersPosts}
+            showSinglePost={showSinglePost}
+            setShowSinglePost={setShowSinglePost}
             />
           </Route>
           {/* once the user signs in, redirect them to Posts. if they aren't signed in, they will be directed to login page  */}
           <Route path="/src/Login.js">
-            {isLoggedIn ? (
-              <Posts
-                posts={posts}
-                setPosts={setPosts}
-                isLoggedIn={isLoggedIn}
-                userAccount={userAccount}
-                showPost={showPost}
-                setShowPost={setShowPost}
-              />
-            ) : (
+            {isLoggedIn ? <Redirect to="/src/Home.js" /> : (
               <LogIn
                 showPost={showPost}
                 setShowPost={setShowPost}
@@ -96,14 +109,7 @@ const App = () => {
 
           <Route path="/src/Register.js">
             {/* if user is logged in, render Posts, else render Register **PROBABLY DON'T LEAVE THIS AS THE FINAL SOLUTION, LIKELY NOT BEST PRACTICE */}
-            {isLoggedIn ? (
-              <Posts
-                posts={posts}
-                setPosts={setPosts}
-                isLoggedIn={isLoggedIn}
-                userAccount={userAccount}
-              />
-            ) : (
+            {isLoggedIn ? <Redirect to="/src/Home.js" /> :  (
               <Register
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
@@ -119,17 +125,25 @@ const App = () => {
               setPosts={setPosts}
               isLoggedIn={isLoggedIn}
               userAccount={userAccount}
+              usersPosts={usersPosts}
+            setUsersPosts={setUsersPosts}
             />
           </Route>
 
           <Route path="/src/ViewPost.jsx">
             <ViewPost
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
               showPost={showPost}
               setShowPost={setShowPost}
               isLoggedIn={isLoggedIn}
               userAccount={userAccount}
               messages={messages}
               setMessages={setMessages}
+              usersPosts={usersPosts}
+            setUsersPosts={setUsersPosts}
+            showSinglePost={showSinglePost}
+            setShowSinglePost={setShowSinglePost}
             />
           </Route>
 
@@ -143,6 +157,8 @@ const App = () => {
               userAccount={userAccount}
               messages={messages}
               setMessages={setMessages}
+              usersPosts={usersPosts}
+            setUsersPosts={setUsersPosts}
             />
           </Route>
         </div>
@@ -152,3 +168,26 @@ const App = () => {
 };
 
 export default App;
+
+
+// {/* <Route path="/src/Login.js">
+// {isLoggedIn ? (
+//   <Posts
+//     posts={posts}
+//     setPosts={setPosts}
+//     isLoggedIn={isLoggedIn}
+//     userAccount={userAccount}
+//     showPost={showPost}
+//     setShowPost={setShowPost}
+//   />
+// ) : (
+//   <LogIn
+//     showPost={showPost}
+//     setShowPost={setShowPost}
+//     isLoggedIn={isLoggedIn}
+//     setIsLoggedIn={setIsLoggedIn}
+//     userAccount={userAccount}
+//     setUserAccount={setUserAccount}
+//   />
+// )}
+// </Route> */}

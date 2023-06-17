@@ -339,3 +339,7 @@ Completed so far:
 * Made message form
 * Conditional rendering for Message, edit, delete buttons as well as what view post does when logged in vs not
 * ViewPost renders messages if they exist
+
+June 16 Prog Report:
+Woohoo! I set up Profile's myData fetch request properly!
+to do: finish the profile return 

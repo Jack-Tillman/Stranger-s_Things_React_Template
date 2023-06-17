@@ -23,14 +23,19 @@ import { login } from './api';
 const LogIn = ({isLoggedIn, setIsLoggedIn, setUserAccount, userAccount, showPost, setShowPost}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    //ISSUE: even if incorrect login info, will still log in - try catch block is one approach, maybe just copy register stuff here
+
     const handleSubmit = (event) => {
-        event.preventDefault()
-        console.log(username);
-        console.log(password);
-        loginToken(username, password)
-        setUsername('')
-        setPassword('')
+        event.preventDefault();
+        try {
+            console.log(username);
+            console.log(password);
+            loginToken(username, password)
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setUsername('')
+            setPassword('')
+        }
     }   
 
     const handleChange = (event) => {
@@ -74,7 +79,7 @@ const LogIn = ({isLoggedIn, setIsLoggedIn, setUserAccount, userAccount, showPost
                     <button type="submit">Log In</button>
                     <label htmlFor="signup">
                         <Link to="/src/Register.js">
-                        <aside className="signup-link">Don't have an account? What's wrong with you?</aside>
+                        <aside className="signup-link">Don't have an account? Click here to register!</aside>
                         </Link>
                     </label>
                 </form>

@@ -6,19 +6,29 @@ import { fetchPosts } from "./api";
 // const COHORT_NAME = '2303-FTB-ET-WEB-AM';
 // const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
-const Posts = ({isLoggedIn, posts, setPosts, userAccount, setUserAccount, showPost, setShowPost, messages, setMessages}) => {
-  
+const Posts = ({showSinglePost, setShowSinglePost, isLoading, setIsLoading, isLoggedIn, posts, setPosts, usersPosts, setUsersPosts, userAccount, setUserAccount, showPost, setShowPost, messages, setMessages}) => {
+
   useEffect(() => {
-    const authToken = userAccount._id;
-    fetchPosts(authToken)
-      .then((posts) => {setPosts(posts.data.posts)})
-      .catch((error) => {
-        console.error(error)
-      });
+    const startFetchPosts = async () => {
+      try {
+        const authToken = userAccount._id;
+        fetchPosts(authToken).then((posts) => {setPosts(posts.data.posts)})
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+      } 
     }
-      ,[userAccount._id, setPosts])
-
-
+    if (isLoading || !posts) {
+        startFetchPosts();
+      }
+  },[setIsLoading, isLoading, userAccount._id, setPosts, posts])
+  
+  // fetchPosts(authToken)
+  //   .then((posts) => {setPosts(posts.data.posts)})
+  //   .catch((error) => {
+  //     console.error(error)
+  //   });
+  if (!isLoading) {
     return(
         <>
         <div className="posts-wrapper">
@@ -48,10 +58,13 @@ const Posts = ({isLoggedIn, posts, setPosts, userAccount, setUserAccount, showPo
                       (isLoggedIn) ? 
                     <Link to="/src/ViewPost.jsx">
                     <button className="viewpost-btn" onClick={()=> {
+                      console.log(showPost);
                       const postId = post._id;
                       const postAuthor = post.isAuthor;
                       setShowPost({postId, postAuthor});
                       localStorage.setItem("postid", postId);
+                      // setPosts(posts);
+                      setIsLoading(true);
                     }}>VIEW POST</button>
                   </Link>
                   : 
@@ -71,7 +84,7 @@ const Posts = ({isLoggedIn, posts, setPosts, userAccount, setUserAccount, showPo
         </div>
         </>
     )
-
+ }
 }
 
 export default Posts;

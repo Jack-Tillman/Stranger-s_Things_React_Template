@@ -35,7 +35,7 @@ const Navbar = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount}) => {
           </Link>
           }
           {isLoggedIn ? 
-          <Link to="/">
+          <Link to="/src/Login.js">
             <li className="navbar logout" onClick={()=> {
               localStorage.clear();
               setIsLoggedIn(false);
