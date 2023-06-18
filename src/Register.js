@@ -110,8 +110,6 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount}) => {
         }
         //if the user's input passes all the validation checks, then initiate a fetch request for the authentification token
 
-        /*Current issue: The submission does not go through the first time. It will always fail and say that the user is already taken; however, if submitted again, 
-        it will go through and return the authToken. Ideas: refine the condition for this async fetch request   */
         if ((userResult) && (formInput.username) && (formInput.password) && (formInput.confirmPassword === formInput.password)) {
             // setUserAccount(formInput.username, formInput.password);
             console.log(formInput.username, formInput.password);
@@ -121,11 +119,16 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount}) => {
                     //get authorization token
                     const authToken = await registerUser(formInput.username, formInput.password);
                     //add isAuthenticated and _id to hold authToken 
-                    await setUserAccount({username: formInput.username, password: formInput.password, isAuthenticated: true, _id: authToken })
-                    //put authToken in localStorage
-                    await populateStorage(authToken);
-                    await setIsLoggedIn(true);
-                    await setRegisterSuccess(true)
+                    if (authToken) {
+                        await setUserAccount({username: formInput.username, password: formInput.password, isAuthenticated: true, _id: authToken })
+                        //put authToken in localStorage
+                        await populateStorage(authToken);
+                        await setIsLoggedIn(true);
+                        await setRegisterSuccess(true)
+                    }else {
+                        setRegisterSuccess(false);
+                        alert("Please use a different username, that user already exists!")
+                    }
                 } catch (error) {
                     throw error;
                 }   
@@ -136,14 +139,6 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount}) => {
         setFormError(inputError);
     };
 
-    /*
-    Current issues:
-    id does not get updated in userAccount immediately - might not be an issue though
-    still need to make sure that the userAccount is passed to other components => IT DOES! 
-    password and password confirmation error message shows up even if user corrects the problem 
-    ** perhaps incorporate the userAccount stuff in Login.js rather than username, password 
-    */
-
     return (
     <>
         <main className="register-main">
@@ -153,8 +148,8 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount}) => {
                 <form className="register-form" onSubmit={validateFormInput}>
                     <label className="all-labels username-label" htmlFor="username">Username
                     {/* line below ensures the prompt disappears once user enters 8 characters */}
-                    {(formInput.username.length < 8)  && <span className="register-setup">Usernames must be 8 - 20 characters in length, using only use letters and numbers.</span>}
-                    {(!userResult) && <span className="register-setup">Username cannot have special characters</span>}
+                    {(formInput.username.length < 8)  && <span className="register-setup"> • Usernames must be 8 - 20 characters in length, using only use letters and numbers.</span>}
+                    {(!userResult) && <span className="register-setup"> • Username cannot have special characters</span>}
                         <input
                          className="register-input"
                          type="text" 
@@ -177,7 +172,7 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount}) => {
 
                     <label className="all-labels" htmlFor="password">Password
                     
-                    {(formInput.password.length < 8) && <span className="register-setup">Passwords must be between 8 - 20 characters in length.</span>}
+                    {(formInput.password.length < 8) && <span className="register-setup"> • Passwords must be between 8 - 20 characters in length.</span>}
                         <input 
                         className="register-input"
                         type="password" 
@@ -197,7 +192,7 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount}) => {
                     </label>
 
                     <label className="all-labels" htmlFor="confirm-password">Confirm Password
-                    {(formInput.confirmPassword.length < 8) && <span className="register-setup">Password and Confirm Password must match</span>}
+                    {(formInput.confirmPassword.length < 8) && <span className="register-setup"> • Password and Confirm Password must match</span>}
                         <input 
                         className="register-input"
                         type="password" 
@@ -217,11 +212,11 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount}) => {
                     <button className="register-btn" type="submit">Register</button>
                 </form>
             </div>
-                    {registerSuccess && <span className="welcome-notification">
+                    {registerSuccess && <div className="welcome-notification">
                         Registration successful!
                         {console.log("welcome notif popped up")}
                         {/* <Testy /> */}
-                        </span>}
+                        </div>}
         </main>
     </>
     )

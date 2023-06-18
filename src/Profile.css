@@ -1,0 +1,98 @@
+.profile-top-section {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+
+.sign-in-link {
+    margin:1rem 0 0 1rem;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", "Bebas Neue",serif;
+    cursor: pointer;
+    border:2px solid #13e784;
+    font-size: 1.25rem;
+    line-height: 1;
+    border-radius: 30rem;
+    letter-spacing: 2px;
+    min-width: 9rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 1rem 3rem;
+    color: #fff;
+    background-color: transparent;
+    height: 3rem;
+}
+
+.sign-in-link:hover {
+    transform: scale(1.02);
+    background-color: white;
+    border:2px solid #13e784;
+    color:#13e784;
+}
+
+h3.profile-message-h3 {
+    display:flex;
+    justify-content: center;
+    font-size:3rem;
+    border-bottom:2px solid black;
+    margin:1rem auto;
+}
+
+div.profile-message-container {
+    display:flex;
+    flex-direction: column;
+    margin:1rem auto;
+}
+
+div.profile-message-wrapper {
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin:0.75em auto;
+    width: 100rem;
+    min-height:5rem;
+    padding:0.5em;
+    text-align: left;
+    border-top:3px solid grey;
+    background-color: rgb(224, 250, 255);
+    box-shadow: 2px 8px 4px rgb(111, 107, 138);
+    font-size:1.5rem;
+}
+
+div.profile-message-fromUser {
+    font-size:2rem;
+    border-bottom:2px solid black;
+    margin-bottom:0.25rem;
+}
+
+div.profile-message-content,
+div.profile-message-postId {
+    font-family: "Poppins", serif;
+    margin-bottom:0.25rem;
+}
+
+h3.profile-posts-h3 {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size:3rem;
+    margin:0.5rem auto;
+    border-top:2px solid black;
+    border-bottom:2px solid black;
+}
+
+div.profile-post-full-post {
+    display:flex;
+    margin:0 auto;
+}
+
+div.profile-none-display {
+    display:flex;
+    justify-content: center;
+    font-size:3rem;
+}

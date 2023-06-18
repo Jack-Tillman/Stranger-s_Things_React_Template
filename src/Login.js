@@ -2,23 +2,7 @@ import React, { useState } from 'react';
 import {Link} from "react-router-dom"
 import "./Login.css";
 import { login } from './api';
-// import {
-//     registerUser,
-//     fetchPosts
-// } from "./api/index.js"
 
-/*login NEED:
-1) Navbar with 4 items: Stranger's Things, HOME, POSTS, LOGIN
-2) Main section with:
-    - H1 title of Log In 
-    -section 
-    - input for username
-    - input for password
-    - button to log in
-    - sentence of "Don't have an account? Sign Up" with a link to signup page 
-
-    JUNE 6 UPDATE: Consider making username, password into a single state with username and password as properties for a single state object like in register
-*/
 
 const LogIn = ({isLoggedIn, setIsLoggedIn, setUserAccount, userAccount, showPost, setShowPost}) => {
     const [username, setUsername] = useState('');

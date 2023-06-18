@@ -6,6 +6,7 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts, setIsLoading}) =>
     const [willDeliver, setWillDeliver] = useState(false);
     const [createSuccess, setCreateSuccess] = useState(false);
     const [createNotification, setCreateNotification] = useState(false);
+
     const [formInput, setFormInput] = useState({
         title: '',
         description: '',
@@ -128,14 +129,8 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts, setIsLoading}) =>
             }
             
         }
-
         setFormError(inputError);
         console.log(formInput)
-        // if (!formInput.willDeliver) {
-        //     setFormError({
-        //         ...inputError,
-        //     })
-        // }
     };
 
     return (

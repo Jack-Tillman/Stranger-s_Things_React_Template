@@ -9,11 +9,12 @@ const EditPost = ({userAccount, posts, setPosts, showPost, setShowPost, isLogged
     //filter all posts to display only one post whose post._id matches the same post stored in showPost (which is the post the user clicks on when seeing all posts)
     const [thisPostId] = posts.filter(post => post._id === showPost.postId);
     console.log(thisPostId._id)
+
     const [updatedFormInput, setUpdatedFormInput] = useState({
         title: '',
         description: '',
         price: 0,
-        location: "",
+        location: '',
         willingToDeliver: `${willDeliver}`,
         authToken: `${userAccount._id}`,
         _id: `${thisPostId._id}`

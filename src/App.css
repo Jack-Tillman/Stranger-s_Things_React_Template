@@ -122,4 +122,33 @@ input:focus{
 .all-labels {
     flex:1;
 }
+
+button {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", "Bebas Neue",serif;
+    cursor: pointer;
+    border:2px solid transparent;
+    font-size: 1.25rem;
+    line-height: 1;
+    border-radius: 30rem;
+    letter-spacing: 2px;
+    min-width: 9rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 1rem 3rem;
+    color: #fff;
+    background-color: #82a7d8;
+    height: 3rem;
+}
+
+button:hover{
+    transform: scale(1.02);
+    background-color: #217ae0;
+}
+
+button::after{
+    background-color: #82a7d8;
+}
 /* media queries for .App-wrapper and other for nav bar */

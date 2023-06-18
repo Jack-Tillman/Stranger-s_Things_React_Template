@@ -98,7 +98,7 @@ const App = () => {
         {/* once the user signs in, redirect them to Posts. if they aren't signed in, they will be directed to login page  */}
         <Route path="/src/Login.js">
           {isLoggedIn ?  (
-            <Redirect to="/src/Home.js" />
+            <Redirect to="/src/Profile.js" />
           ) : (
             <LogIn
               showPost={showPost}

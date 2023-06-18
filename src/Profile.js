@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { myData } from "./api";
 import "./Posts.css"
+import "./Profile.css"
 
 const Profile = ({showSinglePost, setShowSinglePost, usersPosts, setUsersPosts, isLoading, setIsLoading, isLoggedIn, userAccount, posts, setPosts, messages, setMessages, setShowPost, showPost}) => {
 const [usersMessages, setUsersMessages] = useState({});
@@ -37,22 +39,25 @@ const [usersMessages, setUsersMessages] = useState({});
         return (
         <section className="profile-top-section"> 
          <h1>{`Welcome, please sign in to see your profile!` }</h1>
+         <Link to="/src/Login.js">
+         <div className="sign-in-link">Sign in here!</div>
+         </Link>
         </section> )
         //if user is logged in, and useEffect executes, return the actual page 
-    } else if (isLoggedIn && (usersMessages.length < 1)){
-      return (
-        <>
-        <section className="profile-top-section"> 
-        <h1>{`Welcome, ${userAccount.username}!` }</h1>
-        </section>
-        <main className="profile-main">
-          <section className="profile-posts-section">
-                <h3 className="profile-message-h3">You have no messages!</h3>
-          </section>
-        </main>
-        </>
-      )
-    } else if ((usersMessages.length > 0) && isLoggedIn){ 
+    // } else if (isLoggedIn && (usersMessages.length < 1)){
+    //   return (
+    //     <>
+    //     <section className="profile-top-section"> 
+    //     <h1>{`Welcome, ${userAccount.username}!` }</h1>
+    //     </section>
+    //     <main className="profile-main">
+    //       <section className="profile-posts-section">
+    //             <h3 className="profile-message-h3">You have no messages!</h3>
+    //       </section>
+    //     </main>
+    //     </>
+    //   )
+    } else if (isLoggedIn){ 
     return(
         <>
         <section className="profile-top-section"> 
@@ -61,60 +66,47 @@ const [usersMessages, setUsersMessages] = useState({});
         <main className="profile-main">
             <section className="profile-posts-section">
                 <h3 className="profile-message-h3">Messages to me:</h3>
-                { usersMessages ? usersMessages.map(
-                        (
-                            {_id, content, fromUser: {username}, post}
-                        ) => {
+                { (usersMessages.length > 0) ? usersMessages.map(
+                        ({_id, content, fromUser: {username}, post}) => {
                         return (
                           <div className="profile-message-container" key={_id}>
-                            <div className="profile-message-fromUser">
-                              From: {username}
-                            </div>
-                            <div className="profile-message-content">
-                              {content}
-                            </div>
-                              {/* <button
-                                className="viewpost-btn"
-                                onClick={() => {
-                                    // <Posts />
-                                    const postId = post._id;
-                                    const postAuthor = post.isAuthor;
-                                    console.log(postId, postAuthor)
-                                    setShowPost({ postId, postAuthor });
-                                    localStorage.setItem("postid", postId);
-                                }}
-                              >
-                                VIEW POST
-                              </button> */}
-                            <div className="profile-message-postId">
-                              {post._id}
+                            <div className="profile-message-wrapper">
+                             <div className="profile-message-fromUser">
+                              {`From: ${username}`}
+                              </div>
+                              <div className="profile-message-content">
+                              {`Message: ${content}`}
+                              </div>
+                              <div className="profile-message-postId">
+                              {`PostId: ${post._id}`}
+                              </div>
                             </div>
                           </div>
-                        );}) : 
-                          <div>no messages</div>
+                        );
+                        }
+                  ) : 
+                      <div className="profile-none-display">no messages</div>
                         }
 
                         {/* users posts */}
 
                         <h3 className="profile-posts-h3">Posts I have made:</h3>
-                        { usersPosts ? usersPosts.map(
-                        (
-                            {_id, title, description, price, location, willDeliver }
-                        ) => {
+                        { (usersPosts.length > 0) ? usersPosts.map(
+                        ({_id, title, description, price, location, willDeliver }) => {
                         return (
                           <div className="all-posts profile-post-all-posts" key={_id} >
                             <div className="full-post profile-post-full-post" >
                             <div className="title profile-post-title">
-                              {title}
+                              {`Title: ${title}`}
                             </div>
                             <div className="description profile-post-description">
-                              {description}
+                              {`Description: ${description}`}
                             </div>
                             <div className="price profile-post-price">
-                              {price}
+                              {`Price: ${price}`}
                             </div>
                             <div className="location profile-post-location">
-                              {location}
+                              {`Location: ${location}`}
                             </div>
                             <div className="willDeliver profile-post-willDeliver">
                               {willDeliver}
@@ -122,7 +114,7 @@ const [usersMessages, setUsersMessages] = useState({});
                             </div>
                           </div>
                         );}) : 
-                          <div>You've made no posts.</div>
+                          <div className="profile-none-display">You've made no posts.</div>
                         }
             </section>
         </main>

@@ -42,20 +42,11 @@ h1 {
     box-shadow: 3px 1px 1px rgb(80, 75, 75);
 }
 
-.login-btn {
-  width: 100%;
-  display: inline;
-  background-color: #0556F3;
-  border-radius: 0.7rem;
-  padding: 10px 20px;
-  border: none;
-  color: #fff;
-  font-weight: 500;
-  cursor: pointer;
-  margin:1rem 0;
-  font-family:"Poppins","Darumadrop One","Bebas Neue",serif;
+button.login-btn {
+    margin-top:2rem;
 }
 
 .signup-link {
+    margin-top:2rem;
     font-family:"Poppins","Darumadrop One","Bebas Neue",serif;
 }

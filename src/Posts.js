@@ -13,8 +13,11 @@ const Posts = ({showSinglePost, setShowSinglePost, isLoading, setIsLoading, isLo
     const startFetchPosts = async () => {
       try {
         const authToken = userAccount._id;
-        fetchPosts(authToken).then((posts) => {setPosts(posts.data.posts)})
+        fetchPosts(authToken).then((posts) => {
+          setPosts(posts.data.posts)
+        })
         setIsLoading(false);
+        setEditComplete(false);
       } catch (error) {
         console.error(error);
       } 
@@ -44,7 +47,7 @@ const Posts = ({showSinglePost, setShowSinglePost, isLoading, setIsLoading, isLo
   }
   const filteredPosts = posts.filter(post => postMatches(post, searchTerm));
   const postsToDisplay = searchTerm.length ? filteredPosts : posts;
-  setEditComplete(false);
+
   if (!isLoading) {
 
     return(
@@ -84,6 +87,7 @@ const Posts = ({showSinglePost, setShowSinglePost, isLoading, setIsLoading, isLo
             </section>
             <div className="all-posts">
           {
+            
             postsToDisplay.map(post => (
                 <div className="full-post" key={post._id}>
                     <div className="title">{post.title}</div>
