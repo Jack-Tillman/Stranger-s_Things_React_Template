@@ -120,3 +120,22 @@ button.message-btn:hover {
     margin:1rem auto;
     text-shadow: 4px 1.5px 1px rgb(181, 181, 238);
 }
+
+.edit-notification {
+    margin:1rem auto;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", "Bebas Neue",serif;
+    font-size: 1.25rem;
+    line-height: 1;
+    border-radius: 100%;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-align: center;
+    padding: 1rem 3rem;
+    color: #fff;
+    background-color: #2ebc7a;
+    height: 8rem;
+    width: 8rem;
+}

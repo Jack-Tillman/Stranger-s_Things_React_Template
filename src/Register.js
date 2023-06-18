@@ -151,7 +151,7 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount}) => {
             <div className="register-container">       
             <h3 className="h3-register">Register</h3>
                 <form className="register-form" onSubmit={validateFormInput}>
-                    <label className="username-label" htmlFor="username">Username
+                    <label className="all-labels username-label" htmlFor="username">Username
                     {/* line below ensures the prompt disappears once user enters 8 characters */}
                     {(formInput.username.length < 8)  && <span className="register-setup">Usernames must be 8 - 20 characters in length, using only use letters and numbers.</span>}
                     {(!userResult) && <span className="register-setup">Username cannot have special characters</span>}
@@ -175,7 +175,7 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount}) => {
                     {formError.username && <span className='err'>{formError.username}</span>}
                     </label>
 
-                    <label htmlFor="password">Password
+                    <label className="all-labels" htmlFor="password">Password
                     
                     {(formInput.password.length < 8) && <span className="register-setup">Passwords must be between 8 - 20 characters in length.</span>}
                         <input 
@@ -196,7 +196,7 @@ const Register = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount}) => {
                         {formError.password && <span className='err'>{formError.password}</span>}
                     </label>
 
-                    <label htmlFor="confirm-password">Confirm Password
+                    <label className="all-labels" htmlFor="confirm-password">Confirm Password
                     {(formInput.confirmPassword.length < 8) && <span className="register-setup">Password and Confirm Password must match</span>}
                         <input 
                         className="register-input"

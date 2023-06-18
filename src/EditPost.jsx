@@ -3,8 +3,8 @@ import { updatePost } from "./api";
 import "./AddNewPost.css"
 
 //THIS WORKS YES! BUT, please do refine this and make it easier to read and less redundant 
-const EditPost = ({userAccount, posts, setPosts, showPost, setShowPost, isLoggedIn, messages, setMessages}) => {
-    const [editComplete, setEditComplete] = useState(false);
+const EditPost = ({userAccount, posts, setPosts, showPost, setShowPost, isLoggedIn, messages, setMessages, setIsLoading, editComplete, setEditComplete}) => {
+    const [showSuccessEdit, setShowSuccessEdit] = useState(false)
     const [willDeliver, setWillDeliver] = useState(false);
     //filter all posts to display only one post whose post._id matches the same post stored in showPost (which is the post the user clicks on when seeing all posts)
     const [thisPostId] = posts.filter(post => post._id === showPost.postId);
@@ -13,7 +13,7 @@ const EditPost = ({userAccount, posts, setPosts, showPost, setShowPost, isLogged
         title: '',
         description: '',
         price: 0,
-        location: '',
+        location: "",
         willingToDeliver: `${willDeliver}`,
         authToken: `${userAccount._id}`,
         _id: `${thisPostId._id}`
@@ -95,6 +95,9 @@ const EditPost = ({userAccount, posts, setPosts, showPost, setShowPost, isLogged
         }
         //if the user enters all input fields properly, store the input values within an object
         // that will be passed to the makePost API request
+        // if(updatedFormInput.location.length < 1) {
+        //     updatedFormInput.location = "[On Request]";
+        // }
         if ((updatedFormInput.location) && (updatedFormInput.price) && (priceResult) && (updatedFormInput.description) && (updatedFormInput.title) && (isLoggedIn)) {
             const updatedFormInputObject = {
                 title: updatedFormInput.title,
@@ -111,8 +114,12 @@ const EditPost = ({userAccount, posts, setPosts, showPost, setShowPost, isLogged
                 async function editPost() {
                     await updatePost(updatedFormInputObject);
                 }
-                editPost()
-                setEditComplete(true);
+                editPost();
+                setShowSuccessEdit(true);
+                setIsLoading(true);
+                setTimeout(()=> {
+                    setEditComplete(true);
+                }, "1000")
                 //reset form inputs
                 setUpdatedFormInput({ 
                 title: '',
@@ -145,6 +152,9 @@ const EditPost = ({userAccount, posts, setPosts, showPost, setShowPost, isLogged
         <main className="newpost-main">
             <div className="newpost-container">
                 <h3 className="h3-newpost">Edit Post</h3>
+                {
+                (showSuccessEdit) ? <div className="edit-notification">Post editted!</div> : null
+            }
                 <form className="newpost-form" onSubmit={validateUpdatedFormInput}>
                     <label className="title-label" htmlFor='title'>Title*
                         <input 
@@ -238,12 +248,10 @@ const EditPost = ({userAccount, posts, setPosts, showPost, setShowPost, isLogged
                     </div>
                     </label>
 
-                    <button className="newpost-btn" type="submit">Create</button>
+                    <button className="newpost-btn" type="submit">Edit Post</button>
                 </form>
             </div>
-            {
-                (editComplete) ? <div className="edit-notification">hi</div> : null
-            }
+            
         </main>
         </>
     )

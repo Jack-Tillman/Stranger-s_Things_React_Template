@@ -87,15 +87,39 @@ input {
     font-size: 1rem;
     height: 2.5rem;
     transition: all .27s ease;
+    width:100%;
     
 }
 
 input:hover{
-    box-shadow: 0 0 0 0 #fff inset, #ed75fd 0 0 0 4px;
+    box-shadow: 0 0 0 0 #fff inset, #9075fd 0 0 0 4px;
 }
 input:focus{
     background: #fff;
     outline: 0;
-    box-shadow: 0 0 0 0 #fff inset, #911de9 0 0 0 4px;
+    box-shadow: 0 0 0 0 #fff inset, #ca94f3 0 0 0 4px;
+}
+
+.success-notification {
+    margin:1rem auto;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", "Bebas Neue",serif;
+    font-size: 3rem;
+    line-height: 1;
+    border-radius: 100%;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-align: center;
+    padding: 3rem 3rem;
+    color: #fff;
+    background-color: #2ebc7a;
+    height: 2rem;
+    width: 2rem;
+}
+
+.all-labels {
+    flex:1;
 }
 /* media queries for .App-wrapper and other for nav bar */

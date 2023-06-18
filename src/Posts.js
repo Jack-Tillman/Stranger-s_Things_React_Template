@@ -6,7 +6,7 @@ import { fetchPosts } from "./api";
 // const COHORT_NAME = '2303-FTB-ET-WEB-AM';
 // const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
-const Posts = ({showSinglePost, setShowSinglePost, isLoading, setIsLoading, isLoggedIn, posts, setPosts, usersPosts, setUsersPosts, userAccount, setUserAccount, showPost, setShowPost, messages, setMessages}) => {
+const Posts = ({showSinglePost, setShowSinglePost, isLoading, setIsLoading, isLoggedIn, posts, setPosts, usersPosts, setUsersPosts, userAccount, setUserAccount, showPost, setShowPost, messages, setMessages, editComplete, setEditComplete}) => {
   const [searchTerm, setSearchTerm] = useState('');
   //fetch all posts 
   useEffect(() => {
@@ -44,7 +44,7 @@ const Posts = ({showSinglePost, setShowSinglePost, isLoading, setIsLoading, isLo
   }
   const filteredPosts = posts.filter(post => postMatches(post, searchTerm));
   const postsToDisplay = searchTerm.length ? filteredPosts : posts;
-
+  setEditComplete(false);
   if (!isLoading) {
 
     return(
@@ -78,7 +78,7 @@ const Posts = ({showSinglePost, setShowSinglePost, isLoading, setIsLoading, isLo
                 </div>
                 <Link to="/src/AddNewPost.jsx">
                 <span className="add-post">
-                  (ADD POST)
+                  ADD POST
                   </span>
                 </Link>
             </section>

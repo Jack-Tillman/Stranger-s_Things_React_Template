@@ -2,9 +2,10 @@ import React, {useState} from 'react';
 import './AddNewPost.css'
 import { makePost} from './api';
 
-const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
+const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts, setIsLoading}) => {
     const [willDeliver, setWillDeliver] = useState(false);
-
+    const [createSuccess, setCreateSuccess] = useState(false);
+    const [createNotification, setCreateNotification] = useState(false);
     const [formInput, setFormInput] = useState({
         title: '',
         description: '',
@@ -107,6 +108,8 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
                 //line below is when API call is actually made
                 const newPostResult = makePost(formInputObject);
                 console.log(newPostResult);
+                setCreateSuccess(true);
+                setIsLoading(true);
                 //reset form inputs
                 setFormInput({ 
                 title: '',
@@ -115,9 +118,12 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
                 location: '',
                 willingToDeliver: `${willDeliver}`})
             } catch (error) {
+                setCreateSuccess(false);
                 console.error(error);
+
             } finally {
                 console.log("New post submission attempted");
+                setCreateNotification(true);
                 setPosts(posts);
             }
             
@@ -137,6 +143,14 @@ const AddNewPost = ({isLoggedIn, userAccount, setPosts, posts}) => {
         <main className="newpost-main">
             <div className="newpost-container">
                 <h3 className="h3-newpost">Add New Post</h3>
+                {
+                 (createNotification) ? 
+                 <>
+                 <div className="success-notification">✓</div>
+                 <span className="success-text">Post created!</span>
+                 </>
+                 : null
+                 }
                 <form className="newpost-form" onSubmit={validateFormInput}>
                     <label className="title-label" htmlFor='title'>Title*
                         <input 

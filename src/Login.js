@@ -52,7 +52,8 @@ const LogIn = ({isLoggedIn, setIsLoggedIn, setUserAccount, userAccount, showPost
         if (authToken) {
           await setIsLoggedIn(true);
           await setUserAccount({username, password, isAuthenticated: true, _id: authToken });
-          await localStorage.setItem("id", authToken)
+          await localStorage.setItem("id", authToken);
+          
         } else {
             alert("That user does not exist, or the user information was not correctly entered.")
         }
@@ -66,18 +67,18 @@ const LogIn = ({isLoggedIn, setIsLoggedIn, setUserAccount, userAccount, showPost
         <main className="login-main">
             <div className="login-container">
                 <h1>Log In</h1>
-                <form className="login-form" onSubmit={handleSubmit} className="login-form">
+                <form className="login-form" onSubmit={handleSubmit}>
 
-                    <label htmlFor="username">Username:    
+                    <label className="all-labels" htmlFor="username">Username:    
                     <input className="login-input" required type="text" placeholder="Username*" name='username' value={username} onChange={handleChange} />
                     </label>
 
-                    <label htmlFor="password">Password:
+                    <label className="all-labels" htmlFor="password">Password:
                     <input className="login-input" required type="password" placeholder="Password*" name="password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
                     </label>
 
                     <button className="login-btn" type="submit">Log In</button>
-                    <label htmlFor="signup">
+                    <label className="all-labels" htmlFor="signup">
                         <Link to="/src/Register.js">
                         <aside className="signup-link">Don't have an account? Click here to register!</aside>
                         </Link>
