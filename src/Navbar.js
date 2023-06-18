@@ -6,13 +6,10 @@ const Navbar = ({isLoggedIn, setIsLoggedIn, userAccount, setUserAccount}) => {
       <header className="header">
       <nav className="navbar-container">
         <ul className="navbar-list">
-
           <span className="navbar-left">
-            {/* <Route path="./App.js"> */}
             <Link to="/src/App.js">
               <li className="navbar-strangersthings">Stranger's Things</li>
             </Link>
-            {/* </Route> */}
           </span>
 
           <span className="navbar-right">

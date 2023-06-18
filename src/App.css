@@ -27,6 +27,7 @@ input::-webkit-inner-spin-button {
     display:flex;
     align-items: center;
     justify-content: space-around;
+    box-shadow: 10px 5px 5px rgb(122, 113, 113);
 }
 
 .navbar-left{
@@ -63,9 +64,11 @@ a {
     text-decoration: none;
 }
 
-.wrapper {
+.App-wrapper {
     display:flex;
     flex-direction: column;
     min-height: 100vh;
+    flex-wrap:wrap;
 }
 
+/* media queries for .App-wrapper and other for nav bar */

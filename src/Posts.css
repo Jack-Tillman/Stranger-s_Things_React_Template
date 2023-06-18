@@ -3,11 +3,18 @@
     flex-direction: column;
     margin:0 auto;
 }
+.search-posts-wrapper {
+    display:flex;
+    margin:1em 0 0 0;
+    align-items: center;
+}
+
 
 .post-section {
     display:flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     margin:0 auto;
     height:5em;
 }
@@ -24,6 +31,7 @@
     width:100%;
     text-align: left;
     padding:0 0 0 0.5em;
+    margin:0 auto;
 }
 
 .add-post {

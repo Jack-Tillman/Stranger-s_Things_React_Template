@@ -24,7 +24,7 @@ h1 {
     box-shadow: 10px 5px 5px rgb(226, 195, 195);
 }
 
-form {
+.login-form {
     font-family:"Poppins","Darumadrop One","Bebas Neue",serif;
     margin:0em auto 3em auto;
     display:flex;

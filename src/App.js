@@ -1,9 +1,5 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Redirect } from "react-router-dom";
-// import {
-//   registerUser,
-//   fetchPosts
-// } from "./api/index.js"
 import "./App.css";
 import LogIn from "./Login";
 import Navbar from "./Navbar";

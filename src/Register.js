@@ -13,7 +13,7 @@ TO-DO:
 *Feedback for if submission is successful 
 *Determine what I will need to pass as props to other components (maybe have a state called isLoggedIn that tracks whether user is logged in,
     and if the user successfully registers, then isLoggedIn is set to true)
-*Make the CSS good for this, keeping in mind required pseudoclass for the inputs 
+
 */
 
 

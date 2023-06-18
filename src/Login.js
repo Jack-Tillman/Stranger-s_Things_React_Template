@@ -66,7 +66,7 @@ const LogIn = ({isLoggedIn, setIsLoggedIn, setUserAccount, userAccount, showPost
         <main className="login-main">
             <div className="login-container">
                 <h1>Log In</h1>
-                <form onSubmit={handleSubmit} className="login-form">
+                <form className="login-form" onSubmit={handleSubmit} className="login-form">
 
                     <label htmlFor="username">Username:    
                     <input className="login-input" required type="text" placeholder="Username*" name='username' value={username} onChange={handleChange} />
