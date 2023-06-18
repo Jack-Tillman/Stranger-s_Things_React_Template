@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { fetchPosts, deletePost, postMessage } from "./api";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import "./Posts.css"
 import "./ViewPost.css"
-
 
 export const COHORT_NAME = '2303-FTB-ET-WEB-AM';
 export const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
@@ -20,7 +18,6 @@ const ViewPost = ({
   messages,
   setMessages,
 }) => {
-
   const currentPostId = showPost.postId;
   const currentAuthor = showPost.postAuthor;
   const authToken = userAccount._id;
@@ -80,8 +77,8 @@ const ViewPost = ({
     <>
       <div className="posts-wrapper">
         {showSinglePost.map((post) => (
-          <div className="single-post-container" key={post._id}>
-            <div className="single-body">
+
+            <div className="single-body" key={post._id}>
               <div className="title">{post.title}</div>
               <div className="description">{post.description}</div>
               <div className="price">{post.price}</div>
@@ -91,6 +88,7 @@ const ViewPost = ({
               <div className="viewpost-btn-container">
                 <Link to="/src/Posts.js">
                   <button
+                  className="back-btn"
                     onClick={() => {
                       localStorage.removeItem("postid");
                       setShowPost("false");
@@ -107,7 +105,7 @@ const ViewPost = ({
                   onClick={() => {
                     console.log(currentAuthor)
                     console.log(userAccount._id)
-                    setShowMessageForm(true);
+                    setShowMessageForm(!showMessageForm);
                   }}
                 >
                   Message
@@ -116,6 +114,13 @@ const ViewPost = ({
                 {
                 (showMessageForm && (!currentAuthor)) ? (
                   <form className="message-form" onSubmit={validateMessage}>
+                    <button
+                      id="message-btn"
+                      className="send-message-btn"
+                      onSubmit={validateMessage}
+                    >
+                      send message
+                    </button>
                     <input
                       className="message-input"
                       type="text"
@@ -128,12 +133,6 @@ const ViewPost = ({
                         handleMessageInput(e.target.name, e.target.value);
                       }}
                     />
-                    <button
-                      className="send-message-btn"
-                      onSubmit={validateMessage}
-                    >
-                      send message
-                    </button>
                   </form>
                 ) : null}
                 {
@@ -155,6 +154,7 @@ const ViewPost = ({
                     className="edit-btn"
                     onClick={() => {
                       console.log("Time to edit!");
+                      
                     }}
                     >
                     Edit
@@ -171,8 +171,8 @@ const ViewPost = ({
                   {post.messages.map((message, index) => {
                     return( 
                     <div className="message-wrapper" key={index}>
-                        <div className="message-display-div fromUser-id">{message.fromUser._id}</div>
-                        <div className="message-display-div fromUser-username">{message.fromUser.username}</div>
+                        {/* <div className="message-display-div fromUser-id">{message.fromUser._id}</div> */}
+                        <div className="message-display-div fromUser-username">{`From: ${message.fromUser.username}`}</div>
                         <div className="message-display-div message-content">{message.content}</div>
                     </div>)
                         
@@ -181,7 +181,6 @@ const ViewPost = ({
               </div>
               ) : null}
             </div>
-          </div>
         ))}
       </div>
     </>

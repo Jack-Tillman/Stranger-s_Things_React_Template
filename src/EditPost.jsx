@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 import { updatePost } from "./api";
+import "./AddNewPost.css"
 
 //THIS WORKS YES! BUT, please do refine this and make it easier to read and less redundant 
 const EditPost = ({userAccount, posts, setPosts, showPost, setShowPost, isLoggedIn, messages, setMessages}) => {
-    
+    const [editComplete, setEditComplete] = useState(false);
     const [willDeliver, setWillDeliver] = useState(false);
     //filter all posts to display only one post whose post._id matches the same post stored in showPost (which is the post the user clicks on when seeing all posts)
     const [thisPostId] = posts.filter(post => post._id === showPost.postId);
@@ -29,10 +30,6 @@ const EditPost = ({userAccount, posts, setPosts, showPost, setShowPost, isLogged
         _id: `${thisPostId._id}`
     });
 
-    // const handleClick = (e) => {
-    //     e.preventDefault();
-
-    // }
 
     const handleUserInput = (name, value) => {
        setUpdatedFormInput({
@@ -113,9 +110,9 @@ const EditPost = ({userAccount, posts, setPosts, showPost, setShowPost, isLogged
                 //line below is when API call is actually made
                 async function editPost() {
                     await updatePost(updatedFormInputObject);
-
                 }
                 editPost()
+                setEditComplete(true);
                 //reset form inputs
                 setUpdatedFormInput({ 
                 title: '',
@@ -132,7 +129,6 @@ const EditPost = ({userAccount, posts, setPosts, showPost, setShowPost, isLogged
                 console.log("New post submission attempted");
                 setPosts(posts);
             }
-            
         }
 
         setFormError(inputError);
@@ -245,6 +241,9 @@ const EditPost = ({userAccount, posts, setPosts, showPost, setShowPost, isLogged
                     <button className="newpost-btn" type="submit">Create</button>
                 </form>
             </div>
+            {
+                (editComplete) ? <div className="edit-notification">hi</div> : null
+            }
         </main>
         </>
     )

@@ -76,7 +76,7 @@ const LogIn = ({isLoggedIn, setIsLoggedIn, setUserAccount, userAccount, showPost
                     <input className="login-input" required type="password" placeholder="Password*" name="password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
                     </label>
 
-                    <button type="submit">Log In</button>
+                    <button className="login-btn" type="submit">Log In</button>
                     <label htmlFor="signup">
                         <Link to="/src/Register.js">
                         <aside className="signup-link">Don't have an account? Click here to register!</aside>

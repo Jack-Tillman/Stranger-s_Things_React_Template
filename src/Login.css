@@ -42,7 +42,7 @@ h1 {
     box-shadow: 3px 1px 1px rgb(80, 75, 75);
 }
 
-button {
+.login-btn {
   width: 100%;
   display: inline;
   background-color: #0556F3;

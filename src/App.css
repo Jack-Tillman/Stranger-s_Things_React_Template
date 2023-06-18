@@ -73,4 +73,29 @@ a {
     background-color: rgb(80, 171, 224);
 }
 
+html {
+    background-color: rgb(80, 171, 224);
+}
+
+input {
+    box-shadow: inset #abacaf 2px 2px 2px 2px;
+    border: 0;
+    background: rgb(255, 255, 255);
+    border-radius: 2.5px;
+    padding: 0.563rem 0.75rem;
+    line-height: 1;
+    font-size: 1rem;
+    height: 2.5rem;
+    transition: all .27s ease;
+    
+}
+
+input:hover{
+    box-shadow: 0 0 0 0 #fff inset, #ed75fd 0 0 0 4px;
+}
+input:focus{
+    background: #fff;
+    outline: 0;
+    box-shadow: 0 0 0 0 #fff inset, #911de9 0 0 0 4px;
+}
 /* media queries for .App-wrapper and other for nav bar */
