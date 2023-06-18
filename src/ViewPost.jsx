@@ -17,10 +17,12 @@ const ViewPost = ({
   setShowPost,
   messages,
   setMessages,
+  setIsLoading
 }) => {
   const currentPostId = showPost.postId;
   const currentAuthor = showPost.postAuthor;
   const authToken = userAccount._id;
+  const [showSuccessDelete, setShowSuccessDelete] = useState(false)
   const [isCurrentAuthor, setIsCurrentAuthor] = useState(false);
   //conditionally render message form if user clicks button
   const [showMessageForm, setShowMessageForm] = useState(false);
@@ -143,6 +145,11 @@ const ViewPost = ({
                   onClick={() => {
                     const singlePostId = showSinglePost[0]._id;
                     deletePost(singlePostId, authToken);
+                    setShowSuccessDelete(true);
+                    setTimeout(()=> {
+                      setIsLoading(true);
+                      setShowPost("false");
+                  }, "1000")
                   }}
                 >
                   delete
@@ -154,7 +161,7 @@ const ViewPost = ({
                     className="edit-btn"
                     onClick={() => {
                       console.log("Time to edit!");
-                      
+
                     }}
                     >
                     Edit
@@ -183,6 +190,9 @@ const ViewPost = ({
             </div>
         ))}
       </div>
+      {
+                  showSuccessDelete ? <div className="delete-notification">Post deleted!</div> : null
+                }
     </>
   );
 };

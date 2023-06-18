@@ -121,7 +121,8 @@ button.message-btn:hover {
     text-shadow: 4px 1.5px 1px rgb(181, 181, 238);
 }
 
-.edit-notification {
+.edit-notification,
+.delete-notification {
     margin:1rem auto;
     display:flex;
     align-items: center;

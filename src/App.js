@@ -33,6 +33,7 @@ const App = () => {
   const [showSinglePost, setShowSinglePost] = useState([]);
   const [editComplete, setEditComplete] = useState(false);
 
+
   return (
     <BrowserRouter>
       <div className="App-wrapper">
@@ -142,20 +143,25 @@ const App = () => {
         </Route>
 
         <Route path="/src/ViewPost.jsx">
+          {
+            (isLoading && (showPost === "false")) ? 
+            <Redirect to ="/src/Home.js"/>  :       
           <ViewPost
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-            showPost={showPost}
-            setShowPost={setShowPost}
-            isLoggedIn={isLoggedIn}
-            userAccount={userAccount}
-            messages={messages}
-            setMessages={setMessages}
-            usersPosts={usersPosts}
-            setUsersPosts={setUsersPosts}
-            showSinglePost={showSinglePost}
-            setShowSinglePost={setShowSinglePost}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+          showPost={showPost}
+          setShowPost={setShowPost}
+          isLoggedIn={isLoggedIn}
+          userAccount={userAccount}
+          messages={messages}
+          setMessages={setMessages}
+          usersPosts={usersPosts}
+          setUsersPosts={setUsersPosts}
+          showSinglePost={showSinglePost}
+          setShowSinglePost={setShowSinglePost}
           />
+        }
+        
         </Route>
 
         <Route path="/src/EditPost">
