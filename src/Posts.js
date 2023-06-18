@@ -88,9 +88,9 @@ const Posts = ({showSinglePost, setShowSinglePost, isLoading, setIsLoading, isLo
                 <div className="full-post" key={post._id}>
                     <div className="title">{post.title}</div>
                     <div className="description">{post.description}</div>
-                    <div className="price">{post.price}</div>
-                    <div className="author">{post.author.username}</div>
-                    <div className="location">{post.location}</div>
+                    <div className="price">{`Price: ${post.price}`}</div>
+                    <div className="author">{`Seller: ${post.author.username}`}</div>
+                    <div className="location">{`Location: ${post.location}`}</div>
                     <div className="willDeliver">{post.willDeliver}</div>
                     { //if user is logged in, button links to single post view, else 
                     // the button links to Login page

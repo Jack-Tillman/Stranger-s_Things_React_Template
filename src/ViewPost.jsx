@@ -79,19 +79,6 @@ const ViewPost = ({
   return (
     <>
       <div className="posts-wrapper">
-        {/* <section className="post-section">
-          <h1 className="h1-posts">Posts</h1>
-          <div className="search-posts-wrapper">
-            <input
-              className="search-posts"
-              type="text"
-              placeholder="Search Posts"
-            />
-          </div>
-          <Link to="/src/AddNewPost.jsx">
-            <span className="add-post">(ADD POST)</span>
-          </Link>
-        </section> */}
         {showSinglePost.map((post) => (
           <div className="single-post-container" key={post._id}>
             <div className="single-body">

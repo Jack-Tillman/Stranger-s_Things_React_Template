@@ -17,7 +17,8 @@ input::-webkit-inner-spin-button {
     margin:0;
     padding:0;
     box-sizing: border-box; 
-    font-family:"Darumadrop One", "Poppins", "Bebas Neue",serif;
+    /* font-family:"Darumadrop One", "Poppins", "Bebas Neue",serif; */
+    font-family:"Bebas Neue", "Poppins", serif;
 }
 
 .navbar-container {
@@ -69,6 +70,7 @@ a {
     flex-direction: column;
     min-height: 100vh;
     flex-wrap:wrap;
+    background-color: rgb(80, 171, 224);
 }
 
 /* media queries for .App-wrapper and other for nav bar */

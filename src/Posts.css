@@ -3,12 +3,12 @@
     flex-direction: column;
     margin:0 auto;
 }
+
 .search-posts-wrapper {
     display:flex;
     margin:1em 0 0 0;
     align-items: center;
 }
-
 
 .post-section {
     display:flex;
@@ -20,43 +20,115 @@
 }
 
 .h1-posts {
+    font-family: "Poppins", "Bebas Neue",serif;
     font-size: 3em;
     margin: 1em 0.5em 1em 1em;
 }
 
 
 .search-posts {
+    font-family: "Poppins", "Bebas Neue",serif;
     font-size:1.5em;
     height:100%;
     width:100%;
     text-align: left;
     padding:0 0 0 0.5em;
     margin:0 auto;
+    box-shadow: 4px 2.5px 3px rgb(136, 126, 126);
 }
 
+/* .search-posts:active {
+    color:red;
+}
+
+.search-posts::after {
+    color:rgb(17, 212, 124);
+} */
+
 .add-post {
+    font-family: "Poppins", "Bebas Neue",serif;
+    color:black;
     font-size:1.5em;
     margin:1em;
+    text-shadow: 4px 1.5px 1px rgb(212, 212, 227);
 }
+
+.add-post:active {
+    color:white;
+
+}
+
 .all-posts {
     display:flex;
-    flex-direction: column;   
+    flex-direction: column; 
+    margin-bottom:1rem;
 }
 
 div > .full-post {
     display:flex;
     flex-direction: column;
     align-items: flex-start;
-    border:1px solid black;
-    margin:1em auto 0;
-    width:65vw;
-    height:15em;
+    margin:0.75em 0;
+    width: 100rem;
+    height:20rem;
     padding:0.5em;
-    box-shadow: 10px 5px 5px rgb(226, 195, 195);
     text-align: left;
+    border-top:3px solid grey;
+    background-color: rgb(224, 250, 255);
+    box-shadow: 2px 8px 4px rgb(111, 107, 138);
+
+    /* border-left:4px solid rgb(120, 102, 222); */
+    /* border-right:4px solid rgb(120, 102, 222); */
+    /* border-radius:2em; */
 }
 
 .title {
-    font-size:1.5em;
+    font-size:2.5rem;
     margin:0.5em;
+    border-bottom:2px solid black;
+}
+
+.description {
+    font-family: "Poppins", "Bebas Neue",serif;
+    font-size:1.25rem;
+    margin:0.25rem 0 0 0.5rem;
+}
+
+.price {
+    font-family: "Poppins", "Bebas Neue",serif;
+    font-size:1.25rem;
+    margin:0.25rem 0 0 0.5rem;
+}
+
+.author {
+    font-family: "Poppins", "Bebas Neue",serif;
+    font-size:1.25rem;
+    margin:0.25rem 0 0 0.5rem;
+}
+
+.location {
+    font-family: "Poppins", "Bebas Neue",serif;
+    font-size:1.25rem;
+    margin:0.25rem 0 0 0.5rem;
+}
+
+.viewpost-btn {
+    font-family: "Poppins", "Bebas Neue",serif;
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 1;
+    border-radius: 30rem;
+    letter-spacing: 2px;
+    min-width: 145px;
+    font-weight: 700;
+    text-align: center;
+    padding: 1rem 3rem;
+    color: #fff;
+    background-color: #82a7d8;
+    height: 48px;
+}
+
+.viewpost-btn:hover{
+    transform: scale(1.02);
+    background-color: #217ae0;
 }
