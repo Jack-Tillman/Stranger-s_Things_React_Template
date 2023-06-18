@@ -52,6 +52,8 @@ const App = () => {
            userAccount={userAccount}
            setEditComplete={setEditComplete}
            editComplete={editComplete}
+           setIsLoggedIn={setIsLoggedIn}
+           setUserAccount={setUserAccount}
              />
         </Route>
 

@@ -38,7 +38,7 @@ const [usersMessages, setUsersMessages] = useState({});
     if (!isLoggedIn) {
         return (
         <section className="profile-top-section"> 
-         <h1>{`Welcome, please sign in to see your profile!` }</h1>
+         <h1 className="profile-h1">{`Welcome, please sign in to see your profile!` }</h1>
          <Link to="/src/Login.js">
          <div className="sign-in-link">Sign in here!</div>
          </Link>

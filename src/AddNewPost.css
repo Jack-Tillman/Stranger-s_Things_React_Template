@@ -91,3 +91,51 @@
     font-size:2rem;
     color:#0e4129;
 }
+
+/* media queries for .App-wrapper and other for nav bar */
+
+@media screen and (max-width:1600px) {
+    .newpost-main {
+        flex-direction: column;
+        flex:1 1 1;
+    }
+
+    
+    .h3-newpost {
+        font-family:"Poppins","Darumadrop One","Bebas Neue",serif;
+        font-size:3rem;
+        margin:1rem auto;
+    }
+    
+    .newpost-form {
+        font-family:"Poppins","Darumadrop One","Bebas Neue",serif;
+        display:flex;
+        flex-direction: column;
+        font-size:1.5em;
+        width:75%;
+        margin:0 auto;
+    
+    }
+    
+    .title-label,
+    .description-label,
+    .price-label,
+    .location-label {
+        width:auto;
+    }
+    
+    .newpost-input {
+        width:100%;
+    }
+    
+    .willdeliver-input {
+        width:3rem;
+    }
+
+    .success-text {
+        display:flex;
+        justify-content: center;
+        font-size:2rem;
+        color:#0e4129;
+    }
+}

@@ -3,7 +3,6 @@
 .login-main {
     display:flex;
     flex-direction: column;
-    background-color:lavender;
     flex-grow:1;
 }
 
@@ -21,7 +20,7 @@ h1 {
     width:50%;
     margin: 4em auto;
     border-radius:10%;
-    box-shadow: 10px 5px 5px rgb(226, 195, 195);
+    box-shadow: 10px 5px 5px rgb(123, 112, 243);
 }
 
 .login-form {
@@ -49,4 +48,52 @@ button.login-btn {
 .signup-link {
     margin-top:2rem;
     font-family:"Poppins","Darumadrop One","Bebas Neue",serif;
+}
+
+/* media queries for .App-wrapper and other for nav bar */
+
+@media screen and (max-width:1600px) {
+    
+
+.login-main {
+    display:flex;
+    flex-direction: column;
+    flex:1 1 1;
+}
+
+h1 {
+    font-family:"Poppins","Darumadrop One","Bebas Neue",serif;
+    font-size:3rem;
+    margin:1em auto;
+}
+
+.login-container {
+    display:flex;
+    flex-direction: column;
+    width:75%;
+    margin: 4em auto;
+}
+
+.login-form {
+    margin:0em auto 3em auto;
+    display:flex;
+    flex-direction: column;
+    font-size:1.5em;
+    width:auto;
+}
+
+.login-input {
+    margin:0 auto;
+    width:100%;
+}
+
+.login-btn {
+    width:75%;
+    margin:0 auto;
+}
+
+.all-labels {
+    width:auto;
+}
+
 }

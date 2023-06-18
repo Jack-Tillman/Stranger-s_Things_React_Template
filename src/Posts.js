@@ -1,5 +1,5 @@
 import React, {useEffect, useState } from "react";
-import {Link} from "react-router-dom";  
+import {Link, Redirect} from "react-router-dom";  
 import "./Posts.css";
 import { fetchPosts } from "./api";
 
@@ -79,11 +79,20 @@ const Posts = ({showSinglePost, setShowSinglePost, isLoading, setIsLoading, isLo
                     /> 
                   </form>
                 </div>
+                {
+                isLoggedIn ? 
                 <Link to="/src/AddNewPost.jsx">
                 <span className="add-post">
                   ADD POST
                   </span>
-                </Link>
+                </Link> 
+                :
+                <Link to="/src/Login.js">
+                    <span className="add-post">
+                  ADD POST
+                  </span> </Link>
+  
+              }
             </section>
             <div className="all-posts">
           {

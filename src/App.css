@@ -29,6 +29,7 @@ input::-webkit-inner-spin-button {
     align-items: center;
     justify-content: space-around;
     box-shadow: 10px 5px 5px rgb(122, 113, 113);
+    flex-wrap:nowrap;
 }
 
 .navbar-left{
@@ -151,4 +152,50 @@ button:hover{
 button::after{
     background-color: #82a7d8;
 }
+
 /* media queries for .App-wrapper and other for nav bar */
+
+@media screen and (max-width:1600px) {
+    .navbar-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .App-wrapper {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        margin:0 auto;
+    }
+
+    .navbar-left{
+        margin:0;
+    }
+    
+    .navbar-right{
+        display:flex;
+        flex-direction: column;
+    }
+    
+    ul {
+        flex-direction: column;
+        padding:0;
+        justify-content: center;
+    }
+    
+    li {
+        margin:0.25rem 0 0 0;
+        padding: 0 0.25rem;
+    }
+    
+    
+    .App-wrapper {
+        display:flex;
+        flex-direction: column;
+        min-height: 100vh;
+        flex-wrap:wrap;
+        background-color: rgb(80, 171, 224);
+    }
+
+    
+}
