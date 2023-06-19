@@ -5,7 +5,6 @@ export const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAM
 
 export const registerUser = async (username, password) => {
   //check for proper username and password values 
-  // console.log(username, password)
   try {
     const response = await fetch(`${BASE_URL}/users/register`, {
       method: "POST",
@@ -19,12 +18,7 @@ export const registerUser = async (username, password) => {
         },
       }),
     });
-    console.log(username, password);
     const result = await response.json();
-    // You can log ▲▲▲ the result
-    // here ▼▼▼ to view the json object before returning it
-    console.log(result);
-    // localStorage.token = result.data.token;
     return result.data.token;
   } catch (err) {
     console.error(err);
@@ -39,9 +33,6 @@ export const registerUser = async (username, password) => {
       });
   
       const result = await response.json();
-      // console.log(result);
-      // console.log(result.data.posts);
-      // console.log(authToken)
       return result;
     } catch (err) {
       console.error(err);
@@ -64,7 +55,6 @@ export const registerUser = async (username, password) => {
         })
       });
       const result = await response.json();
-      console.log(result);
       return result.data.token;
     } catch (err) {
       console.error(err);
@@ -73,13 +63,11 @@ export const registerUser = async (username, password) => {
 
 //helper function for makePosts
 function makeHeaders(authToken){
-  // console.log(authToken);
   if (authToken) {
     const loggedInHeader = {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${authToken}`
     }
-    // console.log(loggedInHeader)
     return loggedInHeader;
   } else {
     return {
@@ -92,8 +80,6 @@ function makeHeaders(authToken){
   //used as arguments for below
   // {authToken, newPost.title, newPost.description, newPost.price, newPost.willDeliver}
   export const makePost = async (formInputObject) => {
-    // const madeHeader = makeHeaders(authToken);
-    console.log(formInputObject);
     try {
       const response = await fetch(`${BASE_URL}/posts`, {
         method: "POST",
@@ -109,7 +95,6 @@ function makeHeaders(authToken){
         })
       });
       const result = await response.json();
-      console.log(result);
       return result
     } catch (err) {
       console.error(err);
@@ -126,7 +111,6 @@ function makeHeaders(authToken){
         }
       });
       const result = await response.json();
-      console.log(result);
       return result
     } catch (err) {
       console.error(err);
@@ -134,7 +118,6 @@ function makeHeaders(authToken){
   }
   //updatedFormInputObject needs updated form input data, as well as authToken AND postId of the current post that is being edited 
   export const updatePost = async (updatedFormInputObject) => {
-    console.log(updatedFormInputObject);
     try {
       const response = await fetch(`${BASE_URL}/posts/${updatedFormInputObject._id}`, {
         method: "PATCH",
@@ -154,7 +137,6 @@ function makeHeaders(authToken){
         })
       });
       const result = await response.json();
-      console.log(result);
       return result
     } catch (err) {
       console.error(err);
@@ -163,7 +145,6 @@ function makeHeaders(authToken){
 
   export const postMessage = async (createMessage) => {
     const {message, currentPostId, authToken } = createMessage;
-    console.log(message, currentPostId, authToken);
     try {
       const response = await fetch(`${BASE_URL}/posts/${currentPostId}/messages`, {
         method: "POST",
@@ -178,7 +159,6 @@ function makeHeaders(authToken){
         })
       });
       const result = await response.json();
-      console.log(result);
       return result
     } catch (err) {
       console.error(err);
@@ -193,7 +173,6 @@ function makeHeaders(authToken){
         headers: makeHeaders(authToken)
       });
       const result = await response.json();
-      console.log(result);
       return result
     } catch (err) {
       console.error(err);

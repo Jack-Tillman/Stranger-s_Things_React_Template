@@ -1,23 +1,21 @@
-
-
 .posts-wrapper {
-    display:flex;
+    display: flex;
     flex-direction: column;
-    margin:0 auto;
+    margin: 0 auto;
     /* border:1px solid rgb(28, 181, 20); */
 }
 
- div.single-body {
-    display:flex;
+div.single-body {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin:0.75em 0;
+    margin: 0.75em 0;
     width: 100rem;
-    min-height:20rem;
-    max-height:27rem;
-    padding:0.5em;
+    min-height: 20rem;
+    max-height: 27rem;
+    padding: 0.5em;
     text-align: left;
-    border-top:3px solid grey;
+    border-top: 3px solid grey;
     background-color: rgb(224, 250, 255);
     box-shadow: 2px 8px 4px rgb(111, 107, 138);
 }
@@ -27,11 +25,11 @@ button.delete-btn,
 button.edit-btn,
 button.send-message-btn,
 button.message-btn {
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    border:2px solid transparent;
-    font-family: "Poppins", "Bebas Neue",serif;
+    border: 2px solid transparent;
+    font-family: "Poppins", "Bebas Neue", serif;
     cursor: pointer;
     font-size: 1.25rem;
     line-height: 1;
@@ -42,7 +40,7 @@ button.message-btn {
     text-align: center;
     padding: 1rem 3rem;
     color: #ffffff;
-    background-color: #82a7d8;
+    background-color: #3481e6;
     height: 3rem;
 }
 
@@ -56,15 +54,15 @@ button.message-btn:hover {
 }
 
 .viewpost-btn-container {
-    display:flex;
-    gap:2em;
+    display: flex;
+    gap: 2em;
     justify-content: center;
-    padding:1em;
-    margin:0.25rem;
+    padding: 1em;
+    margin: 0.25rem;
 }
 
 .message-form {
-    display:flex;
+    display: flex;
     flex-direction: column-reverse;
     margin: 0rem 2rem;
     flex-wrap: wrap;
@@ -72,64 +70,64 @@ button.message-btn:hover {
 }
 
 .message-input {
-    font-size:1.5rem;
-    padding:2rem;
+    font-size: 1.5rem;
+    padding: 2rem;
     margin: 0.25rem 0rem 0.75rem 0rem;
-    border-radius:1rem;
+    border-radius: 1rem;
     box-shadow: 2px 8px 4px rgb(111, 107, 138);
 }
 
 
 .post-message-container {
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin:3rem auto;
+    margin: 3rem auto;
 }
 
 .message-display {
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    margin:3rem 0;
+    margin: 3rem 0;
 }
 
 .message-wrapper {
-    font-size:2rem;
-    display:flex;
-    flex-direction:column;
-    margin:1em auto;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    margin: 1em auto;
     background-color: azure;
-    width:100rem;
+    width: 100rem;
     box-shadow: 2px 8px 4px rgb(111, 107, 138);
 }
 
 .fromUser-username {
-    font-size:2.5rem;
-    margin:1rem;
-    border-bottom:2px solid black;
+    font-size: 2.5rem;
+    margin: 1rem;
+    border-bottom: 2px solid black;
 }
 
 .message-content {
-    font-family: "Poppins", "Bebas Neue",serif;
-    font-size:1.5rem;
-    margin:0.25rem 0 0 0.5rem;
-    padding-bottom:0.25rem;
+    font-family: "Poppins", "Bebas Neue", serif;
+    font-size: 1.5rem;
+    margin: 0.25rem 0 0 0.5rem;
+    padding-bottom: 0.25rem;
 }
 
 .message-display-h1 {
-    margin:1rem auto;
+    margin: 1rem auto;
     text-shadow: 4px 1.5px 1px rgb(181, 181, 238);
 }
 
 .edit-notification,
 .delete-notification {
-    margin:1rem auto;
-    display:flex;
+    margin: 1rem auto;
+    display: flex;
     align-items: center;
     justify-content: center;
-    font-family: "Poppins", "Bebas Neue",serif;
+    font-family: "Poppins", "Bebas Neue", serif;
     font-size: 1.25rem;
     line-height: 1;
     border-radius: 100%;
@@ -148,58 +146,56 @@ button.message-btn:hover {
 @media screen and (max-width:1600px) {
 
 
- div.single-body {
-    display:flex;
-    flex-direction: column;
-    align-items: left;
-    margin:0.75em auto;
-    width: 100%;
-    min-height:20rem;
-    max-height:40rem;
-    padding:0.5em;
-}
+    div.single-body {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        margin: 0.75em auto;
+        width: 100%;
+        min-height: 20rem;
+        max-height: 40rem;
+        padding: 0.5em;
+    }
 
-.viewpost-btn-container {
-    display:flex;
-    gap:2em;
-    justify-content: center;
-    padding:1em;
-    margin:0.25rem;
-}
+    .viewpost-btn-container {
+        display: flex;
+        gap: 2em;
+        justify-content: center;
+        padding: 1em;
+        margin: 0.25rem;
+    }
 
-.message-form {
-    display:flex;
-    flex-direction: column-reverse;
-    margin: 0rem 2rem;
-    flex-wrap: wrap;
+    .message-form {
+        display: flex;
+        flex-direction: column-reverse;
+        margin: 0rem 2rem;
+        flex-wrap: wrap;
+    }
 
-}
+    .message-input {
+        font-size: 1.5rem;
+        padding: 2rem;
+        margin: 1rem;
+        border-radius: 1rem;
+        box-shadow: 2px 8px 4px rgb(111, 107, 138);
+    }
 
-.message-input {
-    font-size:1.5rem;
-    padding:2rem;
-    margin:1rem;
-    border-radius:1rem;
-    box-shadow: 2px 8px 4px rgb(111, 107, 138);
-}
+    .post-message-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 15rem auto;
+    }
 
+    .message-display {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
-.post-message-container {
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin:15rem auto;
-}
-
-.message-display {
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.message-wrapper {
-    width:100%;
-}
+    .message-wrapper {
+        width: 100%;
+    }
 
 }

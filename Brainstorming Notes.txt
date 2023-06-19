@@ -372,3 +372,19 @@ the messages and post theyve made, and render that within Profile
 - See all messages in a 'special view' 
 
 * SEARCH FILTER functionality for all users!
+
+June 18 The Final Day - 8 pm
+* too tired to actually give full explanation on what i did today 
+* basically, redid most of CSS for everything, refined all JSX files, set up media queries.
+
+*If onlies: 
+Overall color scheme is meh, uninteresting. Would have loved to make it pop better.
+Incorporate more functional media queries
+Refined state and prop passing and such 
+Removed unnecessary states and props
+Add a few more UX things, such as success notifications for things like sending messages and others 
+Cleaner import and exports, a designated import and export file wouldve been great 
+Put all components in a components folder!!!! should've done that day 1!
+Less redundancy with CSS 
+Location update when edited ... not sure why it doesn't honestly 
+Overall: pleased with how it all shook out! and TIRED, no more 10 hour days ok

@@ -135,7 +135,7 @@ div>.full-post {
     text-align: center;
     padding: 1rem 3rem;
     color: #fff;
-    background-color: #82a7d8;
+    background-color: #3481e6;
     height: 3rem;
 }
 
@@ -145,7 +145,7 @@ div>.full-post {
 }
 
 .viewpost-btn::after {
-    background-color: #82a7d8;
+    background-color: #3481e6;
 }
 
 /* MEDIA QUERIES*/

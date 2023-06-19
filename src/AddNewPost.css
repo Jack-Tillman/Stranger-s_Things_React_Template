@@ -29,7 +29,6 @@
     font-size:1.5em;
     width:75%;
     margin:0 auto;
-
 }
 
 .title-label,
@@ -72,10 +71,6 @@
 .newpost-btn:active {
     background-color: #0556F3;
 }
-/*this controls the little spans that pop up if a form isn't fully filled out*/
-/* .newpost-setup {
-
-} */
 
 .willdeliver-input {
     font-family:"Poppins","Darumadrop One","Bebas Neue",serif;
