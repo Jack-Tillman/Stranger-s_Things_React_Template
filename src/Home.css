@@ -27,6 +27,10 @@
     color:black;
 }
 
+.check-it-out {
+    font-size:2.5rem;
+    padding-bottom:1rem;
+}
 /* MEDIA QUERIES*/
 
 @media screen and (max-width:1600px) {

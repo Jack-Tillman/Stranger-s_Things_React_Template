@@ -14,7 +14,7 @@ const Home = ({
     <div className="home-screen-container">
       <div className="home-body">
         <div className="links">
-          Here's some cool places to check out:
+          <p className="check-it-out">Here's some cool places to check out:</p>
           <Link to="/src/App.js">
             <div className="home-div">HOME</div>
           </Link>
