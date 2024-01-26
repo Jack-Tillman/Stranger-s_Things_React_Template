@@ -4,8 +4,12 @@ This repository holds the code for my Stranger's Things project completed during
 
 ## To check out for yourself:
 
-1) After cloning down the repository, run 
+After cloning down the repository, run 
 
 ### `npm run start`
 
 This script installs all the necessary packages and dependencies, and then starts the local server. The site is accessible via the local url: localhost:3000 
+
+
+## This project utilized Heroku's Stranger's Things API
+https://strangers-things.herokuapp.com/api/
