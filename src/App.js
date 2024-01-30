@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
+import { CompatRouter } from "react-router-dom-v5-compat";
 import "./App.css";
 import Navbar from "./Navbar";
 import MainSection from "./MainSection";
@@ -27,25 +28,27 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <div className="App-wrapper">
-        <Navbar
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
-          userAccount={userAccount}
-          setUserAccount={setUserAccount}
-        />
+      <CompatRouter>
+        <div className="App-wrapper">
+          <Navbar
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            userAccount={userAccount}
+            setUserAccount={setUserAccount}
+          />
 
-        <MainSection
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
-          userAccount={userAccount}
-          setUserAccount={setUserAccount}
-        />
-      </div>
+          <MainSection
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            userAccount={userAccount}
+            setUserAccount={setUserAccount}
+          />
+        </div>
+      </CompatRouter>
     </BrowserRouter>
   );
 };
