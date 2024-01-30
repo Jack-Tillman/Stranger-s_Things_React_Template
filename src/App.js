@@ -1,15 +1,8 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import "./App.css";
-import LogIn from "./Login";
 import Navbar from "./Navbar";
-import Profile from "./Profile";
-import Posts from "./Posts";
-import Home from "./Home";
-import Register from "./Register";
-import AddNewPost from "./AddNewPost";
-import ViewPost from "./ViewPost";
-import EditPost from "./EditPost";
+import MainSection from "./MainSection";
 
 const App = () => {
   //some components will be rendered based on state of isLoggedIn
@@ -43,7 +36,25 @@ const App = () => {
           userAccount={userAccount}
           setUserAccount={setUserAccount}
         />
-         <Route path="/Home">
+
+        <MainSection
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+          userAccount={userAccount}
+          setUserAccount={setUserAccount}
+        />
+      </div>
+    </BrowserRouter>
+  );
+};
+
+export default App;
+
+/* 
+
+  <Route path="/Home">
           <Home
             isLoggedIn={isLoggedIn}
             userAccount={userAccount}
@@ -94,7 +105,7 @@ const App = () => {
             editComplete={editComplete}
           />
         </Route>
-        {/* once the user signs in, redirect them to Posts. if they aren't signed in, they will be directed to login page  */}
+ 
         <Route path="/Login">
           {isLoggedIn ? (
             <Redirect to="/Profile" />
@@ -111,7 +122,7 @@ const App = () => {
         </Route>
 
         <Route path="/Register">
-          {/* if user is logged in, render Posts, else render Register */}
+
           {isLoggedIn ? (
             <Redirect to="/Home" />
           ) : (
@@ -182,9 +193,7 @@ const App = () => {
             />
           )}
         </Route>
-      </div>
-    </BrowserRouter>
-  );
-};
 
-export default App;
+
+
+*/
