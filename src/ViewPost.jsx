@@ -75,7 +75,7 @@ const ViewPost = ({
             <div className="location">{`Location: ${post.location}`}</div>
             <div className="willDeliver">{post.willDeliver}</div>
             <div className="viewpost-btn-container">
-              <Link to="/src/Posts.js">
+              <Link to="/Posts">
                 <button
                   className="back-btn"
                   onClick={() => {
@@ -139,7 +139,7 @@ const ViewPost = ({
                 ) : null
               }
               {currentAuthor ? (
-                <Link to="/src/EditPost">
+                <Link to="/EditPost">
                   <button className="edit-btn" onClick={() => {}}>
                     Edit
                   </button>

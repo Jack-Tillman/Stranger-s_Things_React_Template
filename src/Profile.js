@@ -45,7 +45,7 @@ const Profile = ({
     return (
       <section className="profile-top-section">
         <h1 className="profile-h1">{`Welcome, please sign in to see your profile!`}</h1>
-        <Link to="/src/Login.js">
+        <Link to="/Login">
           <div className="sign-in-link">Sign in here!</div>
         </Link>
       </section>

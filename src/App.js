@@ -11,7 +11,6 @@ import AddNewPost from "./AddNewPost";
 import ViewPost from "./ViewPost";
 import EditPost from "./EditPost";
 
-
 const App = () => {
   //some components will be rendered based on state of isLoggedIn
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -27,7 +26,7 @@ const App = () => {
   const [showPost, setShowPost] = useState({});
   //hold all messages sent to userAccount
   const [messages, setMessages] = useState([]);
-  //used for Post related components to try to avoid race-conditions 
+  //used for Post related components to try to avoid race-conditions
   const [isLoading, setIsLoading] = useState(true);
   const [usersPosts, setUsersPosts] = useState([]);
   const [showSinglePost, setShowSinglePost] = useState([]);
@@ -44,8 +43,7 @@ const App = () => {
           userAccount={userAccount}
           setUserAccount={setUserAccount}
         />
-
-        <Route path="/src/App.js">
+         <Route path="/Home">
           <Home
             isLoggedIn={isLoggedIn}
             userAccount={userAccount}
@@ -54,9 +52,9 @@ const App = () => {
             setIsLoggedIn={setIsLoggedIn}
             setUserAccount={setUserAccount}
           />
-        </Route>
+        </Route> 
 
-        <Route path="/src/Profile.js">
+        <Route path="/Profile">
           <Profile
             isLoading={isLoading}
             setIsLoading={setIsLoading}
@@ -75,7 +73,7 @@ const App = () => {
           />
         </Route>
 
-        <Route path="/src/Posts.js">
+        <Route path="/Posts">
           <Posts
             isLoading={isLoading}
             setIsLoading={setIsLoading}
@@ -97,9 +95,9 @@ const App = () => {
           />
         </Route>
         {/* once the user signs in, redirect them to Posts. if they aren't signed in, they will be directed to login page  */}
-        <Route path="/src/Login.js">
+        <Route path="/Login">
           {isLoggedIn ? (
-            <Redirect to="/src/Profile.js" />
+            <Redirect to="/Profile" />
           ) : (
             <LogIn
               showPost={showPost}
@@ -112,10 +110,10 @@ const App = () => {
           )}
         </Route>
 
-        <Route path="/src/Register.js">
+        <Route path="/Register">
           {/* if user is logged in, render Posts, else render Register */}
           {isLoggedIn ? (
-            <Redirect to="/src/Home.js" />
+            <Redirect to="/Home" />
           ) : (
             <Register
               isLoggedIn={isLoggedIn}
@@ -126,9 +124,9 @@ const App = () => {
           )}
         </Route>
 
-        <Route path="/src/AddNewPost.jsx">
+        <Route path="/AddNewPost">
           {isLoading ? (
-            <Redirect to="/src/Home.js" />
+            <Redirect to="/Home" />
           ) : (
             <AddNewPost
               posts={posts}
@@ -142,9 +140,9 @@ const App = () => {
           )}
         </Route>
 
-        <Route path="/src/ViewPost.jsx">
+        <Route path="/ViewPost">
           {isLoading && showPost === "false" ? (
-            <Redirect to="/src/Home.js" />
+            <Redirect to="/Home" />
           ) : (
             <ViewPost
               isLoading={isLoading}
@@ -163,9 +161,9 @@ const App = () => {
           )}
         </Route>
 
-        <Route path="/src/EditPost">
+        <Route path="/EditPost">
           {isLoading && editComplete ? (
-            <Redirect to="/src/Home.js" />
+            <Redirect to="/Home" />
           ) : (
             <EditPost
               posts={posts}

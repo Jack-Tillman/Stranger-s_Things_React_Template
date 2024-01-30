@@ -90,7 +90,7 @@ const LogIn = ({
               Log In
             </button>
             <label className="all-labels" htmlFor="signup">
-              <Link to="/src/Register.js">
+              <Link to="/Register">
                 <aside className="signup-link">
                   Don't have an account? Click here to register!
                 </aside>

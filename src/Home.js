@@ -15,27 +15,24 @@ const Home = ({
       <div className="home-body">
         <div className="links">
           <p className="check-it-out">Here's some cool places to check out:</p>
-          <Link to="/src/App.js">
-            <div className="home-div">HOME</div>
-          </Link>
-          <Link to="/src/Posts.js">
+          <Link to="/Posts">
             <div className="home-div">POSTS</div>
           </Link>
-          <Link to="/src/Profile.js">
+          <Link to="/Profile">
             <div className="home-div">PROFILE</div>
           </Link>
           {isLoggedIn ? null : (
-            <Link to="/src/Login.js">
+            <Link to="/Login">
               <div className="home-div">LOGIN</div>
             </Link>
           )}
           {isLoggedIn ? null : (
-            <Link to="/src/Register.js">
+            <Link to="/Register">
               <div className="home-div">REGISTER</div>
             </Link>
           )}
           {isLoggedIn ? (
-            <Link to="/src/Login.js">
+            <Link to="/Login">
               <div
                 className="home-div"
                 onClick={() => {

@@ -105,11 +105,11 @@ const Posts = ({
               </form>
             </div>
             {isLoggedIn ? (
-              <Link to="/src/AddNewPost.jsx">
+              <Link to="/AddNewPost">
                 <span className="add-post">ADD POST</span>
               </Link>
             ) : (
-              <Link to="/src/Login.js">
+              <Link to="/Login">
                 <span className="add-post">ADD POST</span>{" "}
               </Link>
             )}
@@ -127,7 +127,7 @@ const Posts = ({
                   //if user is logged in, button links to single post view, else
                   // the button links to Login page
                   isLoggedIn ? (
-                    <Link to="/src/ViewPost.jsx">
+                    <Link to="/ViewPost">
                       <button
                         className="viewpost-btn"
                         onClick={() => {
@@ -142,7 +142,7 @@ const Posts = ({
                       </button>
                     </Link>
                   ) : (
-                    <Link to="/src/Login.js">
+                    <Link to="/Login">
                       <button
                         className="viewpost-btn"
                         onClick={() => {
