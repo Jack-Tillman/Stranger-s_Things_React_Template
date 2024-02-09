@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
-import { CompatRouter } from "react-router-dom-v5-compat";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import Navbar from "./Navbar";
 import MainSection from "./MainSection";
@@ -15,20 +14,11 @@ const App = () => {
     isAuthenticated: false,
     _id: "",
   });
-  const [posts, setPosts] = useState([]);
-  //this will hold the specific postID when user clicks on 'view post' button
-  const [showPost, setShowPost] = useState({});
-  //hold all messages sent to userAccount
-  const [messages, setMessages] = useState([]);
   //used for Post related components to try to avoid race-conditions
   const [isLoading, setIsLoading] = useState(true);
-  const [usersPosts, setUsersPosts] = useState([]);
-  const [showSinglePost, setShowSinglePost] = useState([]);
-  const [editComplete, setEditComplete] = useState(false);
 
   return (
     <BrowserRouter>
-      <CompatRouter>
         <div className="App-wrapper">
           <Navbar
             isLoading={isLoading}
@@ -48,7 +38,6 @@ const App = () => {
             setUserAccount={setUserAccount}
           />
         </div>
-      </CompatRouter>
     </BrowserRouter>
   );
 };
